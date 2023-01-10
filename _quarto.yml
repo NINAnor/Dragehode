@@ -6,6 +6,7 @@ book:
   chapters: 
     - index.qmd
     - intro.qmd
+    - localEst.qmd
     
     
 #bibliography: book.bib
