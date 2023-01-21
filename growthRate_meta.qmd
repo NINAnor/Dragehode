@@ -1,0 +1,63 @@
+---
+title: "Population growth rate"
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(metafor)
+
+#get the data
+
+popvekstdata <- readRDS(paste0(here::here(),"/data/derived_data/popvekstdata.RDS"))
+#unweighted growth rate mean of site and mean of location
+popvekstdata$Year=as.integer(popvekstdata$Year)
+df <- popvekstdata[!is.infinite(popvekstdata$vekstrate),]
+```
+
+```{r}
+lokalitetsestimater <- readRDS(paste0(here::here(),"/data/derived_data/lokalitetsestimater.RDS"))
+
+df_lok <- plyr::ldply (lokalitetsestimater, data.frame)
+
+join_df=df |> 
+  left_join(df_lok, by=c("Lokalitet"="lokalitet"))
+
+testmeta=join_df |> 
+  group_by(Lokalitet, Region) |> 
+  summarise(meanGR=mean(vekstrate, na.rm=TRUE),
+            sdGR=sd(vekstrate, na.rm=TRUE),
+            VARGR=var(vekstrate,na.rm = TRUE),
+            meanTpop=mean(nTot, na.rm=TRUE),
+            sdTpop=sd(nTot, na.rm=TRUE),
+            VARTpop=var(nTot, na.rm=TRUE)
+            )
+
+res <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta)
+res
+forest(res, refline=1)
+mlabfun <- function(text, res) {
+  list(bquote(paste(.(text),
+                    #" (Q = ", .(formatC(res$QE, digits=2, format="f")),
+                    #", df = ", .(res$k - res$p),
+                    #", p ", .(metafor:::.pval(res$QEp, digits=2, showeq=TRUE, sep=" ")), "; ",
+                    #I^2, " = ", .(formatC(res$I2, digits=1, format="f")), "%, ",
+                    #tau^2, " = ", .(formatC(res$tau2, digits=2, format="f"))
+                    #, ")"
+                    )))}
+
+forest(res, order=Region, mlab=mlabfun("RE Model for All Sites", res), refline = 1)
+
+#6, 13, 8
+
+### fit random-effects model in the three subgroups
+res.H <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta)
+res.R <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta)
+res.O <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta)
+
+### add summary polygons for the three subgroups
+addpoly(res.H, row=19.5, mlab=mlabfun("Region = Hadeland", res.H))
+addpoly(res.O, row= 7.5, mlab=mlabfun("Region = Oslo", res.O))
+addpoly(res.R, row= 0.5, mlab=mlabfun("Region = Ringerrike", res.R))
+
+```

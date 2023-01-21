@@ -1,0 +1,74 @@
+---
+title: "Population growth rate"
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(tidyverse)
+#get the data
+popvekstdata <- readRDS(paste0(here::here(),"/data/derived_data/popvekstdata.RDS"))
+#unweighted growth rate mean of site and mean of location
+popvekstdata$Year=as.integer(popvekstdata$Year)
+df <- popvekstdata[!is.infinite(popvekstdata$vekstrate),]
+df$Year<-df[,2]
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+plot_logR<-function(Lokal){
+  sub_set_df<-df |> filter(Lokalitet == {{Lokal}})
+
+p=sub_set_df |> 
+  ggplot(aes(Year, logR)) +
+  geom_point(colour="darkred", alpha=0.5)+
+  stat_smooth()+
+  labs(x="Ar",y="Log Growth Rate")+
+  geom_hline(yintercept = 0, lty=2, linewidth=1, colour="black")+
+  theme_classic()+
+  ggtitle(paste0("Log growth rate for ", {{Lokal}}))
+
+return(p)
+}
+
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+local_list<-unique(df$Lokalitet)
+
+plot_logR(local_list[1])
+plot_logR(local_list[2])
+plot_logR(local_list[3])
+plot_logR(local_list[4])
+plot_logR(local_list[5])
+plot_logR(local_list[6])
+plot_logR(local_list[7])
+plot_logR(local_list[8])
+plot_logR(local_list[9])
+plot_logR(local_list[10])
+plot_logR(local_list[11])
+plot_logR(local_list[12])
+plot_logR(local_list[13])
+plot_logR(local_list[14])
+plot_logR(local_list[15])
+plot_logR(local_list[16])
+plot_logR(local_list[17])
+plot_logR(local_list[18])
+plot_logR(local_list[19])
+plot_logR(local_list[20])
+plot_logR(local_list[21])
+plot_logR(local_list[22])
+plot_logR(local_list[23])
+plot_logR(local_list[24])
+plot_logR(local_list[25])
+plot_logR(local_list[26])
+```

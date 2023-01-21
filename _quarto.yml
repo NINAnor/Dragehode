@@ -7,6 +7,7 @@ book:
     - index.qmd
     - intro.qmd
     - localEst.qmd
+    - growthRate.qmd
     
     
 #bibliography: book.bib
