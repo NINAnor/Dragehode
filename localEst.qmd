@@ -77,6 +77,10 @@ p
 ```
 
 ```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
 plotLocEst(i=1)
 plotLocEst(i=2)
 plotLocEst(i=3)
