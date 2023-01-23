@@ -10,7 +10,7 @@ editor: visual
 
 library(tidyverse)
 
-lokalitetsestimater <- readRDS("C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/derived_data/lokalitetsestimater.RDS")
+lokalitetsestimater <- readRDS(paste0(here::here(), "/data/derived_data/lokalitetsestimater.RDS"))
 
 plotLocEst<-function(i){
   
@@ -92,7 +92,7 @@ plotLocEst(i=8)
 plotLocEst(i=9)
 plotLocEst(i=10)
 plotLocEst(i=11)
-#plotLocEst(i=12)
+plotLocEst(i=12)
 plotLocEst(i=13)
 plotLocEst(i=14)
 plotLocEst(i=15)
