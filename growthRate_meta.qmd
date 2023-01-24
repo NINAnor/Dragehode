@@ -1,5 +1,5 @@
 ---
-title: "Population growth rate"
+title: "Weighted population growth rate"
 editor: visual
 ---
 
@@ -102,7 +102,7 @@ Rforrest_data[1:3,] |>
 
 ```
 
-# Add NaturType
+# Naturtype
 
 ```{r}
 #| echo: false
