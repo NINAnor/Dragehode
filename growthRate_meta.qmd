@@ -6,7 +6,7 @@ editor: visual
 ```{r}
 library(tidyverse)
 library(metafor)
-
+source("_common.R")
 #get the data
 
 popvekstdata <- readRDS(paste0(here::here(),"/data/derived_data/popvekstdata.RDS"))
@@ -31,33 +31,63 @@ testmeta=join_df |>
             meanTpop=mean(nTot, na.rm=TRUE),
             sdTpop=sd(nTot, na.rm=TRUE),
             VARTpop=var(nTot, na.rm=TRUE)
-            )
+            ) |> 
+  filter(!Lokalitet=="Viernbukta")
 
 res <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta)
-res
-forest(res, refline=1)
-mlabfun <- function(text, res) {
-  list(bquote(paste(.(text),
-                    #" (Q = ", .(formatC(res$QE, digits=2, format="f")),
-                    #", df = ", .(res$k - res$p),
-                    #", p ", .(metafor:::.pval(res$QEp, digits=2, showeq=TRUE, sep=" ")), "; ",
-                    #I^2, " = ", .(formatC(res$I2, digits=1, format="f")), "%, ",
-                    #tau^2, " = ", .(formatC(res$tau2, digits=2, format="f"))
-                    #, ")"
-                    )))}
 
-forest(res, order=Region, mlab=mlabfun("RE Model for All Sites", res), refline = 1)
+```
 
-#6, 13, 8
 
-### fit random-effects model in the three subgroups
+```{r}
+
+#create forest plot
+
+forrest_data<-rbind(data.frame(ES=res$yi,SE=sqrt(res$vi),Type=rep("Site", 25),Site=testmeta$Lokalitet),
+                    data.frame(ES=res$b,SE=res$se,Type="Summary",Site="Summary"))
+
+forrest_data$Region<-c(testmeta$Region, NA)
+
+forrest_data<-forrest_data |> 
+  rowid_to_column()
+
+plot1<-ggplot(data=forrest_data,aes(x=reorder(Site, -rowid) ,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE),
+                                    size=factor(Type),colour=factor(Type)))+
+  geom_pointrange()
+plot2<-plot1+coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))
+plot3<-plot2+xlab("Site")+ylab("Observed outcome")+scale_colour_manual(values=c("grey","black"))
+plot3+theme(legend.position="none")
+
+
+```
+
+
+```{r}
 res.H <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta)
 res.R <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta)
 res.O <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta)
 
-### add summary polygons for the three subgroups
-addpoly(res.H, row=19.5, mlab=mlabfun("Region = Hadeland", res.H))
-addpoly(res.O, row= 7.5, mlab=mlabfun("Region = Oslo", res.O))
-addpoly(res.R, row= 0.5, mlab=mlabfun("Region = Ringerrike", res.R))
+dat.comp <- data.frame(estimate = c(coef(res.H), coef(res.R), coef(res.O)), stderror = c(res.H$se, res.R$se, res.O$se),
+                       meta = c("Hadeland", "Ringerike", "Oslo"), tau2 = round(c(res.H$tau2, res.R$tau2, res.O$tau2),4))
+out=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp, digits=3)
+#forest(out)
+Rforrest_data<-rbind(data.frame(ES=out$yi,SE=sqrt(out$vi),Type=rep("Site", 3),Site=dat.comp$meta),
+                    data.frame(ES=out$b,SE=out$se,Type="Summary",Site="Summary"))
+
+
+Rforrest_data[1:3,] |> 
+  ggplot(aes(Site,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE) ))+
+  geom_pointrange()+
+  coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))+
+  xlab("Region")+
+  ylab("Observed outcome")+
+  scale_colour_manual(values=c("grey","black"))+
+  theme(legend.position="none")
+
 
 ```
+
