@@ -23,7 +23,8 @@ options(encoding="UTF-8")
 library(boot)
 library(rio)
 library(Dragehode)
-#Sys.setlocale(locale = 'Norwegian Bokmål_Norway') # Uncomment this line if you locale is not Norway
+#Sys.setlocale(locale = 'Norwegian Bokmål_Norway') 
+# Uncomment this line if you locale is not Norway
 source('R/funksjoner.R', encoding = "UTF-8")
 
 ## Dataimport ----
