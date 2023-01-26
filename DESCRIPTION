@@ -1,0 +1,21 @@
+Package: Dragehode
+Title: Functions to calculate Dragehode estimates 
+Version: 0.0.0.9000
+Authors@R: 
+  c(person(given = "Matthew",
+           family = "Grainger",
+           role = c("aut", "cre"),
+           email = "matthew.grainger@nina.no",
+           comment = c(ORCID = "0000-0001-8426-6495")),
+    person(given = "Olav",
+           family = "Skarplaas",
+           role = "aut",
+           comment = c(ORCID = "0000-0001-9727-1672")),
+    person(given = "Marianne",
+           family = "Evju",
+           role = "aut", comment = c(ORCID = "0000-0001-7338-5376")))
+Description: A collection of functions to calculate Dragehode estimates from annual monitoring
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3

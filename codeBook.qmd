@@ -1,0 +1,367 @@
+---
+title: "Code to recreate the analysis"
+editor: visual
+lang: no
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+options(encoding="UTF-8")
+```
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+#| eval: false
+
+
+# Population estimation script ----
+## Load libraries ----
+library(boot)
+library(rio)
+library(Dragehode)
+#Sys.setlocale(locale = 'Norwegian Bokmål_Norway') # Uncomment this line if you locale is not Norway
+source('R/funksjoner.R', encoding = "UTF-8")
+
+## Dataimport ----
+
+### save the data with the addition of this years data as "Dragehode_overvaking_DATA.xlsx" in the "/data" folder
+### To reduce the burden (data storage on GitHub is not recommended) on the GitHub repo the data will be stored as RDS files
+
+lokalitetsdata <- import("data/Dragehode_overvaking_DATA.xlsx",sheet="Lokalitetsdata",na=c("NA"))
+transektdata <- import("data/Dragehode_overvaking_DATA.xlsx",sheet="Transektdata",na=c("NA"," "))
+rutedata <- import("data/Dragehode_overvaking_DATA.xlsx",sheet="Rutedata",na=c("NA"))
+artsdata <- import("data/Dragehode_overvaking_DATA.xlsx",sheet="Artsdata",na=c("NA"))
+korreksjonsdata <- import("data/siriskuddogind.xlsx")
+
+### Save the data that has been imported to overwrite last years files ----
+
+saveRDS(lokalitetsdata, "data/lokalitetsdata.RDS")
+saveRDS(transektdata, "data/transektdata.RDS")
+saveRDS(rutedata, "data/rutedata.RDS")
+saveRDS(artsdata, "data/artsdata.RDS")
+saveRDS(korreksjonsdata, "data/korreksjonsdata.RDS")
+
+
+# Datajusteringer ----
+
+### Remove NAs ---- 
+
+rutedata <- rutedata[!is.na(rutedata$Lokalitet), ]
+lokalitetsdata <- lokalitetsdata[!apply(lokalitetsdata,1,function(x){all(is.na(x))}),]
+transektdata <- transektdata[!apply(transektdata,1,function(x){all(is.na(x))}),]
+rutedata <- rutedata[!apply(rutedata,1,function(x){all(is.na(x))}),]
+
+### change format of Lokalitet to factor ----
+lokalitetsdata$Lokalitet <- factor(lokalitetsdata$Lokalitet)
+
+### data to be omitted (single sampling event or change in method in earliest years) ----
+lok.utelates <- c("Nedre Røykenvik","Øvre Røykenvik")
+lokalitetsdata <- lokalitetsdata[!(lokalitetsdata$Lokalitet%in%lok.utelates),]; lokalitetsdata$Lokalitet <- factor(lokalitetsdata$Lokalitet)
+transektdata <- transektdata[!(transektdata$Lokalitet%in%lok.utelates),]; transektdata$Lokalitet <- factor(transektdata$Lokalitet)
+rutedata <- rutedata[!(rutedata$Lokalitet%in%lok.utelates),]; rutedata$Lokalitet <- factor(rutedata$Lokalitet)
+
+lokalitetsdata <- lokalitetsdata[!(lokalitetsdata$Lokalitet%in%c("Falang") & lokalitetsdata$År<2020),]
+transektdata <- transektdata[!(transektdata$Lokalitet%in%c("Falang") & transektdata$År<2020),]
+rutedata <- rutedata[!(rutedata$Lokalitet%in%c("Falang") & rutedata$År<2020),]
+### Create a hovednaturtype by combining the Naturtypes in to a single column ----
+lokalitetsdata$Hovednaturtype <- sapply(strsplit(lokalitetsdata$Naturtype,"-"),function(x){x[[1]]})
+
+### Change character data to character formats and create a hovedskjøtsel coloumn ----
+lokalitetsdata$Hovedskjøtsel <- as.character(lokalitetsdata$Krattrydding_binær)
+lokalitetsdata$Hovedskjøtsel[lokalitetsdata$Krattrydding_binær=="Ja"] <- "Krattrydding"
+lokalitetsdata$Hovedskjøtsel[lokalitetsdata$Slått_binær=="Ja"] <- "Slått"
+lokalitetsdata$Hovedskjøtsel[lokalitetsdata$Hovedskjøtsel=="Nei"] <- "Ingen/annet"
+lokalitetsdata$Hovedskjøtsel <- factor(lokalitetsdata$Hovedskjøtsel)
+
+### convert "ingen" to NA ----
+transektdata$`Forekomst dragehode (m)`[transektdata$`Forekomst dragehode (m)`%in%c("ingen"," ")] <- NA
+
+# Get coverage ----
+rutedata$Vedpl.dekn <- beregn.dekning(rutedata,artsdata,"Vedplante")
+
+lokalitetsnavn <- levels(lokalitetsdata$Lokalitet)
+regionnavn <- levels(factor(lokalitetsdata$Region))
+naturtypenavn <- levels(factor(lokalitetsdata$Hovednaturtype))
+
+# Horgen og Møllerenga: tellinger av skudd (vegetative og fertile) korrigeres til estimert antall individer ----
+names(korreksjonsdata)[6:11] <- c("x1","x2","x3","y1","y2","y3")
+#par(mfrow=c(2,2))
+#plot(korreksjonsdata$x1,korreksjonsdata$y1,main="småplanter")
+m1 <- lm(y1~-1+x1,data=korreksjonsdata)
+# summary(m1)
+# abline(m1)
+# plot(korreksjonsdata$x2,korreksjonsdata$y2,main="vegetative")
+ m2 <- lm(y2~-1+x2,data=korreksjonsdata)
+# summary(m2)
+# abline(m2)
+#plot(korreksjonsdata$x3,korreksjonsdata$y3,main="fertile")
+m3 <- lm(y3~-1+x3,data=korreksjonsdata)
+# summary(m3)
+# abline(m3)
+
+ i <- rutedata$Lokalitet%in%c("Horgen","Møllerenga") & rutedata$År%in%c(2019,2020)
+ newdat <- rutedata[i,c("Veg.planter","Fert.planter")]
+ names(newdat) <- c("x2","x3")
+ y2 <- round(predict(m2,newdat))
+ y3 <- round(predict(m3,newdat))
+ y4 <- rutedata[i,"Småplanter"]+y2+y3
+
+ #par(mfrow=c(1,3))
+ #plot(rutedata[i,"Veg.planter"],y2)
+ #plot(rutedata[i,"Fert.planter"],y3)
+ #plot(rutedata[i,"Ant.DR"],y4)
+
+ rutedata[i,"Veg.planter"] <- y2
+ rutedata[i,"Fert.planter"] <- y3
+ rutedata[i,"Ant.DR"] <- y4
+
+# Populasjonsstørrelser ----
+
+# Sjekk om forekomst varierer med avstand fra midtpunkt
+# par(mfrow=c(1,1))
+# j <- rutedata$Lokalitet!="Ekebergskråningen"
+# plot(rutedata$Avst[j],rutedata$Ant.DR[j]>0,main="Alle lokaliteter")
+# par(mfrow=c(5,5))
+# for(i in 1:length(lokalitetsnavn))
+# {
+#  j <- rutedata$Lokalitet==lokalitetsnavn[i]
+#  plot(rutedata$Avst[j],rutedata$Ant.DR[j]>0,main=lokalitetsnavn[i])
+# }
+# 
+# # Sjekk om tetthet varierer med avstand fra midtpunkt
+# par(mfrow=c(1,1))
+# j <- rutedata$Ant.DR>0 & rutedata$Lokalitet!="Ekebergskråningen"
+# plot(rutedata$Avst[j],rutedata$Ant.DR[j],main="Alle lokaliteter")
+# par(mfrow=c(5,5))
+# for(i in 1:length(lokalitetsnavn))
+# {
+#   j <- rutedata$Lokalitet==lokalitetsnavn[i] & rutedata$Ant.DR>0
+#   plot(rutedata$Avst[j],rutedata$Ant.DR[j],main=lokalitetsnavn[i])
+# }
+
+
+# For hver populasjon (fordi de har særegenheter i design, og det er ønskelig å presentere resultater for enkelt-populasjoner på nett)
+# Også for hvert år (Hensiktsmessig hvis f.eks. design endrer seg...
+
+## lokalestimater ----
+lokalitetsestimater <- list()
+for(i in 1:length(lokalitetsnavn))
+{
+  tryCatch({
+    print(lokalitetsnavn[i])
+    popstr <- beregn.popstruktur(lokalitetsnavn[i],lokalitetsdata,transektdata,rutedata,quantiles=c(0.25,0.75))
+    lokalitetsestimater[[i]] <- popstr
+    
+  }, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+  }
+names(lokalitetsestimater) <- lokalitetsnavn
+
+#save the Lokalitetsestimater 
+
+saveRDS(lokalitetsestimater,"data/derived_data/lokalitetsestimater.RDS" )
+
+### Figurer ----
+
+if(!dir.exists("Figurer")) dir.create("Figurer")
+
+# "Rå" figurer av alle lokaliteter med populasjonsestimater m/CI over tid for fertile, vegetative, små og totalt
+#par(mfrow=c(5,5))
+pdf(paste("Figurer/","Alle lokaliteter",".pdf",sep=""))
+for(i in 1:length(lokalitetsestimater))
+{
+  popstr <- lokalitetsestimater[[i]]
+  plot.popstruktur(popstr)
+}
+dev.off()
+
+for(i in 1:length(lokalitetsestimater))
+{
+  #pdf(paste("Figurer/",lokalitetsnavn[i],".pdf",sep=""))
+  #png(paste("Figurer/",lokalitetsnavn[i],".png",sep=""))
+  jpeg(paste("Figurer/",lokalitetsnavn[i],".jpg",sep=""))
+  popstr <- lokalitetsestimater[[i]]
+  plot.popstruktur(popstr)
+  dev.off()
+}
+
+
+# Populasjonstrender per gruppe, totalt, fertile, vegetative og små
+
+lokfarge <- rainbow(length(lokalitetsnavn)); names(lokfarge) <- lokalitetsnavn
+regsymbol <- c(1,2,3); names(regsymbol) <- regionnavn
+natlinje <- c(1,2); names(natlinje) <- naturtypenavn
+
+thisyear=lubridate::year(Sys.time())
+
+tidsrom=c(2016.5, thisyear)
+
+if(!dir.exists("Figurer/Regioner")) dir.create("Figurer/Regioner")
+# Regioner
+pdf(paste("Figurer/Regioner/","Alle regioner",".pdf",sep=""))
+plot.gruppetrender(lokalitetsdata,gruppevariabel="Region",lokalitetsestimater,tidsrom=tidsrom,reverser=T,lokalitetsnavn,lokfarge,regsymbol,natlinje)
+par(mfrow=c(1,3))
+plot(0,0,type="n",axes=F,xlab="",ylab=""); legend("topleft",lty=1,col=lokfarge,legend=lokalitetsnavn,bty="n")
+dev.off()
+
+
+
+if(!dir.exists("Figurer/Naturtyper")) dir.create("Figurer/Naturtyper")
+# Naturtyper
+pdf(paste("Figurer/Naturtyper/","Alle hovedtyper",".pdf",sep=""))
+plot.gruppetrender(lokalitetsdata,gruppevariabel="Hovednaturtype",lokalitetsestimater,tidsrom=tidsrom,reverser=T,lokalitetsnavn,lokfarge,regsymbol,natlinje)
+par(mfrow=c(1,3))
+plot(0,0,type="n",axes=F,xlab="",ylab=""); legend("topleft",lty=1,col=lokfarge,legend=lokalitetsnavn,bty="n")
+dev.off()
+
+if(!dir.exists("Figurer/Skjøtsel")) dir.create("Figurer/Skjøtsel")
+pdf(paste("Figurer/Skjøtsel/","Hovedskjøtsel",".pdf",sep=""))
+plot.gruppetrender(lokalitetsdata,gruppevariabel="Hovedskjøtsel",lokalitetsestimater,tidsrom=tidsrom,reverser=T,lokalitetsnavn,lokfarge,regsymbol,natlinje)
+par(mfrow=c(1,3))
+plot(0,0,type="n",axes=F,xlab="",ylab=""); legend("topleft",lty=1,col=lokfarge,legend=lokalitetsnavn,bty="n")
+dev.off()
+
+## GGplot versions of figures¨
+source("R/ggplot_popstruktur.R")
+if(!dir.exists("Figurer/ggplots")) dir.create("Figurer/ggplots")
+for(i in 1:length(lokalitetsestimater)){
+  tryCatch({
+    
+    
+    
+    popstr <- list(lokalitet=lokalitetsestimater[i][[1]]$lokalitet,year=lokalitetsestimater[i][[1]]$year,nFert=lokalitetsestimater[i][[1]]$nFert,
+                   nVeg=lokalitetsestimater[i][[1]]$nVeg,nSma=lokalitetsestimater[i][[1]]$nSma,nTot=lokalitetsestimater[i][[1]]$nTot,Fert.CI=lokalitetsestimater[i][[1]]$Fert.CI,
+                   Veg.CI=lokalitetsestimater[i][[1]]$Veg.CI,Sma.CI=lokalitetsestimater[i][[1]]$Sma.CI,Tot.CI=lokalitetsestimater[i][[1]]$Tot.CI)
+    
+    P=ggplot.popstruktur(popstr)  
+    
+  })
+  
+}
+
+
+
+# # Populasjonsestimater 2017-2020
+# utvalgte.lok <- lokalitetsdata$Lokalitet[lokalitetsdata$År==2017]
+# for(i in 1:length(utvalgte.lok))
+# {
+#   lok <- utvalgte.lok[i]
+#   print(lokalitetsestimater[lok])
+# }
+
+# Forekomst fravær?
+
+# Vekstrater-----
+
+
+popvekstdata <- beregn.vekstrate(rutedata,"Ant.DR","RuteID")
+popvekstdata$logR <- log(popvekstdata$vekstrate)
+popvekstdata$logR[popvekstdata$logR%in%c(-Inf,Inf)] <- NA
+#summary(popvekstdata$logR)
+i <- match(popvekstdata$Lokalitet,lokalitetsdata$Lokalitet)
+popvekstdata$Region <- lokalitetsdata$Region[i]
+popvekstdata$Hovednaturtype <- lokalitetsdata$Hovednaturtype[i]
+popvekstdata$Skjøtsel_binær <- lokalitetsdata$Skjøtsel_binær[i]
+popvekstdata <- popvekstdata[!is.na(popvekstdata$Veg.høyde),]
+
+
+## save popvekstdata
+ saveRDS(popvekstdata, "data/derived_data/popvekstdata.RDS")
+
+# par(mfrow=c(1,1))
+# plot(popvekstdata[,c("vekstrate","logR","Ant.DR","Bunnsjikt","Feltsjikt","Busksjikt","Tresjikt","Veg.høyde","Vedpl.dekn","Region","Hovednaturtype")]) # ,"Småplanter","Veg.planter","Fert.planter"
+# plot(popvekstdata[popvekstdata$År==2017,c("vekstrate","logR","Veg.høyde","Vedpl.dekn")])
+# plot(popvekstdata[popvekstdata$År==2018,c("vekstrate","logR","Veg.høyde","Vedpl.dekn")])
+# plot(popvekstdata[popvekstdata$År==2019,c("vekstrate","logR","Veg.høyde","Vedpl.dekn")])
+# plot(popvekstdata[popvekstdata$År==2020,c("vekstrate","logR","Veg.høyde","Vedpl.dekn")])
+# plot(popvekstdata[popvekstdata$År==2021,c("vekstrate","logR","Veg.høyde","Vedpl.dekn")])
+# plot(popvekstdata[popvekstdata$År==2022,c("vekstrate","logR","Veg.høyde","Vedpl.dekn")])
+
+
+
+# library(gamm4)
+# 
+# popvekstdata$logVH <- log(popvekstdata$Veg.høyde)
+# popvekstdata$Hovednaturtype <- factor(popvekstdata$Hovednaturtype)
+# popvekstdata$Year <- factor(popvekstdata$År)
+# 
+# m1.gam <- gamm4(logR~Hovednaturtype+s(Veg.høyde,by=Hovednaturtype),random=~(1|Region)+(1|Lokalitet)+(1|RuteID)+(1|Year),data=popvekstdata)
+# summary(m1.gam$gam)
+# ranef(m1.gam$mer)
+# 
+# m1.gam.b <- gamm4(logR~Hovednaturtype+s(Veg.høyde,by=Hovednaturtype)+s(Vedpl.dekn),random=~(1|Region)+(1|Lokalitet)+(1|RuteID)+(1|Year),data=popvekstdata)
+# summary(m1.gam.b$gam)
+# 
+# m2.gam <- gamm4(logR~Hovednaturtype+s(logVH,by=Hovednaturtype),random=~(1|Region)+(1|Lokalitet)+(1|RuteID)+(1|Year),data=popvekstdata)
+# summary(m2.gam$gam)
+# 
+# 
+# yr <- seq(from=min(popvekstdata$År), to=max(popvekstdata$År), by=1)
+# modlist <- vector("list",length(yr)); names(modlist) <- yr
+# for(i in 1:length(yr))
+# {
+#   y <- popvekstdata$Year==yr[i] # Bare en Region (Oslo) i 2017, så ingen random effect for region
+#   if(yr[i]==2017)
+#   {
+#     m1 <- gamm4(logR~Hovednaturtype+s(Veg.høyde,by=Hovednaturtype),random=~(1|Lokalitet),data=popvekstdata[y,])
+#     m2 <- gamm4(logR~Hovednaturtype+s(logVH,by=Hovednaturtype),random=~(1|Lokalitet),data=popvekstdata[y,])
+#   }
+#   else
+#   {
+#     m1 <- gamm4(logR~Hovednaturtype+s(Veg.høyde,by=Hovednaturtype),random=~(1|Region)+(1|Lokalitet),data=popvekstdata[y,])
+#     m2 <- gamm4(logR~Hovednaturtype+s(logVH,by=Hovednaturtype),random=~(1|Region)+(1|Lokalitet),data=popvekstdata[y,])
+#   }
+#   modlist[[i]] <- list(m1.gam=m1,m2.gam=m2)
+# }
+# 
+# pdf(paste("Figurer/Vekstrater/","Alle plot",".pdf",sep=""))
+# par(mfrow=c(2,2),mar=c(4,4,2,0.1))
+# xlim <- c(0,max(popvekstdata$Veg.høyde[!is.na(popvekstdata$logR)],na.rm=T))
+# ylim <- range(popvekstdata$logR,na.rm=T)
+# xlab <- c("","Vegetasjonshøyde (cm)","Vegetasjonshøyde (cm)")
+# ylab <- c("","log R","")
+# main <- c("2017-2018","2018-2019","2019-2020")
+# 
+# i <- as.numeric(popvekstdata$Hovednaturtype=="T2")+1
+# plot(popvekstdata$Veg.høyde,popvekstdata$logR,pch=21,cex=0.8,bg=c("blue","red")[i],col=c("blue","red")[i],xlab="",ylab="log R",main="Alle år",xlim=xlim,ylim=ylim)
+# lines(popvekstdata$Veg.høyde,predict(m1.gam$gam,newdata=data.frame(Veg.høyde=popvekstdata$Veg.høyde,Hovednaturtype="T32",Year="2017",Lokalitet=popvekstdata$Lokalitet[1],RuteID=popvekstdata$RuteID[2]),level=0),col="blue",lwd=2)
+# lines(popvekstdata$Veg.høyde,predict(m1.gam$gam,newdata=data.frame(Veg.høyde=popvekstdata$Veg.høyde,Hovednaturtype="T2",Year="2017",Lokalitet=popvekstdata$Lokalitet[1],RuteID=popvekstdata$RuteID[2]),level=0),col="red",lwd=2)
+# abline(h=0,lty=3)
+# legend("bottomright",c("T32 Seminaturlig eng","T2 Åpen grunnlendt mark"),lty=c(1,1),col=c("blue","red"),lwd=2,bty="n")
+# 
+# for(i in 1:length(yr))
+# {
+#   y <- popvekstdata$Year==yr[i]
+#   j <- as.numeric(popvekstdata$Hovednaturtype[y]=="T2")+1
+#   plot(popvekstdata$Veg.høyde[y],popvekstdata$logR[y],pch=21,cex=0.8,bg=c("blue","red")[j],col=c("blue","red")[j],xlab=xlab[i],ylab=ylab[i],main=main[i],xlim=xlim,ylim=ylim)
+#   
+#   if(i>1)
+#   {
+#     VH <- popvekstdata$Veg.høyde[y][!is.na(popvekstdata$logR[y])&popvekstdata$Hovednaturtype[y]=="T32"]
+#     Veg.høyde <- min(VH,na.rm=T):max(VH,na.rm=T)
+#     lines(Veg.høyde,predict(modlist[[i]]$m1.gam$gam,newdata=data.frame(Veg.høyde=Veg.høyde,Hovednaturtype="T32",Lokalitet=popvekstdata$Lokalitet[1]),level=0),col="blue",lwd=2)
+#   }
+#   VH <- popvekstdata$Veg.høyde[y][!is.na(popvekstdata$logR[y])&popvekstdata$Hovednaturtype[y]=="T2"]
+#   Veg.høyde <- min(VH,na.rm=T):max(VH,na.rm=T)
+#   lines(Veg.høyde,predict(modlist[[i]]$m1.gam$gam,newdata=data.frame(Veg.høyde=Veg.høyde,Hovednaturtype="T2",Lokalitet=popvekstdata$Lokalitet[1]),level=0),col="red",lwd=2)
+# 
+#   abline(h=0,lty=3)
+#   legend("bottomright",c("T32 Seminaturlig eng","T2 Åpen grunnlendt mark"),lty=c(1,1),col=c("blue","red"),lwd=2,bty="n")
+# }
+# dev.off()
+# 
+# 
+# # Moodellsammendrag, tabell av random effects
+# summary(m1.gam$gam)
+# summary(m1.gam$mer)
+# ranef(m1.gam$mer)
+# 
+# coef(m1.gam$mer)
+# 
+# summary(modlist[[3]]$m1.gam$gam)
+# 
+# table(popvekstdata$År, popvekstdata$Hovednaturtype, popvekstdata$logR>0)
+```

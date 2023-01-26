@@ -9,6 +9,7 @@ book:
     - localEst.qmd
     - growthRate.qmd
     - growthRate_meta.qmd
+    - codeBook.qmd
     
     
 #bibliography: book.bib

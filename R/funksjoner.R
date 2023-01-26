@@ -1,26 +1,35 @@
 #' Calculate coverage
 #'
-#' @param rutedata 
-#' @param artsdata 
-#' @param artsgruppe 
+#' @param rutedata quadrate data
+#' @param artsdata species data
+#' @param artsgruppe Species 
 #'
-#' @return
+#' @return coverage 
 #' @export
 #'
-#' @examples
-beregn.dekning <- function(rutedata,artsdata,artsgruppe)
-{
+beregn.dekning <- function(rutedata,artsdata,artsgruppe){
   dekning <- rep(0,nrow(rutedata))
   for(i in 1:nrow(rutedata))
   {
-    utvalgte.data <- artsdata[,artsgruppe]==1 & artsdata$Rute==rutedata$RuteID[i] & artsdata$Ã…r==rutedata$Ã…r[i]
+    utvalgte.data <- artsdata[,artsgruppe]==1 & artsdata$Rute==rutedata$RuteID[i] & artsdata$Ãr==rutedata$Ãr[i]
     if(length(utvalgte.data)>0) dekning[i] <- sum(artsdata$Dekning[utvalgte.data],na.rm=T)
   }
   return(dekning)
 }
 
-beregn.arealvekt <- function(x,design,lokalitetsbredde=NA,rutebredde=1)
-{
+
+#' Calculate area weight
+#'
+#' @param x Quadrate data
+#' @param design Linje or Rose
+#' @param lokalitetsbredde Width of locality 
+#' @param rutebredde with of quadrate (defaults to 1)
+#'
+#' @return area weighting of survey to calculate estimates
+#' @keywords internal
+#'
+
+beregn.arealvekt <- function(x,design,lokalitetsbredde=NA,rutebredde=1){
   if(design=="Linje")
   {
     return(rep(lokalitetsbredde/rutebredde,length(x)))
@@ -33,45 +42,60 @@ beregn.arealvekt <- function(x,design,lokalitetsbredde=NA,rutebredde=1)
   }
 }
 
-veid.sum <- function(x,v) sum(x*v)
 
-boot.pop <- function(tetthet,forekomstareal,nboot=2000)
-{
-  #print(tetthet)
+
+#veid.sum <- function(x,v) sum(x*v)
+
+
+
+#' Bootstrap population
+#'
+#' @param tetthet density 
+#' @param forekomstareal Occurrence area 
+#' @param nboot number of bootstrap iterations (defaults to 2000)
+#'
+#' @return bootstraped estimates of population per age stage
+#' @keywords internal
+#'
+boot.pop <- function(tetthet,forekomstareal,nboot=2000){
   tetthet <- tetthet[!is.na(tetthet)]
-  #print(tetthet)
-  #print(forekomstareal)
   if(length(tetthet)==0) {print("Ingen individer"); return(rep(NA,nboot))}
   tetthet.boot <- boot(tetthet,statistic=function(x,k){mean(x[k])},R=nboot)
   forekomstareal.boot <- boot(forekomstareal,statistic=function(x,k){sum(x[k])},R=nboot)
   tetthet.boot$t * forekomstareal.boot$t
 }
 
+#' Calculate the Occurrence area
+#'
+#' @param transektdata transect data 
+#' @param utvalgt.lokalitet chosen locality 
+#' @param year year
+#' @param design Linje or Rose
+#' @param lokalitetsbredde Width of locality 
+#' @param rutebredde with of quadrate (defaults to 1)
+#' @param forekomst_transekt "Dragehode" column in data
+#' @param forekomst_avstand "Forekomst dragehode (m)" column in data
+#'
+#' @keywords internal
 beregn.forekomstareal <- function(transektdata,utvalgt.lokalitet,year,design,lokalitetsbredde,rutebredde=1,
-                                  forekomst_transekt="Dragehode",forekomst_avstand="Forekomst dragehode (m)")
-{
+                                  forekomst_transekt="Dragehode",forekomst_avstand="Forekomst dragehode (m)"){
   x <- list()
   for(i in 1:length(year))
   {
-    transekter <- transektdata[transektdata$Lokalitet==utvalgt.lokalitet & transektdata$Ã…r==year[i],]
-    #print(year[i])
-    #print(transekter)
+    transekter <- transektdata[transektdata$Lokalitet==utvalgt.lokalitet & transektdata$Ãr==year[i],]
+    
     if(all(is.na(transekter[,forekomst_transekt])))
     {
-      #print("Forekomstruter ikke registrert")
+    
       next
     }
     if(all(transekter[,forekomst_transekt]==0))
     {
-      #print("Forekomstruter ikke registrert")
       next
     }
     forekomstruter <- as.numeric(unlist(sapply(transekter[,forekomst_avstand],strsplit,split=',')))
-    #print(forekomstruter)
     forekomstruter <- forekomstruter[!is.na(forekomstruter)]
-    #print(forekomstruter)
     forekomstareal <- beregn.arealvekt(forekomstruter,design[i],lokalitetsbredde[i],rutebredde=rutebredde)
-    #print(forekomstareal)
     x[[i]] <- forekomstareal
   }
   mangler <- unlist(lapply(x,is.null))
@@ -94,12 +118,30 @@ beregn.forekomstareal <- function(transektdata,utvalgt.lokalitet,year,design,lok
 }
 
 
+#' Calculate population structure
+#'
+#' @param utvalgt.lokalitet chosen locality
+#' @param lokalitetsdata data for that locality
+#' @param transektdata transect data 
+#' @param rutedata quadrate data
+#' @param rutebredde quadrate width (defaults to 1)
+#' @param fert Fertile plants column
+#' @param veg Vegetative plants column
+#' @param sma seedlins column
+#' @param tot total plants column
+#' @param forekomst_transekt occurrence transect data
+#' @param forekomst_avstand occurrence distance
+#' @param quantiles quantiles to be calsulated (dafaults to 0.025, 0.975)
+#'
+#' @return population structure list per location
+#' @export
+#'
+
 beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rutedata,rutebredde=1,
                                fert="Fert.planter",veg="Veg.planter",sma="SmÃ¥planter",tot="Ant.DR",
                                forekomst_transekt="Dragehode",forekomst_avstand="Forekomst dragehode (m)",
-                               quantiles=c(0.025,0.975))
-{
-  year <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Ã…r"]
+                               quantiles=c(0.025,0.975)){
+  year <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Ãr"]
   design <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Design"]
   lokalitetsbredde <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Lokalitetsbredde"]
   print(paste(utvalgt.lokalitet, year, design,"bredde:",lokalitetsbredde))
@@ -123,7 +165,7 @@ beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rut
     forekomstareal <- forekomstareal.liste[[i]]
     saveRDS(forekomstareal, paste0("data/derived_data/", utvalgt.lokalitet,"_forekomstareal","_",i,".RDS"))
     print(year[i])
-    ruter <- rutedata[rutedata$Lokalitet==utvalgt.lokalitet & rutedata$Ã…r==year[i] & rutedata[,tot]>0,]
+    ruter <- rutedata[rutedata$Lokalitet==utvalgt.lokalitet & rutedata$Ãr==year[i] & rutedata[,tot]>0,]
     saveRDS(ruter, paste0("data/derived_data/", utvalgt.lokalitet,"_ruter","_",i ,".RDS"))
 
     print("Fertile")
@@ -138,7 +180,7 @@ beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rut
     #print(summary(x))
     nVeg[i] <- mean(x); Veg.CI[i,] <- quantile(x,quantiles,na.rm=T)
     
-    print("SmÃ¥planter")
+    print("Småplanter")
     if(!is.na(sma)) x <- boot.pop(ruter[,sma],forekomstareal,nboot)
     else x <- NA
     #print(summary(x))
@@ -155,20 +197,47 @@ beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rut
   return(popstr)
 }
 
-plot.popstruktur <- function(popstr,tidsrom=c(2016.5,2023.5))
-{
+
+
+#' Base plot population structure
+#'
+#' @param popstr population structure data 
+#'
+#' @return Baseplots of population structure per location
+#' @export
+
+plot.popstruktur <- function(popstr){
+  thisyear=lubridate::year(Sys.time())
+  tidsrom=c(2016.5, thisyear)
   plot(popstr$year,popstr$nTot,ylim=c(0,max(popstr$Tot.CI,na.rm=T)),type="o",main=popstr$lokalitet,xlab="Ã…r",ylab="Antall individer",xlim=tidsrom)
   polygon(c(popstr$year,rev(popstr$year)),c(popstr$Tot.CI[,1],rev(popstr$Tot.CI[,2])),col=rgb(0.5,0.5,0.5,alpha=0.2),border=NA)
   lines(popstr$year,popstr$nFert,col="red",type="o"); polygon(c(popstr$year,rev(popstr$year)),c(popstr$Fert.CI[,1],rev(popstr$Fert.CI[,2])),col=rgb(1,0,0,alpha=0.2),border=NA)
   lines(popstr$year,popstr$nVeg,col="green",type="o"); polygon(c(popstr$year,rev(popstr$year)),c(popstr$Veg.CI[,1],rev(popstr$Veg.CI[,2])),col=rgb(0,1,0,alpha=0.2),border=NA)
   lines(popstr$year,popstr$nSma,col="blue",,type="o"); polygon(c(popstr$year,rev(popstr$year)),c(popstr$Sma.CI[,1],rev(popstr$Sma.CI[,2])),col=rgb(0,0,1,alpha=0.2),border=NA)
   #lines(popstr$year,popstr$nSma+popstr$nVeg+popstr$nFert,lty=2,type="o")
-  legend("topleft",c("Totalt","Fertile","Vegetative","SmÃ¥planter"),lty=c(1,1,1,1),pch=c(1,1,1,1),col=c("black","red","green","blue"),bty="n")
+  legend("topleft",c("Totalt","Fertile","Vegetative","Småplanter"),lty=c(1,1,1,1),pch=c(1,1,1,1),col=c("black","red","green","blue"),bty="n")
 }
 
-# need to update this to allow change in years
-plot.gruppetrender <- function(lokalitetsdata,gruppevariabel,lokalitetsestimater,tidsrom=c(2016.5,2023.5),reverser=F,lokalitetsnavn,lokfarge,regsymbol,natlinje)
-{
+
+#' Base plot group trends
+#'
+#' @param lokalitetsdata locality data
+#' @param gruppevariabel grouping variable 
+#' @param lokalitetsestimater local estimates data
+#' @param reverser Reverse the axis? default is FALSE
+#' @param lokalitetsnavn locality name
+#' @param lokfarge locality colour
+#' @param regsymbol Regional symbol
+#' @param natlinje linetype for naturtype
+#'
+#' @return baseplots of group trends
+#' @export
+#'
+plot.gruppetrender <- function(lokalitetsdata,gruppevariabel,lokalitetsestimater,
+                               reverser=FALSE,lokalitetsnavn,lokfarge,regsymbol,natlinje){
+  thisyear=lubridate::year(Sys.time())
+  tidsrom=c(2016.5, thisyear)
+  
   gruppe <- unique(lokalitetsdata[,gruppevariabel])
   if(reverser) gruppe <- rev(gruppe)
   ngrp <- length(gruppe)
@@ -215,16 +284,24 @@ plot.gruppetrender <- function(lokalitetsdata,gruppevariabel,lokalitetsestimater
 
 #
 
-beregn.vekstrate <- function(rutedata,popvar,idvar)
-{
+#' Calculate growth rate
+#'
+#' @param rutedata quadrate data
+#' @param popvar population variable (Total Dragehode )
+#' @param idvar Id of the quadrate (RuteID)
+#'
+#' @return growthrate estimates
+#' @export
+
+beregn.vekstrate <- function(rutedata,popvar,idvar){
   vekstrate <- rep(NA,nrow(rutedata))
-  year <- sort(as.numeric(unique(rutedata$Ã…r)))
+  year <- sort(as.numeric(unique(rutedata$Ãr)))
   nyear <- length(year)
   if(nyear<2) return(NA)
   for(i in 1:(nyear-1))
   {
-    t1 <- rutedata$Ã…r==year[i]
-    t2 <- rutedata$Ã…r==year[i+1]
+    t1 <- rutedata$Ãr==year[i]
+    t2 <- rutedata$Ãr==year[i+1]
     idmatch <- match(rutedata[t1,idvar],rutedata[t2,idvar])
     vekstrate[t1] <- rutedata[t2,popvar][idmatch] / rutedata[t1,popvar] 
   }
@@ -232,3 +309,73 @@ beregn.vekstrate <- function(rutedata,popvar,idvar)
   return(rutedata)
 }
 
+
+#' GGplot version of plot.popstruktur
+#'
+#' @param popstr population structure
+#'
+#' @return plots of population structure
+#' @export
+#'
+
+ggplot.popstruktur <- function(popstr){
+  require(tidyverse)
+  title=popstr$lokalitet
+  popstr=as_tibble(popstr)
+  names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "Småplanter",      "Totalt",     
+                    "Fert.CI",   "Veg.CI",    "Sma.CI",    "Tot.CI" )
+  
+  
+  popstrCI=popstr %>% 
+    mutate("Fert.CI_upper"= Fert.CI[,2]) %>% 
+    mutate("Fert.CI_lower"= Fert.CI[,1]) %>% 
+    mutate("Tot.CI_upper"= Tot.CI[,2]) %>% 
+    mutate("Tot.CI_lower"= Tot.CI[,1]) %>%
+    mutate("Veg.CI_upper"= Veg.CI[,2]) %>% 
+    mutate("Veg.CI_lower"= Veg.CI[,1]) %>%
+    mutate("Sma.CI_upper"= Sma.CI[,2]) %>% 
+    mutate("Sma.CI_lower"= Sma.CI[,1]) %>%
+    select(!lokalitet) %>% 
+    pivot_longer(!year, names_to = "key", values_to = "value") %>% 
+    filter(key%in% c("Fert.CI", "Veg.CI","Sma.CI", "Tot.CI")) %>% 
+    mutate(var=gsub(".CI","", key))
+  
+  popstrCI=popstrCI%>% 
+    mutate(var=rep(c("Fertile", "Vegetative", "Småplanter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
+    mutate(upper=value[,2]) %>% 
+    mutate(lower=value[,1]) %>% 
+    select(!value)
+  
+  
+  
+  popstr_plot=popstr %>% 
+    mutate("Fert.CI_upper"= Fert.CI[,2]) %>% 
+    mutate("Fert.CI_lower"= Fert.CI[,1]) %>% 
+    mutate("Tot.CI_upper"= Tot.CI[,2]) %>% 
+    mutate("Tot.CI_lower"= Tot.CI[,1]) %>%
+    mutate("Veg.CI_upper"= Veg.CI[,2]) %>% 
+    mutate("Veg.CI_lower"= Veg.CI[,1]) %>%
+    mutate("Sma.CI_upper"= Sma.CI[,2]) %>% 
+    mutate("Sma.CI_lower"= Sma.CI[,1]) %>%
+    select(!lokalitet) %>% 
+    pivot_longer(!year, names_to = "key", values_to = "value") %>%
+    #filter(!key%in% c("Fert.CI", "Veg.CI","Sma.CI", "Tot.CI")) %>% 
+    filter(key%in% c("Fertile", "Småplanter", "Totalt", "Vegetative")) %>% 
+    mutate(upper=popstrCI$upper) %>% 
+    mutate(lower=popstrCI$lower)
+  
+  p=popstr_plot%>% 
+    ggplot(aes(year,value[,1], colour=key))+
+    geom_point(size=2)+
+    geom_ribbon(aes(ymin=lower, ymax=upper, fill=popstr_plot$key), alpha=0.2)+
+    scale_fill_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"), guide="none")+
+    geom_line( size=1.2)+
+    scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
+    labs(x="Ãƒr", y= "Antall individer")+
+    ggtitle(title)+
+    theme_classic()
+  
+  ggsave(
+    paste0(here::here(),"/Figurer/ggplots/" ,title, ".png"))              
+  
+}              
