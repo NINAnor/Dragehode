@@ -1,6 +1,7 @@
 ---
 title: "Weighted population growth rate"
 editor: visual
+lang: no
 ---
 
 ```{r}
@@ -15,7 +16,7 @@ source("_common.R")
 
 popvekstdata <- readRDS(paste0(here::here(),"/data/derived_data/popvekstdata.RDS"))
 #unweighted growth rate mean of site and mean of location
-popvekstdata$Year=as.integer(popvekstdata$Year)
+popvekstdata$Year=as.integer(popvekstdata[,2])
 df <- popvekstdata[!is.infinite(popvekstdata$vekstrate),]
 ```
 

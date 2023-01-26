@@ -3,6 +3,8 @@ project:
   output-dir: docs
 book:
   title: "Dragehode"
+  cover-image: Dragehode.png
+  page-navigation: true
   chapters: 
     - index.qmd
     - intro.qmd
