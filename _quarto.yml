@@ -12,6 +12,7 @@ book:
     - growthRate.qmd
     - growthRate_meta.qmd
     - codeBook.qmd
+    - funksjoner.qmd
     
     
 #bibliography: book.bib
