@@ -1,8 +1,11 @@
 ---
-title: "Code to recreate the analysis"
 editor: visual
 lang: no
 ---
+
+# Code to recreate the analysis {#sec-code}
+
+To look at the functions used go to @sec-funksjoner
 
 ```{r}
 #| echo: false

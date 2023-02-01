@@ -1,7 +1,8 @@
 ---
-title: "Local estimates"
 editor: visual
 ---
+
+# Local estimates {#sec-local}
 
 ```{r}
 #| echo: false

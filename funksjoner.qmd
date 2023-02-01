@@ -1,8 +1,11 @@
 ---
-title: "Funksjons"
 editor: visual
 lang: no
 ---
+
+# Funksjoner {#sec-funksjoner}
+
+To see the code which uses these functions go to @sec-code
 
 ```{r}
 #| echo: true
