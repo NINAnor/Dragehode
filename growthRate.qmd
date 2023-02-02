@@ -10,6 +10,7 @@ editor: visual
 library(tidyverse)
 #get the data
 popvekstdata <- readRDS(paste0(here::here(),"/data/derived_data/popvekstdata.RDS"))
+popvekstdata$Year<-popvekstdata[,2]
 #unweighted growth rate mean of site and mean of location
 popvekstdata$Year=as.integer(popvekstdata$Year)
 df <- popvekstdata[!is.infinite(popvekstdata$vekstrate),]
@@ -23,12 +24,14 @@ df$Year<-df[,2]
 
 plot_logR<-function(Lokal){
   sub_set_df<-df |> filter(Lokalitet == {{Lokal}})
-
-p=sub_set_df |> 
-  ggplot(aes(Year, logR)) +
+  
+  p=sub_set_df |> 
+  ggplot(aes(as.integer(Year+1), logR)) +
   geom_point(colour="darkred", alpha=0.5)+
   stat_smooth()+
-  labs(x="Ar",y="Log Growth Rate")+
+  labs(x="Latest survey year",y="Log Growth Rate")+
+  scale_x_continuous(breaks=scales::breaks_pretty(n=4, min.n=2))+
+  #scale_x_continuous(label = ~ scales::comma(.x, accuracy =1))+
   geom_hline(yintercept = 0, lty=2, linewidth=1, colour="black")+
   theme_classic()+
   ggtitle(paste0("Log growth rate for ", {{Lokal}}))
