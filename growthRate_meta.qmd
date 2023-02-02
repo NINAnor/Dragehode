@@ -20,7 +20,7 @@ popvekstdata$Year=as.integer(popvekstdata[,2])
 df <- popvekstdata[!is.infinite(popvekstdata$vekstrate),]
 ```
 
-## 2018
+## 2018 - 2019
 
 ```{r}
 #| echo: false
@@ -152,7 +152,7 @@ Rforrest_data[1:2,] |>
 ```
 
 
-## 2019
+## 2019 - 2020
 
 ```{r}
 #| echo: false
@@ -285,7 +285,7 @@ Rforrest_data[1:2,] |>
 ```
 
 
-## 2020
+## 2020 - 2021
 
 
 ```{r}
@@ -420,7 +420,7 @@ Rforrest_data[1:2,] |>
 
 
 
-## 2021
+## 2021 - 2022
 
 ```{r}
 #| echo: false
