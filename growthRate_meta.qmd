@@ -20,6 +20,8 @@ popvekstdata$Year=as.integer(popvekstdata[,2])
 df <- popvekstdata[!is.infinite(popvekstdata$vekstrate),]
 ```
 
+## 2018
+
 ```{r}
 #| echo: false
 #| message: false
@@ -33,6 +35,7 @@ join_df=df |>
 
 testmeta=join_df |> 
   group_by(Lokalitet, Region) |> 
+  filter(Year==2018) |> 
   summarise(meanGR=mean(vekstrate, na.rm=TRUE),
             sdGR=sd(vekstrate, na.rm=TRUE),
             VARGR=var(vekstrate,na.rm = TRUE),
@@ -44,6 +47,408 @@ testmeta=join_df |>
 
 res <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta)
 
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#create forest plot
+
+forrest_data<-rbind(data.frame(ES=res$yi,SE=sqrt(res$vi),Type=rep("Site", 14),Site=testmeta$Lokalitet),
+                    data.frame(ES=res$b,SE=res$se,Type="Summary",Site="Summary"))
+
+forrest_data$Region<-c(testmeta$Region, NA)
+
+forrest_data<-forrest_data |> 
+  rowid_to_column()
+
+plot1<-ggplot(data=forrest_data,aes(x=reorder(Site, -rowid) ,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE),
+                                    size=factor(Type),colour=factor(Type)))+
+  geom_pointrange()
+plot2<-plot1+coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))
+plot3<-plot2+xlab("Site")+ylab("Observed outcome")+scale_colour_manual(values=c("grey","black"))
+plot3+theme(legend.position="none")
+
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+res.H <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta)
+res.R <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta)
+res.O <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta)
+
+dat.comp <- data.frame(estimate = c(coef(res.H), coef(res.R), coef(res.O)), stderror = c(res.H$se, res.R$se, res.O$se),
+                       meta = c("Hadeland", "Ringerike", "Oslo"), tau2 = round(c(res.H$tau2, res.R$tau2, res.O$tau2),4))
+out=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp, digits=3)
+#forest(out)
+Rforrest_data<-rbind(data.frame(ES=out$yi,SE=sqrt(out$vi),Type=rep("Site", 3),Site=dat.comp$meta),
+                    data.frame(ES=out$b,SE=out$se,Type="Summary",Site="Summary"))
+
+
+Rforrest_data[1:3,] |> 
+  ggplot(aes(Site,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE) ))+
+  geom_pointrange()+
+  coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))+
+  xlab("Region")+
+  ylab("Observed outcome")+
+  scale_colour_manual(values=c("grey","black"))+
+  theme(legend.position="none")
+
+
+```
+
+### Naturtype
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+testmeta2=join_df |> 
+  group_by(Lokalitet, Hovednaturtype ) |> 
+  filter(Year==2018) |> 
+  summarise(meanGR=mean(vekstrate, na.rm=TRUE),
+            sdGR=sd(vekstrate, na.rm=TRUE),
+            VARGR=var(vekstrate,na.rm = TRUE),
+            meanTpop=mean(nTot, na.rm=TRUE),
+            sdTpop=sd(nTot, na.rm=TRUE),
+            VARTpop=var(nTot, na.rm=TRUE)
+            ) |> 
+  filter(!Lokalitet=="Viernbukta")
+
+res2 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta2)
+
+res.T32 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T32"), slab=Lokalitet, data=testmeta2)
+res.T2 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T2"), slab=Lokalitet, data=testmeta2)
+
+dat.comp <- data.frame(estimate = c(coef(res.T32), coef(res.T2)), stderror = c(res.T32$se, res.T2$se),
+                       meta = c("T32", "T2"), tau2 = round(c(res.T32$tau2, res.T2$tau2),4))
+out=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp, digits=3)
+#forest(out)
+Rforrest_data<-rbind(data.frame(ES=out$yi,SE=sqrt(out$vi),Type=rep("Site", 2),Site=dat.comp$meta),
+                    data.frame(ES=out$b,SE=out$se,Type="Summary",Site="Summary"))
+
+
+Rforrest_data[1:2,] |> 
+  ggplot(aes(Site,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE) ))+
+  geom_pointrange()+
+  coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))+
+  xlab("Hovednaturtype")+
+  ylab("Observed outcome")+
+  scale_colour_manual(values=c("grey","black"))+
+  theme(legend.position="none")
+
+
+```
+
+
+## 2019
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+testmeta=join_df |> 
+
+  group_by(Lokalitet, Region) |> 
+
+  filter(Year==2019) |> 
+
+  summarise(meanGR=mean(vekstrate, na.rm=TRUE),
+
+            sdGR=sd(vekstrate, na.rm=TRUE),
+
+            VARGR=var(vekstrate,na.rm = TRUE),
+
+            meanTpop=mean(nTot, na.rm=TRUE),
+
+            sdTpop=sd(nTot, na.rm=TRUE),
+
+            VARTpop=var(nTot, na.rm=TRUE)
+
+            ) |> 
+
+  filter(!Lokalitet=="Viernbukta")
+
+res <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta)
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#create forest plot
+
+forrest_data<-rbind(data.frame(ES=res$yi,SE=sqrt(res$vi),Type=rep("Site", 18),Site=testmeta$Lokalitet),
+                    data.frame(ES=res$b,SE=res$se,Type="Summary",Site="Summary"))
+
+forrest_data$Region<-c(testmeta$Region, NA)
+
+forrest_data<-forrest_data |> 
+  rowid_to_column()
+
+plot1<-ggplot(data=forrest_data,aes(x=reorder(Site, -rowid) ,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE),
+                                    size=factor(Type),colour=factor(Type)))+
+  geom_pointrange()
+plot2<-plot1+coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))
+plot3<-plot2+xlab("Site")+ylab("Observed outcome")+scale_colour_manual(values=c("grey","black"))
+plot3+theme(legend.position="none")
+
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+res.H <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta)
+res.R <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta)
+res.O <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta)
+
+dat.comp <- data.frame(estimate = c(coef(res.H), coef(res.R), coef(res.O)), stderror = c(res.H$se, res.R$se, res.O$se),
+                       meta = c("Hadeland", "Ringerike", "Oslo"), tau2 = round(c(res.H$tau2, res.R$tau2, res.O$tau2),4))
+out=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp, digits=3)
+#forest(out)
+Rforrest_data<-rbind(data.frame(ES=out$yi,SE=sqrt(out$vi),Type=rep("Site", 3),Site=dat.comp$meta),
+                    data.frame(ES=out$b,SE=out$se,Type="Summary",Site="Summary"))
+
+
+Rforrest_data[1:3,] |> 
+  ggplot(aes(Site,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE) ))+
+  geom_pointrange()+
+  coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))+
+  xlab("Region")+
+  ylab("Observed outcome")+
+  scale_colour_manual(values=c("grey","black"))+
+  theme(legend.position="none")
+
+```
+
+### Naturtype
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+testmeta2=join_df |> 
+  group_by(Lokalitet, Hovednaturtype ) |> 
+  filter(Year=="2019") |> 
+  summarise(meanGR=mean(vekstrate, na.rm=TRUE),
+            sdGR=sd(vekstrate, na.rm=TRUE),
+            VARGR=var(vekstrate,na.rm = TRUE),
+            meanTpop=mean(nTot, na.rm=TRUE),
+            sdTpop=sd(nTot, na.rm=TRUE),
+            VARTpop=var(nTot, na.rm=TRUE)
+            ) |> 
+  filter(!Lokalitet=="Viernbukta")
+
+res2 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta2)
+
+res.T32 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T32"), slab=Lokalitet, data=testmeta2)
+res.T2 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T2"), slab=Lokalitet, data=testmeta2)
+
+dat.comp <- data.frame(estimate = c(coef(res.T32), coef(res.T2)), stderror = c(res.T32$se, res.T2$se),
+                       meta = c("T32", "T2"), tau2 = round(c(res.T32$tau2, res.T2$tau2),4))
+out=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp, digits=3)
+#forest(out)
+Rforrest_data<-rbind(data.frame(ES=out$yi,SE=sqrt(out$vi),Type=rep("Site", 2),Site=dat.comp$meta),
+                    data.frame(ES=out$b,SE=out$se,Type="Summary",Site="Summary"))
+
+
+Rforrest_data[1:2,] |> 
+  ggplot(aes(Site,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE) ))+
+  geom_pointrange()+
+  coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))+
+  xlab("Hovednaturtype")+
+  ylab("Observed outcome")+
+  scale_colour_manual(values=c("grey","black"))+
+  theme(legend.position="none")
+
+
+```
+
+
+## 2020
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+testmeta=join_df |> 
+
+  group_by(Lokalitet, Region) |> 
+
+  filter(Year==2020) |> 
+
+  summarise(meanGR=mean(vekstrate, na.rm=TRUE),
+
+            sdGR=sd(vekstrate, na.rm=TRUE),
+
+            VARGR=var(vekstrate,na.rm = TRUE),
+
+            meanTpop=mean(nTot, na.rm=TRUE),
+
+            sdTpop=sd(nTot, na.rm=TRUE),
+
+            VARTpop=var(nTot, na.rm=TRUE)
+
+            ) |> 
+
+  filter(!Lokalitet=="Viernbukta")
+
+res <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta)
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#create forest plot
+
+forrest_data<-rbind(data.frame(ES=res$yi,SE=sqrt(res$vi),Type=rep("Site", 24),Site=testmeta$Lokalitet),
+                    data.frame(ES=res$b,SE=res$se,Type="Summary",Site="Summary"))
+
+forrest_data$Region<-c(testmeta$Region, NA)
+
+forrest_data<-forrest_data |> 
+  rowid_to_column()
+
+plot1<-ggplot(data=forrest_data,aes(x=reorder(Site, -rowid) ,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE),
+                                    size=factor(Type),colour=factor(Type)))+
+  geom_pointrange()
+plot2<-plot1+coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))
+plot3<-plot2+xlab("Site")+ylab("Observed outcome")+scale_colour_manual(values=c("grey","black"))
+plot3+theme(legend.position="none")
+
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+res.H <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta)
+res.R <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta)
+res.O <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta)
+
+dat.comp <- data.frame(estimate = c(coef(res.H), coef(res.R), coef(res.O)), stderror = c(res.H$se, res.R$se, res.O$se),
+                       meta = c("Hadeland", "Ringerike", "Oslo"), tau2 = round(c(res.H$tau2, res.R$tau2, res.O$tau2),4))
+out=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp, digits=3)
+#forest(out)
+Rforrest_data<-rbind(data.frame(ES=out$yi,SE=sqrt(out$vi),Type=rep("Site", 3),Site=dat.comp$meta),
+                    data.frame(ES=out$b,SE=out$se,Type="Summary",Site="Summary"))
+
+
+Rforrest_data[1:3,] |> 
+  ggplot(aes(Site,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE) ))+
+  geom_pointrange()+
+  coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))+
+  xlab("Region")+
+  ylab("Observed outcome")+
+  scale_colour_manual(values=c("grey","black"))+
+  theme(legend.position="none")
+
+```
+
+### Naturtype
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+testmeta2=join_df |> 
+  group_by(Lokalitet, Hovednaturtype ) |> 
+  filter(Year==2020) |> 
+  summarise(meanGR=mean(vekstrate, na.rm=TRUE),
+            sdGR=sd(vekstrate, na.rm=TRUE),
+            VARGR=var(vekstrate,na.rm = TRUE),
+            meanTpop=mean(nTot, na.rm=TRUE),
+            sdTpop=sd(nTot, na.rm=TRUE),
+            VARTpop=var(nTot, na.rm=TRUE)
+            ) |> 
+  filter(!Lokalitet=="Viernbukta")
+
+res2 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta2)
+
+res.T32 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T32"), slab=Lokalitet, data=testmeta2)
+res.T2 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T2"), slab=Lokalitet, data=testmeta2)
+
+dat.comp <- data.frame(estimate = c(coef(res.T32), coef(res.T2)), stderror = c(res.T32$se, res.T2$se),
+                       meta = c("T32", "T2"), tau2 = round(c(res.T32$tau2, res.T2$tau2),4))
+out=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp, digits=3)
+#forest(out)
+Rforrest_data<-rbind(data.frame(ES=out$yi,SE=sqrt(out$vi),Type=rep("Site", 2),Site=dat.comp$meta),
+                    data.frame(ES=out$b,SE=out$se,Type="Summary",Site="Summary"))
+
+
+Rforrest_data[1:2,] |> 
+  ggplot(aes(Site,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE) ))+
+  geom_pointrange()+
+  coord_flip()+
+  geom_hline(yintercept=1, lty=2,linewidth=1)+
+  scale_size_manual(values=c(0.5,1))+
+  xlab("Hovednaturtype")+
+  ylab("Observed outcome")+
+  scale_colour_manual(values=c("grey","black"))+
+  theme(legend.position="none")
+
+
+```
+
+
+
+## 2021
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+testmeta=join_df |> 
+
+  group_by(Lokalitet, Region) |> 
+
+  filter(Year==2021) |> 
+
+  summarise(meanGR=mean(vekstrate, na.rm=TRUE),
+
+            sdGR=sd(vekstrate, na.rm=TRUE),
+
+            VARGR=var(vekstrate,na.rm = TRUE),
+
+            meanTpop=mean(nTot, na.rm=TRUE),
+
+            sdTpop=sd(nTot, na.rm=TRUE),
+
+            VARTpop=var(nTot, na.rm=TRUE)
+
+            ) |> 
+
+  filter(!Lokalitet=="Viernbukta")
+
+res <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta)
 ```
 
 ```{r}
@@ -100,10 +505,10 @@ Rforrest_data[1:3,] |>
   scale_colour_manual(values=c("grey","black"))+
   theme(legend.position="none")
 
-
 ```
 
-# Naturtype
+
+### Naturtype
 
 ```{r}
 #| echo: false
@@ -111,6 +516,8 @@ Rforrest_data[1:3,] |>
 #| warning: false
 testmeta2=join_df |> 
   group_by(Lokalitet, Hovednaturtype ) |> 
+  filter(Year==2021) |> 
+
   summarise(meanGR=mean(vekstrate, na.rm=TRUE),
             sdGR=sd(vekstrate, na.rm=TRUE),
             VARGR=var(vekstrate,na.rm = TRUE),
