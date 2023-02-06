@@ -23,7 +23,7 @@ beregn.dekning <- function(rutedata,artsdata,artsgruppe){
   dekning <- rep(0,nrow(rutedata))
   for(i in 1:nrow(rutedata))
   {
-    utvalgte.data <- artsdata[,artsgruppe]==1 & artsdata$Rute==rutedata$RuteID[i] & artsdata$ﾃビ==rutedata$ﾃビ[i]
+    utvalgte.data <- artsdata[,artsgruppe]==1 & artsdata$Rute==rutedata$RuteID[i] & artsdata$ﾅr==rutedata$ﾅr[i]
     if(length(utvalgte.data)>0) dekning[i] <- sum(artsdata$Dekning[utvalgte.data],na.rm=T)
   }
   return(dekning)
@@ -91,7 +91,7 @@ beregn.forekomstareal <- function(transektdata,utvalgt.lokalitet,year,design,lok
   x <- list()
   for(i in 1:length(year))
   {
-    transekter <- transektdata[transektdata$Lokalitet==utvalgt.lokalitet & transektdata$ﾃビ==year[i],]
+    transekter <- transektdata[transektdata$Lokalitet==utvalgt.lokalitet & transektdata$ﾅr==year[i],]
     
     if(all(is.na(transekter[,forekomst_transekt])))
     {
@@ -150,7 +150,7 @@ beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rut
                                fert="Fert.planter",veg="Veg.planter",sma="Smﾃδ･planter",tot="Ant.DR",
                                forekomst_transekt="Dragehode",forekomst_avstand="Forekomst dragehode (m)",
                                quantiles=c(0.025,0.975)){
-  year <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"ﾃビ"]
+  year <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"ﾅr"]
   design <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Design"]
   lokalitetsbredde <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Lokalitetsbredde"]
   print(paste(utvalgt.lokalitet, year, design,"bredde:",lokalitetsbredde))
@@ -174,7 +174,7 @@ beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rut
     forekomstareal <- forekomstareal.liste[[i]]
     saveRDS(forekomstareal, paste0("data/derived_data/", utvalgt.lokalitet,"_forekomstareal","_",i,".RDS"))
     print(year[i])
-    ruter <- rutedata[rutedata$Lokalitet==utvalgt.lokalitet & rutedata$ﾃビ==year[i] & rutedata[,tot]>0,]
+    ruter <- rutedata[rutedata$Lokalitet==utvalgt.lokalitet & rutedata$ﾅr==year[i] & rutedata[,tot]>0,]
     saveRDS(ruter, paste0("data/derived_data/", utvalgt.lokalitet,"_ruter","_",i ,".RDS"))
 
     print("Fertile")
@@ -304,13 +304,13 @@ plot.gruppetrender <- function(lokalitetsdata,gruppevariabel,lokalitetsestimater
 
 beregn.vekstrate <- function(rutedata,popvar,idvar){
   vekstrate <- rep(NA,nrow(rutedata))
-  year <- sort(as.numeric(unique(rutedata$ﾃビ)))
+  year <- sort(as.numeric(unique(rutedata$ﾅr)))
   nyear <- length(year)
   if(nyear<2) return(NA)
   for(i in 1:(nyear-1))
   {
-    t1 <- rutedata$ﾃビ==year[i]
-    t2 <- rutedata$ﾃビ==year[i+1]
+    t1 <- rutedata$ﾅr==year[i]
+    t2 <- rutedata$ﾅr==year[i+1]
     idmatch <- match(rutedata[t1,idvar],rutedata[t2,idvar])
     vekstrate[t1] <- rutedata[t2,popvar][idmatch] / rutedata[t1,popvar] 
   }
