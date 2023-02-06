@@ -1,8 +1,9 @@
 # Introduksjon {#sec-intro}
-Denne nettsiden presenterer resultater fra overvåking av dragehode _Dracocephalum ruysciana_ i Norge. Dragehode er kategorisert som sårbar (VU) på den norske rødlista for arter, og dragehode er en prioritert art, med egen forskrift og handlingsplan. 
 
-Du kan lese mer om dragehode og overvåkingsprosjektet på NINAs nettsider: https://www.nina.no/Naturmangfold/Trua-natur/Dragehode
-Årsrapporten for 2022, som denne nettsiden refererer til, finner du her: 
+Denne nettsiden presenterer resultater fra overvåking av dragehode *Dracocephalum ruysciana* i Norge. Dragehode er kategorisert som sårbar (VU) på den norske rødlista for arter, og dragehode er en prioritert art, med egen forskrift og handlingsplan.
 
-# Finansiering
+Du kan lese mer om dragehode og overvåkingsprosjektet på NINAs nettsider: https://www.nina.no/Naturmangfold/Trua-natur/Dragehode �rsrapporten for 2022, som denne nettsiden refererer til, finner du her:
+
+## Finansiering
+
 Overvåking av dragehode finansieres av Statsforvalteren i Oslo og Viken.

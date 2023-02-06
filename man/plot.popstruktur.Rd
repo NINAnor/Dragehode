@@ -9,6 +9,9 @@
 \arguments{
 \item{popstr}{population structure data}
 }
+\value{
+Baseplots of population structure per location
+}
 \description{
 Base plot population structure
 }
