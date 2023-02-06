@@ -44,6 +44,9 @@ beregn.popstruktur(
 
 \item{quantiles}{quantiles to be calsulated (dafaults to 0.025, 0.975)}
 }
+\value{
+population structure list per location
+}
 \description{
 Calculate population structure
 }

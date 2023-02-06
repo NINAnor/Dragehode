@@ -32,6 +32,9 @@
 
 \item{natlinje}{linetype for naturtype}
 }
+\value{
+baseplots of group trends
+}
 \description{
 Base plot group trends
 }
