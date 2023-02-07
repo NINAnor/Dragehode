@@ -330,10 +330,10 @@ RNT_data<-rbind(data.frame(ES=c(out_R_2018$yi, out_R_2019$yi,
 RNT_data|> 
   filter(!type=="Summary") |> 
   filter(!site=="Summary") |> 
-  mutate(year2=year+c(0,0.2,0.4)) |> 
+  mutate(year2=year+c(0,0.2)) |> 
   ggplot(aes(year2,y=log(ES),ymax=log(ES)+(1.96*log(SE)),ymin=log(ES)-(1.96*log(SE)), group=site, colour=site ))+
   geom_pointrange()+
-  scale_colour_manual(values=c("#E69F00", "#56B4E9", "#009E73"))+
+  scale_colour_manual(values=c("darkred", "darkgreen"))+
   geom_hline(yintercept=0, lty=2,linewidth=1)+
   labs(x="Ar", y="Log vektet vekstrate (95% CI)")+
   theme_classic()+
