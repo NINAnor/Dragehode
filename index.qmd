@@ -1,7 +1,5 @@
-# Welcome {.unnumbered}
+# Velkommen {.unnumbered}
 
-This is the website for the work-in-progress monitoring report and analysis for Dragehode in 2023.
+Dette er nettstedet for overvåkingsrapporten for Dragehode i 2023.
 
-This website is and will always be free, licensed under the [CC BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/us/) License.
-
-## Acknowledgements {.unnumbered}
+Denne nettsiden er og vil alltid være gratis, lisensiert under CC BY-NC-ND 3.0-lisensen.
