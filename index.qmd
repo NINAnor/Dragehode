@@ -5,6 +5,6 @@ fontenc: iso-8859-1
 
 # Velkommen {.unnumbered}
 
-Dette er nettstedet for overvåkingsrapporten for Dragehode i 2023.
+Dette er nettstedet for overvÃ¥kingsrapporten for Dragehode i 2023.
 
-Denne nettsiden er og vil alltid være gratis, lisensiert under CC BY-NC-ND 3.0-lisensen.
+Denne nettsiden er og vil alltid vÃ¦re gratis, lisensiert under CC BY-NC-ND 3.0-lisensen.
