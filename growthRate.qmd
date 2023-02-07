@@ -1,7 +1,9 @@
 ---
-title: "Population growth rate"
+title: "Lokale estimater av populasjonsvekstrate"
 editor: visual
 ---
+
+
 
 ```{r}
 #| echo: false
@@ -29,12 +31,12 @@ plot_logR<-function(Lokal){
   ggplot(aes(as.integer(Year+1), logR)) +
   geom_point(colour="darkred", alpha=0.5)+
   stat_smooth()+
-  labs(x="Latest survey year",y="Log Growth Rate")+
+  labs(x="Siste overvåkingsår",y="Log vekstrate")+
   scale_x_continuous(breaks=scales::breaks_pretty(n=4, min.n=2))+
   #scale_x_continuous(label = ~ scales::comma(.x, accuracy =1))+
   geom_hline(yintercept = 0, lty=2, linewidth=1, colour="black")+
   theme_classic()+
-  ggtitle(paste0("Log growth rate for ", {{Lokal}}))
+  ggtitle(paste0("Log vekstrate for ", {{Lokal}}))
 
 return(p)
 }
@@ -72,6 +74,6 @@ plot_logR(local_list[21])
 plot_logR(local_list[22])
 plot_logR(local_list[23])
 plot_logR(local_list[24])
-plot_logR(local_list[25])
+# plot_logR(local_list[25])
 plot_logR(local_list[26])
 ```
