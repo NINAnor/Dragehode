@@ -1,3 +1,7 @@
+---
+lang: no
+---
+
 # Velkommen {.unnumbered}
 
 Dette er nettstedet for overvåkingsrapporten for Dragehode i 2023.

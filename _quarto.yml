@@ -17,6 +17,7 @@ book:
     
 #bibliography: book.bib
 
+lang: no
 format: 
   html:
     theme: cosmo
