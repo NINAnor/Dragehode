@@ -9,7 +9,7 @@ For å oppsummere vekstratene på tvers av populasjoner brukte vi en vektet regr
 
 Denne tilnærmingen gjør at vi kan vekte effekten av endringer i store populasjoner mer, mens endringer i små populasjoner har mindre effekt på overordnede vekstrater. Populasjonsvekst-ratene gir dermed et representativt estimat på endringer i dragehodepopulasjonen innenfor regionen/naturtypen.
 
-Populasjonsvekst er her ikke log-transformert. Det betyr at en vekstrate på 1 indikerer en stabil populasjon, vekstrate \> 1 indikerer en populasjon i vekst og vekstrate \< 1 indikerer en populasjon i nedgang.
+Populasjonsvekstraten er log-transformert. Det betyr at en vekstrate på 0 indikerer en stabil populasjon, vekstrate \> 0 indikerer en populasjon i vekst og vekstrate \< 0 indikerer en populasjon i nedgang. Figurene viser vektet gjennomsnitt med 95 % konfidensintervall.
 
 ```{r}
 #| echo: false
