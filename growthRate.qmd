@@ -9,7 +9,7 @@ Disse figurene viser estimert populasjonsvekstrate for hvert år i de 25 lokalit
 
 Vekstrate ble beregnet som forholdet mellom populasjonsstørrelsen (antall individer totalt) i år t over antall individer i år t ‒ 1. Et gjennomsnitt ble beregnet for hver lokalitet og år, over alle overvåkingsruter på lokaliteten. I figurene er vekstraten log-transformert. En log-vekstrate på 0 betyr at populasjonen er stabil (antall individer i år t = antall individer i år t ‒ 1). En positiv log-vekstrate (\> 0) betyr en populasjon i økning, mens en negativ log-vekstrate (\< 0) betyr en populasjon i nedgang. Året langs x-aksen angir år t ‒ 1, dvs. vekstraten i 2020 representerer endringen som er skjedd fra 2020 til 2021 (log(antall individer i 2021/antall individer i 2020).
 
-I figurene vises hver overvåkingsrute som en prikk, gjennomsnittsverdien for lokaliteten som tykk blå strek og standardavviket som grått skravert område.
+I figurene vises hver overvåkingsrute som en prikk, gjennomsnittsverdien for lokaliteten som tykk blå strek og 95 % konfindensintervall som grått skravert område.
 
 ```{r}
 #| echo: false
