@@ -1,5 +1,6 @@
 ---
 lang: no
+fontenc: iso-8859-1
 ---
 
 # Velkommen {.unnumbered}

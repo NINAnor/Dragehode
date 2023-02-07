@@ -2,14 +2,14 @@
 title: "Vektede populasjonsvekstrater"
 editor: visual
 lang: no
+fontenc: iso-8859-1
 ---
 
-For å oppsummere vekstratene på tvers av populasjoner brukte vi en vektet regresjon, en til-nærming som brukes i meta-analyser («random effects meta-analysis»). Vi vektet popula-sjonsvekstratene per lokalitet med den overordnede populasjonsstørrelsen (i den gitte lokali-teten i det gitte året), og et vektet gjennomsnitt ble deretter beregnet totalt (over alle populas-joner), per region og per naturtype. 
+For å oppsummere vekstratene på tvers av populasjoner brukte vi en vektet regresjon, en til-nærming som brukes i meta-analyser («random effects meta-analysis»). Vi vektet popula-sjonsvekstratene per lokalitet med den overordnede populasjonsstørrelsen (i den gitte lokali-teten i det gitte året), og et vektet gjennomsnitt ble deretter beregnet totalt (over alle populas-joner), per region og per naturtype.
 
-Denne tilnærmingen gjør at vi kan vekte effekten av endringer i store populasjoner mer, mens endringer i små populasjoner har mindre effekt på overordnede vekstrater. Populasjonsvekst-ratene gir dermed et representativt estimat på endringer i dragehodepopulasjonen innenfor regionen/naturtypen. 
+Denne tilnærmingen gjør at vi kan vekte effekten av endringer i store populasjoner mer, mens endringer i små populasjoner har mindre effekt på overordnede vekstrater. Populasjonsvekst-ratene gir dermed et representativt estimat på endringer i dragehodepopulasjonen innenfor regionen/naturtypen.
 
-Populasjonsvekst er her ikke log-transformert. Det betyr at en vekstrate på 1 indikerer en stabil populasjon, vekstrate > 1 indikerer en populasjon i vekst og vekstrate < 1 indikerer en populasjon i nedgang. 
-
+Populasjonsvekst er her ikke log-transformert. Det betyr at en vekstrate på 1 indikerer en stabil populasjon, vekstrate \> 1 indikerer en populasjon i vekst og vekstrate \< 1 indikerer en populasjon i nedgang.
 
 ```{r}
 #| echo: false
@@ -141,10 +141,10 @@ data3<-rbind(data, data2)
 
 data3 |> 
   filter(type=="summary") |> 
-  ggplot(aes(year,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE) ))+
+  ggplot(aes(year,y=log(ES),ymax=log(ES)+(1.96*log(SE)),ymin=log(ES)-(1.96*log(SE)) ))+
   geom_pointrange()+
-  geom_hline(yintercept=1, lty=2,linewidth=1)+
-  labs(x="Ar", y="vektet vekstrate (95% CI)")+
+  geom_hline(yintercept=0, lty=2,linewidth=1)+
+  labs(x="Ar", y="Log vektet vekstrate (95% CI)")+
   theme_classic()+
   ggtitle("Vektet populasjonsvekstrate for alle populasjoner kombinert")
 
@@ -196,11 +196,11 @@ R_data<-rbind(data.frame(ES=c(out_2018$yi,out_2019$yi,out_2020$yi,out_2021$yi),
 R_data|> 
   filter(!type=="summary") |> 
   mutate(year2=year+c(0,0.2,0.4)) |> 
-  ggplot(aes(year2,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE), group=site, colour=site ))+
+  ggplot(aes(year2,y=log(ES),ymax=log(ES)+(1.96*log(SE)),ymin=log(ES)-(1.96*log(SE)), group=site, colour=site ))+
   geom_pointrange()+
   scale_colour_manual(values=c("#E69F00", "#56B4E9", "#009E73"))+
-  geom_hline(yintercept=1, lty=2,linewidth=1)+
-  labs(x="Ar", y="vektet vekstrate (95% CI)")+
+  geom_hline(yintercept=0, lty=2,linewidth=1)+
+  labs(x="Ar", y="Log vektet vekstrate (95% CI)")+
   theme_classic()+
   ggtitle("Vektet populasjonsvekstrate for hver region")
 
@@ -331,11 +331,11 @@ RNT_data|>
   filter(!type=="Summary") |> 
   filter(!site=="Summary") |> 
   mutate(year2=year+c(0,0.2,0.4)) |> 
-  ggplot(aes(year2,y=ES,ymax=ES+(1.96*SE),ymin=ES-(1.96*SE), group=site, colour=site ))+
+  ggplot(aes(year2,y=log(ES),ymax=log(ES)+(1.96*log(SE)),ymin=log(ES)-(1.96*log(SE)), group=site, colour=site ))+
   geom_pointrange()+
   scale_colour_manual(values=c("#E69F00", "#56B4E9", "#009E73"))+
-  geom_hline(yintercept=1, lty=2,linewidth=1)+
-  labs(x="Ar", y="vektet vekstrate (95% CI)")+
+  geom_hline(yintercept=0, lty=2,linewidth=1)+
+  labs(x="Ar", y="Log vektet vekstrate (95% CI)")+
   theme_classic()+
   ggtitle("Vektet populasjonsvekstrate for hver naturtype")
 

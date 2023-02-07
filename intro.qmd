@@ -1,3 +1,8 @@
+---
+lang: no
+fontenc: iso-8859-1
+---
+
 # Introduksjon {#sec-intro}
 
 Denne nettsiden presenterer resultater fra overvåking av dragehode *Dracocephalum ruysciana* i Norge. Dragehode er kategorisert som sårbar (VU) på den norske rødlista for arter, og dragehode er en prioritert art, med egen forskrift og handlingsplan.

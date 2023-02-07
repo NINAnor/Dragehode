@@ -1,14 +1,15 @@
 ---
 title: "Lokale estimater av populasjonsvekstrate"
 editor: visual
+lang: no
+fontenc: iso-8859-1
 ---
 
-Disse figurene viser estimert populasjonsvekstrate for hvert år i de 25 lokalitetene som inngår i overvåkingen. 
+Disse figurene viser estimert populasjonsvekstrate for hvert år i de 25 lokalitetene som inngår i overvåkingen.
 
-Vekstrate ble beregnet som forholdet mellom populasjonsstørrelsen (antall individer totalt) i år t over antall individer i år t ‒ 1. Et gjennomsnitt ble beregnet for hver lokalitet og år, over alle overvåkingsruter på lokaliteten. I figurene er vekstraten  log-transformert. En log-vekstrate på 0 betyr at populasjonen er stabil (antall individer i år t = antall individer i år t ‒ 1). En positiv log-vekstrate (> 0) betyr en populasjon i økning, mens en negativ log-vekstrate (< 0) betyr en populasjon i nedgang. Året langs x-aksen angir år t, dvs. vekstraten i 2020 representerer endringen som er skjedd fra 2019 til 2020 (log(antall individer i 2020/antall individer i 2019).   
+Vekstrate ble beregnet som forholdet mellom populasjonsstørrelsen (antall individer totalt) i år t over antall individer i år t ‒ 1. Et gjennomsnitt ble beregnet for hver lokalitet og år, over alle overvåkingsruter på lokaliteten. I figurene er vekstraten log-transformert. En log-vekstrate på 0 betyr at populasjonen er stabil (antall individer i år t = antall individer i år t ‒ 1). En positiv log-vekstrate (\> 0) betyr en populasjon i økning, mens en negativ log-vekstrate (\< 0) betyr en populasjon i nedgang. Året langs x-aksen angir år t, dvs. vekstraten i 2020 representerer endringen som er skjedd fra 2019 til 2020 (log(antall individer i 2020/antall individer i 2019).
 
-I figurene vises hver overvåkingsrute som en prikk, gjennomsnittsverdien for lokaliteten som tykk blå strek og standardavviket som grått skravert område. 
-
+I figurene vises hver overvåkingsrute som en prikk, gjennomsnittsverdien for lokaliteten som tykk blå strek og standardavviket som grått skravert område.
 
 ```{r}
 #| echo: false
@@ -33,10 +34,10 @@ plot_logR<-function(Lokal){
   sub_set_df<-df |> filter(Lokalitet == {{Lokal}})
   
   p=sub_set_df |> 
-  ggplot(aes(as.integer(Year+1), logR)) +
+  ggplot(aes(as.integer(Year), logR)) +
   geom_point(colour="darkred", alpha=0.5)+
   stat_smooth()+
-  labs(x="Siste overvåkingsår",y="Log vekstrate")+
+  labs(x="Overvåkingsår",y="Log vekstrate")+
   scale_x_continuous(breaks=scales::breaks_pretty(n=4, min.n=2))+
   #scale_x_continuous(label = ~ scales::comma(.x, accuracy =1))+
   geom_hline(yintercept = 0, lty=2, linewidth=1, colour="black")+

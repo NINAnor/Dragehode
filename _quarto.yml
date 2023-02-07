@@ -18,6 +18,7 @@ book:
 #bibliography: book.bib
 
 lang: no
+fontenc: iso-8859-1
 format: 
   html:
     theme: cosmo
