@@ -86,17 +86,18 @@ testmeta_2021=join_df |>
             ) |> 
   filter(!Lokalitet=="Viernbukta")
 
-# testmeta_2022=join_df |> 
-#   group_by(Lokalitet, Region) |> 
-#   filter(Year==2022) |> 
-#   summarise(meanGR=mean(vekstrate, na.rm=TRUE),
-#             sdGR=sd(vekstrate, na.rm=TRUE),
-#             VARGR=var(vekstrate,na.rm = TRUE),
-#             meanTpop=mean(nTot, na.rm=TRUE),
-#             sdTpop=sd(nTot, na.rm=TRUE),
-#             VARTpop=var(nTot, na.rm=TRUE)
-#             ) |> 
-#   filter(!Lokalitet=="Viernbukta")
+ testmeta_2022=join_df |> 
+   group_by(Lokalitet, Region) |> 
+   filter(Year==2022) |> 
+   summarise(meanGR=mean(vekstrate, na.rm=TRUE),
+             sdGR=sd(vekstrate, na.rm=TRUE),
+             VARGR=var(vekstrate,na.rm = TRUE),
+             meanTpop=mean(nTot, na.rm=TRUE),
+             sdTpop=sd(nTot, na.rm=TRUE),
+             VARTpop=var(nTot, na.rm=TRUE)
+             ) |> 
+   filter(!Lokalitet=="Viernbukta") |> 
+   filter(!is.nan(meanGR))
 
 
 
@@ -104,7 +105,7 @@ res_2018 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=te
 res_2019 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2019)
 res_2020 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2020)
 res_2021 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2021)
-#res_2022 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2022)
+res_2022 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2022)
 
 
 
@@ -120,20 +121,23 @@ res_2021 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=te
 data<-data.frame(ES=c(res_2018$yi,
                                     res_2019$yi,
                                     res_2020$yi,
-                                    res_2021$yi), SE=c(sqrt(res_2018$vi),
+                                    res_2021$yi,
+                      res_2022$yi), SE=c(sqrt(res_2018$vi),
                                                        sqrt(res_2019$vi),
                                                        sqrt(res_2020$vi),
-                                                       sqrt(res_2021$vi)), 
+                                                       sqrt(res_2021$vi),
+                                         sqrt(res_2022$vi)), 
                        site=c(testmeta_2018$Lokalitet,
                               testmeta_2019$Lokalitet,
                               testmeta_2020$Lokalitet,
-                              testmeta_2021$Lokalitet), 
-                 year=c(rep(2018,length(res_2018$yi)),rep(2019,length(res_2019$yi)),rep(2020,length(res_2020$yi)),rep(2021,length(res_2021$yi))),
+                              testmeta_2021$Lokalitet,
+                              testmeta_2022$Lokalitet), 
+                 year=c(rep(2018,length(res_2018$yi)),rep(2019,length(res_2019$yi)),rep(2020,length(res_2020$yi)),rep(2021,length(res_2021$yi)),rep(2022,length(res_2022$yi))),
                  type="site")
   
-data2<-data.frame(ES=c(res_2018$b, res_2019$b, res_2020$b, res_2021$b),
-           SE=c(res_2018$se, res_2019$se, res_2020$se, res_2021$se),
-           year=c(2018,2019,2020,2021),
+data2<-data.frame(ES=c(res_2018$b, res_2019$b, res_2020$b, res_2021$b, res_2022$b),
+           SE=c(res_2018$se, res_2019$se, res_2020$se, res_2021$se, res_2022$se),
+           year=c(2018,2019,2020,2021,2022),
            site="summary",
            type="summary")
 
@@ -160,16 +164,19 @@ res.H_2018 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), s
 res.H_2019 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2019)
 res.H_2020 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2020)
 res.H_2021 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2021)
+res.H_2022 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2022)
 
 res.R_2018 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2018)
 res.R_2019 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2019)
 res.R_2020 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2020)
 res.R_2021 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2021)
+res.R_2022 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2022)
 
 res.O_2018 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2018)
 res.O_2019 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2019)
 res.O_2020 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2020)
 res.O_2021 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2021)
+res.O_2022 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2022)
 
 dat.comp_2018 <- data.frame(estimate = c(coef(res.H_2018), coef(res.R_2018), coef(res.O_2018)), stderror = c(res.H_2018$se, res.R_2018$se, res.O_2018$se),
                        meta = c("Hadeland", "Ringerike", "Oslo"), tau2 = round(c(res.H_2018$tau2, res.R_2018$tau2, res.O_2018$tau2),4))
@@ -189,9 +196,13 @@ dat.comp_2021 <- data.frame(estimate = c(coef(res.H_2021), coef(res.R_2021), coe
                        meta = c("Hadeland", "Ringerike", "Oslo"), tau2 = round(c(res.H_2021$tau2, res.R_2021$tau2, res.O_2021$tau2),4))
 out_2021=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp_2021, digits=3)
 
+dat.comp_2022 <- data.frame(estimate = c(coef(res.H_2022), coef(res.R_2022), coef(res.O_2022)), stderror = c(res.H_2022$se, res.R_2022$se, res.O_2022$se),
+                       meta = c("Hadeland", "Ringerike", "Oslo"), tau2 = round(c(res.H_2022$tau2, res.R_2022$tau2, res.O_2022$tau2),4))
+out_2022=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp_2022, digits=3)
 
-R_data<-rbind(data.frame(ES=c(out_2018$yi,out_2019$yi,out_2020$yi,out_2021$yi),
-                         SE=c(sqrt(out_2018$vi),sqrt(out_2019$vi),sqrt(out_2020$vi),sqrt(out_2021$vi)), type="Region", site=c(dat.comp_2018$meta, dat.comp_2019$meta, dat.comp_2020$meta, dat.comp_2021$meta), year=c(2018,2019,2020,2021)), data.frame(ES=c(out_2018$b, out_2019$b,out_2020$b, out_2021$b),SE=c(out_2018$se, out_2019$se, out_2020$se, out_2021$se),type="summary",site="summary", year=c(2018,2019,2020,2021)))
+
+R_data<-rbind(data.frame(ES=c(out_2018$yi,out_2019$yi,out_2020$yi,out_2021$yi, out_2022$yi),
+                         SE=c(sqrt(out_2018$vi),sqrt(out_2019$vi),sqrt(out_2020$vi),sqrt(out_2021$vi),sqrt(out_2022$vi)), type="Region", site=c(dat.comp_2018$meta, dat.comp_2019$meta, dat.comp_2020$meta, dat.comp_2021$meta, dat.comp_2022$meta), year=c(2018,2019,2020,2021,2022)), data.frame(ES=c(out_2018$b, out_2019$b,out_2020$b, out_2021$b, out_2022$b),SE=c(out_2018$se, out_2019$se, out_2020$se, out_2021$se, out_2022$se),type="summary",site="summary", year=c(2018,2019,2020,2021,2022)))
 
 R_data|> 
   filter(!type=="summary") |> 
@@ -264,16 +275,30 @@ testmeta2_2021=join_df |>
             ) |> 
   filter(!Lokalitet=="Viernbukta")
 
+testmeta2_2022=join_df |> 
+  group_by(Lokalitet, Hovednaturtype ) |> 
+  filter(Year==2022) |> 
+  summarise(meanGR=mean(vekstrate, na.rm=TRUE),
+            sdGR=sd(vekstrate, na.rm=TRUE),
+            VARGR=var(vekstrate,na.rm = TRUE),
+            meanTpop=mean(nTot, na.rm=TRUE),
+            sdTpop=sd(nTot, na.rm=TRUE),
+            VARTpop=var(nTot, na.rm=TRUE)
+            ) |> 
+  filter(!Lokalitet=="Viernbukta") |> 
+   filter(!is.nan(meanGR))
+
 res2_2018 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta2_2018)
 res2_2019 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta2_2019)
 res2_2020 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta2_2020)
 res2_2021 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta2_2021)
+res2_2022 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta2_2022)
 
 res.T32_2018 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T32"), slab=Lokalitet, data=testmeta2_2018)
 res.T32_2019 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T32"), slab=Lokalitet, data=testmeta2_2019)
 res.T32_2020 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T32"), slab=Lokalitet, data=testmeta2_2020)
 res.T32_2021 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T32"), slab=Lokalitet, data=testmeta2_2021)
-
+res.T32_2022 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T32"), slab=Lokalitet, data=testmeta2_2022)
 
 res.T2_2018 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T2"), slab=Lokalitet, data=testmeta2_2018)
 
@@ -282,6 +307,7 @@ res.T2_2019 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T2")
 res.T2_2020 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T2"), slab=Lokalitet, data=testmeta2_2020)
 
 res.T2_2021 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T2"), slab=Lokalitet, data=testmeta2_2021)
+res.T2_2022 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Hovednaturtype=="T2"), slab=Lokalitet, data=testmeta2_2021)
 
 dat.comp_R_2018 <- data.frame(estimate = c(coef(res.T32_2018), coef(res.T2_2018)), stderror = c(res.T32_2018$se, res.T2_2018$se),
                        meta = c("T32", "T2"), tau2 = round(c(res.T32_2018$tau2, res.T2_2018$tau2),4))
@@ -302,25 +328,32 @@ dat.comp_R_2021 <- data.frame(estimate = c(coef(res.T32_2021), coef(res.T2_2021)
 
 out_R_2021=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp_R_2021, digits=3)
 
+dat.comp_R_2022 <- data.frame(estimate = c(coef(res.T32_2022), coef(res.T2_2022)), stderror = c(res.T32_2022$se, res.T2_2022$se),
+                       meta = c("T32", "T2"), tau2 = round(c(res.T32_2022$tau2, res.T2_2022$tau2),4))
+
+out_R_2022=rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp_R_2022, digits=3)
+
 
 #forest(out)
 RNT_data<-rbind(data.frame(ES=c(out_R_2018$yi, out_R_2019$yi,
-                                out_R_2020$yi,out_R_2021$yi),
+                                out_R_2020$yi,out_R_2021$yi,out_R_2022$yi),
                            SE=c(sqrt(out_R_2018$vi),sqrt(out_R_2019$vi),
-                                sqrt(out_R_2020$vi),sqrt(out_R_2021$vi)),
+                                sqrt(out_R_2020$vi),sqrt(out_R_2021$vi),sqrt(out_R_2022$vi)),
                            type="NaturType",
                            site=c(dat.comp_R_2018$meta,dat.comp_R_2019$meta,
-                                  dat.comp_R_2020$meta,dat.comp_R_2021$meta),
-                           year=rep(c(2018,2019,2020,2021), each=2)),
+                                  dat.comp_R_2020$meta,dat.comp_R_2021$meta, dat.comp_R_2022$meta),
+                           year=rep(c(2018,2019,2020,2021,2022), each=2)),
                     data.frame(ES=c(out_R_2018$b,
                                     out_R_2019$b,
                                     out_R_2020$b,
-                                    out_R_2021$b),
+                                    out_R_2021$b,
+                                    out_R_2022$b),
                                SE=c(out_R_2018$se,
                                     out_R_2019$se,
                                     out_R_2020$se,
-                                    out_R_2021$se),type="Summary",site="Summary",
-                                year=rep(c(2018,2019,2020,2021), each=2)))
+                                    out_R_2021$se,
+                                    out_R_2022$se),type="Summary",site="Summary",
+                                year=rep(c(2018,2019,2020,2021,2022), each=2)))
 
 
 

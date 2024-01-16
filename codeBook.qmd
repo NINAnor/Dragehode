@@ -8,12 +8,6 @@ fontenc: iso-8859-1
 
 To look at the functions used go to @sec-funksjoner
 
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-```
 
 ```{r}
 #| echo: true
@@ -27,6 +21,7 @@ To look at the functions used go to @sec-funksjoner
 library(boot)
 library(rio)
 library(Dragehode)
+library(tidyverse)
 #Sys.setlocale(locale = 'Norwegian Bokmål_Norway') 
 # Uncomment this line if you locale is not Norway
 source('R/funksjoner.R', encoding = "UTF-8")
@@ -86,6 +81,9 @@ lokalitetsdata$Hovedskjøtsel <- factor(lokalitetsdata$Hovedskjøtsel)
 transektdata$`Forekomst dragehode (m)`[transektdata$`Forekomst dragehode (m)`%in%c("ingen"," ")] <- NA
 
 # Get coverage ----
+
+artsdata$Vedplante<-artsdata$`Vedplante i feltsjikt (NY)`
+
 rutedata$Vedpl.dekn <- beregn.dekning(rutedata,artsdata,"Vedplante")
 
 lokalitetsnavn <- levels(lokalitetsdata$Lokalitet)
@@ -178,26 +176,33 @@ if(!dir.exists("Figurer")) dir.create("Figurer")
 pdf(paste("Figurer/","Alle lokaliteter",".pdf",sep=""))
 for(i in 1:length(lokalitetsestimater))
 {
+  tryCatch({
   popstr <- lokalitetsestimater[[i]]
   plot.popstruktur(popstr)
+  
+}, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+  
 }
 dev.off()
 
 for(i in 1:length(lokalitetsestimater))
 {
+  tryCatch({
   #pdf(paste("Figurer/",lokalitetsnavn[i],".pdf",sep=""))
   #png(paste("Figurer/",lokalitetsnavn[i],".png",sep=""))
   jpeg(paste("Figurer/",lokalitetsnavn[i],".jpg",sep=""))
   popstr <- lokalitetsestimater[[i]]
   plot.popstruktur(popstr)
-  dev.off()
+  }, error=function(e){cat("ERROR:", conditionMessage(e), "\n")})
+
+    dev.off()
 }
 
 
 # Populasjonstrender per gruppe, totalt, fertile, vegetative og små
 
 lokfarge <- rainbow(length(lokalitetsnavn)); names(lokfarge) <- lokalitetsnavn
-regsymbol <- c(1,2,3); names(regsymbol) <- regionnavn
+regsymbol <- c(1,2,3,4,5,6); names(regsymbol) <- regionnavn
 natlinje <- c(1,2); names(natlinje) <- naturtypenavn
 
 thisyear=lubridate::year(Sys.time())
@@ -207,7 +212,7 @@ tidsrom=c(2016.5, thisyear)
 if(!dir.exists("Figurer/Regioner")) dir.create("Figurer/Regioner")
 # Regioner
 pdf(paste("Figurer/Regioner/","Alle regioner",".pdf",sep=""))
-plot.gruppetrender(lokalitetsdata,gruppevariabel="Region",lokalitetsestimater,tidsrom=tidsrom,reverser=T,lokalitetsnavn,lokfarge,regsymbol,natlinje)
+plot.gruppetrender(lokalitetsdata,gruppevariabel="Region",lokalitetsestimater,reverser=T,lokalitetsnavn,lokfarge,regsymbol,natlinje)
 par(mfrow=c(1,3))
 plot(0,0,type="n",axes=F,xlab="",ylab=""); legend("topleft",lty=1,col=lokfarge,legend=lokalitetsnavn,bty="n")
 dev.off()
@@ -217,20 +222,19 @@ dev.off()
 if(!dir.exists("Figurer/Naturtyper")) dir.create("Figurer/Naturtyper")
 # Naturtyper
 pdf(paste("Figurer/Naturtyper/","Alle hovedtyper",".pdf",sep=""))
-plot.gruppetrender(lokalitetsdata,gruppevariabel="Hovednaturtype",lokalitetsestimater,tidsrom=tidsrom,reverser=T,lokalitetsnavn,lokfarge,regsymbol,natlinje)
+plot.gruppetrender(lokalitetsdata,gruppevariabel="Hovednaturtype",lokalitetsestimater,reverser=T,lokalitetsnavn,lokfarge,regsymbol,natlinje)
 par(mfrow=c(1,3))
 plot(0,0,type="n",axes=F,xlab="",ylab=""); legend("topleft",lty=1,col=lokfarge,legend=lokalitetsnavn,bty="n")
 dev.off()
 
 if(!dir.exists("Figurer/Skjøtsel")) dir.create("Figurer/Skjøtsel")
 pdf(paste("Figurer/Skjøtsel/","Hovedskjøtsel",".pdf",sep=""))
-plot.gruppetrender(lokalitetsdata,gruppevariabel="Hovedskjøtsel",lokalitetsestimater,tidsrom=tidsrom,reverser=T,lokalitetsnavn,lokfarge,regsymbol,natlinje)
+plot.gruppetrender(lokalitetsdata,gruppevariabel="Hovedskjøtsel",lokalitetsestimater,reverser=T,lokalitetsnavn,lokfarge,regsymbol,natlinje)
 par(mfrow=c(1,3))
 plot(0,0,type="n",axes=F,xlab="",ylab=""); legend("topleft",lty=1,col=lokfarge,legend=lokalitetsnavn,bty="n")
 dev.off()
 
-## GGplot versions of figures¨
-source("R/ggplot_popstruktur.R")
+## GGplot versions of figures
 if(!dir.exists("Figurer/ggplots")) dir.create("Figurer/ggplots")
 for(i in 1:length(lokalitetsestimater)){
   tryCatch({

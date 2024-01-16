@@ -9,9 +9,15 @@
 #'
 beregn.dekning <- function(rutedata,artsdata,artsgruppe){
   dekning <- rep(0,nrow(rutedata))
+  
+  
+  
+  rutedata$Ar<-rutedata[,2]
+  artsdata$Ar<-artsdata[,2]
+  
   for(i in 1:nrow(rutedata))
   {
-    utvalgte.data <- artsdata[,artsgruppe]==1 & artsdata$Rute==rutedata$RuteID[i] & artsdata$Ãr==rutedata$Ãr[i]
+    utvalgte.data <- artsdata[,artsgruppe]==1 & artsdata$Rute==rutedata$RuteID[i] & artsdata$Ar==rutedata$Ar[i]
     if(length(utvalgte.data)>0) dekning[i] <- sum(artsdata$Dekning[utvalgte.data],na.rm=T)
   }
   return(dekning)
@@ -79,10 +85,13 @@ boot.pop <- function(tetthet,forekomstareal,nboot=2000){
 #' @keywords internal
 beregn.forekomstareal <- function(transektdata,utvalgt.lokalitet,year,design,lokalitetsbredde,rutebredde=1,
                                   forekomst_transekt="Dragehode",forekomst_avstand="Forekomst dragehode (m)"){
+  transektdata$Ar<-transektdata[,2]
+  
   x <- list()
   for(i in 1:length(year))
   {
-    transekter <- transektdata[transektdata$Lokalitet==utvalgt.lokalitet & transektdata$Ãr==year[i],]
+   # transektdata$Ar<-transektdata[,4]
+    transekter <- transektdata[transektdata$Lokalitet==utvalgt.lokalitet & transektdata$Ar==year[i],]
     
     if(all(is.na(transekter[,forekomst_transekt])))
     {
@@ -138,10 +147,11 @@ beregn.forekomstareal <- function(transektdata,utvalgt.lokalitet,year,design,lok
 #'
 
 beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rutedata,rutebredde=1,
-                               fert="Fert.planter",veg="Veg.planter",sma="SmÃ¥planter",tot="Ant.DR",
+                               fert="Fert.planter",veg="Veg.planter",sma="Småplanter",tot="Ant.DR",
                                forekomst_transekt="Dragehode",forekomst_avstand="Forekomst dragehode (m)",
                                quantiles=c(0.025,0.975)){
-  year <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Ãr"]
+ lokalitetsdata$Ar<-lokalitetsdata[,4]
+  year <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Ar"]
   design <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Design"]
   lokalitetsbredde <- lokalitetsdata[lokalitetsdata$Lokalitet==utvalgt.lokalitet,"Lokalitetsbredde"]
   print(paste(utvalgt.lokalitet, year, design,"bredde:",lokalitetsbredde))
@@ -158,14 +168,15 @@ beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rut
   Tot.CI <- matrix(NA,nyear,nq)
 
   forekomstareal.liste <- beregn.forekomstareal(transektdata,utvalgt.lokalitet,year,design,lokalitetsbredde,rutebredde,forekomst_transekt,forekomst_avstand)
-  #print(forekomstareal.liste)
+  print(forekomstareal.liste)
   
   for(i in 1:length(year))
   {
+    rutedata$Ar<-rutedata[,2]
     forekomstareal <- forekomstareal.liste[[i]]
     saveRDS(forekomstareal, paste0("data/derived_data/", utvalgt.lokalitet,"_forekomstareal","_",i,".RDS"))
     print(year[i])
-    ruter <- rutedata[rutedata$Lokalitet==utvalgt.lokalitet & rutedata$Ãr==year[i] & rutedata[,tot]>0,]
+    ruter <- rutedata[rutedata$Lokalitet==utvalgt.lokalitet & rutedata$Ar==year[i] & rutedata[,tot]>0,]
     saveRDS(ruter, paste0("data/derived_data/", utvalgt.lokalitet,"_ruter","_",i ,".RDS"))
 
     print("Fertile")
@@ -180,7 +191,7 @@ beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rut
     #print(summary(x))
     nVeg[i] <- mean(x); Veg.CI[i,] <- quantile(x,quantiles,na.rm=T)
     
-    print("Småplanter")
+    print("Smaplanter")
     if(!is.na(sma)) x <- boot.pop(ruter[,sma],forekomstareal,nboot)
     else x <- NA
     #print(summary(x))
@@ -215,7 +226,7 @@ plot.popstruktur <- function(popstr){
   lines(popstr$year,popstr$nVeg,col="green",type="o"); polygon(c(popstr$year,rev(popstr$year)),c(popstr$Veg.CI[,1],rev(popstr$Veg.CI[,2])),col=rgb(0,1,0,alpha=0.2),border=NA)
   lines(popstr$year,popstr$nSma,col="blue",,type="o"); polygon(c(popstr$year,rev(popstr$year)),c(popstr$Sma.CI[,1],rev(popstr$Sma.CI[,2])),col=rgb(0,0,1,alpha=0.2),border=NA)
   #lines(popstr$year,popstr$nSma+popstr$nVeg+popstr$nFert,lty=2,type="o")
-  legend("topleft",c("Totalt","Fertile","Vegetative","Småplanter"),lty=c(1,1,1,1),pch=c(1,1,1,1),col=c("black","red","green","blue"),bty="n")
+  legend("topleft",c("Totalt","Fertile","Vegetative","Smaplanter"),lty=c(1,1,1,1),pch=c(1,1,1,1),col=c("black","red","green","blue"),bty="n")
 }
 
 
@@ -254,7 +265,7 @@ plot.gruppetrender <- function(lokalitetsdata,gruppevariabel,lokalitetsestimater
     variabler <- c("nTot","nFert","nVeg","nSma")
     if(i==1) ylab <- c("Antall totalt","Antall fertile","Antall vegetative","Antall smÃ¥planter")
     else ylab <- rep("",length(variabler))
-    xlab <- c(rep("",length(variabler)-1),"Ã…r")
+    xlab <- c(rep("",length(variabler)-1),"Ar")
     main <- c(grp,rep("",length(variabler)-1))
     for(i in 1:length(variabler))
     {
@@ -294,14 +305,18 @@ plot.gruppetrender <- function(lokalitetsdata,gruppevariabel,lokalitetsestimater
 #' @export
 
 beregn.vekstrate <- function(rutedata,popvar,idvar){
+  
+  rutedata$Ar<-rutedata[,2]
+  
   vekstrate <- rep(NA,nrow(rutedata))
-  year <- sort(as.numeric(unique(rutedata$Ãr)))
+  year <- sort(as.numeric(unique(rutedata$Ar)))
   nyear <- length(year)
   if(nyear<2) return(NA)
   for(i in 1:(nyear-1))
   {
-    t1 <- rutedata$Ãr==year[i]
-    t2 <- rutedata$Ãr==year[i+1]
+    rutedata$Ar<-rutedata[,2]
+    t1 <- rutedata$Ar==year[i]
+    t2 <- rutedata$Ar==year[i+1]
     idmatch <- match(rutedata[t1,idvar],rutedata[t2,idvar])
     vekstrate[t1] <- rutedata[t2,popvar][idmatch] / rutedata[t1,popvar] 
   }
@@ -322,7 +337,7 @@ ggplot.popstruktur <- function(popstr){
   require(tidyverse)
   title=popstr$lokalitet
   popstr=as_tibble(popstr)
-  names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "Småplanter",      "Totalt",     
+  names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "Smaplanter",      "Totalt",     
                     "Fert.CI",   "Veg.CI",    "Sma.CI",    "Tot.CI" )
   
   
@@ -341,7 +356,7 @@ ggplot.popstruktur <- function(popstr){
     mutate(var=gsub(".CI","", key))
   
   popstrCI=popstrCI%>% 
-    mutate(var=rep(c("Fertile", "Vegetative", "Småplanter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
+    mutate(var=rep(c("Fertile", "Vegetative", "Smaplanter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
     mutate(upper=value[,2]) %>% 
     mutate(lower=value[,1]) %>% 
     select(!value)
@@ -360,7 +375,7 @@ ggplot.popstruktur <- function(popstr){
     select(!lokalitet) %>% 
     pivot_longer(!year, names_to = "key", values_to = "value") %>%
     #filter(!key%in% c("Fert.CI", "Veg.CI","Sma.CI", "Tot.CI")) %>% 
-    filter(key%in% c("Fertile", "Småplanter", "Totalt", "Vegetative")) %>% 
+    filter(key%in% c("Fertile", "Smaplanter", "Totalt", "Vegetative")) %>% 
     mutate(upper=popstrCI$upper) %>% 
     mutate(lower=popstrCI$lower)
   
@@ -371,7 +386,7 @@ ggplot.popstruktur <- function(popstr){
     scale_fill_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"), guide="none")+
     geom_line( size=1.2)+
     scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
-    labs(x="Ãƒr", y= "Antall individer")+
+    labs(x="Ar", y= "Antall individer")+
     ggtitle(title)+
     theme_classic()
   
