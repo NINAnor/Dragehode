@@ -11,6 +11,7 @@ book:
     - localEst.qmd
     - growthRate.qmd
     - growthRate_meta.qmd
+    - direction_plots.qmd
     - codeBook.qmd
     - funksjoner.qmd
     

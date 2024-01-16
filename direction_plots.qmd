@@ -1,0 +1,86 @@
+---
+title: "Direction plots"
+editor: visual
+---
+
+::: callout-important
+## This is just a dump of plots - needs to be sorted and cleaned up a bit!!!!!
+:::
+
+```{r}
+library(tidyverse)
+library(bayestestR)
+library(see)
+library(rstanarm)
+
+lokalitetsestimater <- readRDS("C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/derived_data/lokalitetsestimater.RDS")
+lokalitetsdata <- readRDS("C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/lokalitetsdata.RDS")
+```
+
+```{r, eval=FALSE}
+
+#length(lokalitetsestimater)
+#seq_along(lokalitetsestimater)
+
+for (i in seq_along(lokalitetsestimater)){
+  dlist=pluck(lokalitetsestimater,i)
+  df=data.frame(year=dlist$year, nTot=dlist$nTot, nTotUpp=dlist$Tot.CI[,2],
+                nTotLow=dlist$Tot.CI[,1], nFert=dlist$nFert,
+                nFertUpp=dlist$Fert.CI[,2],
+                nFertLow=dlist$Fert.CI[,1], 
+                nVeg=dlist$nVeg,
+                nVegUpp=dlist$Veg.CI[,2],
+                nVegLow=dlist$Veg.CI[,1],
+                nSma=dlist$nSma,
+                nSmaUpp=dlist$Sma.CI[,2],
+                nSmaLow=dlist$Sma.CI[,1],
+                lokalitet=dlist$lokalitet)
+  saveRDS(df, 
+          paste0("data/derived_data/direction_plots/",dlist$lokalitet, "_data.RDS"))
+  
+}
+rds_combo <- list.files(path ="data/derived_data/direction_plots" , pattern = "*.RDS", full.names = TRUE ) %>%
+  map_dfr(readRDS)
+
+#names(rds_combo)
+
+#rds_combo
+
+local=lokalitetsdata %>% 
+  select(Region, Kommune, Lokalitet) %>% 
+  rename(lokalitet=Lokalitet)
+rds_combo=rds_combo %>% 
+  left_join(
+    .,local
+  )
+
+for (i in seq_along(lokalitetsestimater)){
+  tryCatch(
+    {
+      lokalitetsnavn=unique(rds_combo$lokalitet)
+      lokalitetsnavn_=lokalitetsnavn[i]
+      modeldata=rds_combo %>% filter(lokalitet==lokalitetsnavn_) |> distinct()
+      model1<-stan_glm(nTot~year, data=modeldata)
+      saveRDS(model1, file=paste0("data/derived_data/direction_plots/models/",lokalitetsnavn_, ".RDS"))
+      pd=bayestestR::p_direction(model1)
+      p=plot(pd)+ggtitle(paste0(lokalitetsnavn_))
+      ggsave(filename=paste0("data/derived_data/direction_plots/plots/", lokalitetsnavn_,".png"),plot = last_plot())
+    },
+    error=function(cond) {
+      message("Here's the original error message:")
+      message(cond)
+      # Choose a return value in case of error
+      return(NA)
+    },
+    warning=function(cond) {
+      message("Here's the original warning message:")
+      message(cond)
+      # Choose a return value in case of warning
+      return(NULL)
+    }
+  )}
+
+
+```
+
+![](data/derived_data/direction_plots/plots/Aslaksrud.png) ![](data/derived_data/direction_plots/plots/Auren.png) ![](data/derived_data/direction_plots/plots/Buss-stopp.png) ![](data/derived_data/direction_plots/plots/Ekebergskråningen.png) ![](data/derived_data/direction_plots/plots/Falang.png) ![](data/derived_data/direction_plots/plots/Gjefsen.png) ![](data/derived_data/direction_plots/plots/Gran%20sykehjem.png) ![](data/derived_data/direction_plots/plots/Grindaker.png) ![](data/derived_data/direction_plots/plots/Haugsbygd,%20vestvendt%20vegskråning.png) ![](data/derived_data/direction_plots/plots/Heggholmen.png) ![](data/derived_data/direction_plots/plots/Horgen.png) ![](data/derived_data/direction_plots/plots/Hovedøya%20V.png) ![](data/derived_data/direction_plots/plots/Hovedøya.png) ![](data/derived_data/direction_plots/plots/Hurumåsen.png) ![](data/derived_data/direction_plots/plots/Kalvøya.png) ![](data/derived_data/direction_plots/plots/Lyngstad%20Vestre.png) ![](data/derived_data/direction_plots/plots/Møllerenga.png) ![](data/derived_data/direction_plots/plots/Nordre%20Ultvet.png) ![](data/derived_data/direction_plots/plots/Spireodden.png) ![](data/derived_data/direction_plots/plots/Storøykilen.png) ![](data/derived_data/direction_plots/plots/Svartorseter.png) ![](data/derived_data/direction_plots/plots/Telenor.png) ![](data/derived_data/direction_plots/plots/Ultvet%20SØ.png) ![](data/derived_data/direction_plots/plots/Vendelenga.png) ![](data/derived_data/direction_plots/plots/Åsaporten%20NØ.png)
