@@ -11,6 +11,12 @@ Denne tilnærmingen gjør at vi kan vekte effekten av endringer i store populasj
 
 Populasjonsvekstraten er log-transformert. Det betyr at en vekstrate på 0 indikerer en stabil populasjon, vekstrate \> 0 indikerer en populasjon i vekst og vekstrate \< 0 indikerer en populasjon i nedgang. Figurene viser vektet gjennomsnitt med 95 % konfidensintervall.
 
+## could we also make these plots only including the populations that also have plot data in 2023, i.e. 
+## Spireodden, Ekebergskråningen, Hovedøya, Hovedøya V, Horgen for Oslo
+## Buss-stopp, Nordre Ultvet for Ringerike
+## Grindaker, Lyngstad Vestre for Hadeland?
+## that would show better if trends and CIs are consistent over years. 
+
 ```{r}
 #| echo: false
 #| message: false
