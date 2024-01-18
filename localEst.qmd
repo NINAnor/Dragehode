@@ -82,7 +82,7 @@ p
 }
 
 ```
-
+### this one needs to be updated to include all populations (now only 1-26) - but could we also remove those with only data from transects in 2023 (12 of the 15 new ones - they don't need to take up space. 
 ```{r}
 #| echo: false
 #| message: false
