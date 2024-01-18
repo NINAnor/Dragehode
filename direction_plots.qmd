@@ -3,6 +3,11 @@ title: "Direction plots"
 editor: visual
 ---
 
+## Would it be possible to pool data and look at probabilities for regions as well? 
+## And weigh by population size? 
+## Is it possible to make some sort of estimate of population size with transect-only data? E.g. as a function of frequency of transect plots with occurrence and locality size/total number of transect plots?
+## then we would be able to answer one of the important questions/objectives of the monitoring - to assess trends regionally and nationally, in addition to the local populations
+
 ::: callout-important
 ## This is just a dump of plots - needs to be sorted and cleaned up a bit!!!!!
 :::
