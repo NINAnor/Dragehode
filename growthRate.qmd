@@ -80,6 +80,10 @@ plot_logR(local_list[21])
 plot_logR(local_list[22])
 plot_logR(local_list[23])
 plot_logR(local_list[24])
-# plot_logR(local_list[25])
+#plot_logR(local_list[25])
 plot_logR(local_list[26])
+#plot_logR(local_list[27])
+#plot_logR(local_list[28])
+#plot_logR(local_list[29])
+
 ```
