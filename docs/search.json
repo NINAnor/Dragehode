@@ -102,7 +102,7 @@
     "href": "direction_plots.html#and-weigh-by-population-size",
     "title": "5  Direction plots",
     "section": "5.2 And weigh by population size?",
-    "text": "5.2 And weigh by population size?\n\n\n\n\n\n\nThis is just a dump of plots - needs to be sorted and cleaned up a bit!!!!!\n\n\n\n\n\n\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.3     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(bayestestR)\nlibrary(see)\nlibrary(rstanarm)\n\nLoading required package: Rcpp\nThis is rstanarm version 2.26.1\n- See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!\n- Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.\n- For execution on a local, multicore CPU with excess RAM we recommend calling\n  options(mc.cores = parallel::detectCores())\n\nlokalitetsestimater &lt;- readRDS(\"C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/derived_data/lokalitetsestimater.RDS\")\nlokalitetsdata &lt;- readRDS(\"C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/lokalitetsdata.RDS\")\n\n\n#length(lokalitetsestimater)\n#seq_along(lokalitetsestimater)\n\nfor (i in seq_along(lokalitetsestimater)){\n  dlist=pluck(lokalitetsestimater,i)\n  df=data.frame(year=dlist$year, nTot=dlist$nTot, nTotUpp=dlist$Tot.CI[,2],\n                nTotLow=dlist$Tot.CI[,1], nFert=dlist$nFert,\n                nFertUpp=dlist$Fert.CI[,2],\n                nFertLow=dlist$Fert.CI[,1], \n                nVeg=dlist$nVeg,\n                nVegUpp=dlist$Veg.CI[,2],\n                nVegLow=dlist$Veg.CI[,1],\n                nSma=dlist$nSma,\n                nSmaUpp=dlist$Sma.CI[,2],\n                nSmaLow=dlist$Sma.CI[,1],\n                lokalitet=dlist$lokalitet)\n  saveRDS(df, \n          paste0(\"data/derived_data/direction_plots/\",dlist$lokalitet, \"_data.RDS\"))\n  \n}\nrds_combo &lt;- list.files(path =\"data/derived_data/direction_plots\" , pattern = \"*.RDS\", full.names = TRUE ) %&gt;%\n  map_dfr(readRDS)\n\n#names(rds_combo)\n\n#rds_combo\n\nlocal=lokalitetsdata %&gt;% \n  select(Region, Kommune, Lokalitet) %&gt;% \n  rename(lokalitet=Lokalitet)\nrds_combo=rds_combo %&gt;% \n  left_join(\n    .,local\n  )\n\nfor (i in seq_along(lokalitetsestimater)){\n  tryCatch(\n    {\n      lokalitetsnavn=unique(rds_combo$lokalitet)\n      lokalitetsnavn_=lokalitetsnavn[i]\n      modeldata=rds_combo %&gt;% filter(lokalitet==lokalitetsnavn_) |&gt; distinct()\n      model1&lt;-stan_glm(nTot~year, data=modeldata)\n      saveRDS(model1, file=paste0(\"data/derived_data/direction_plots/models/\",lokalitetsnavn_, \".RDS\"))\n      pd=bayestestR::p_direction(model1)\n      p=plot(pd)+ggtitle(paste0(lokalitetsnavn_))\n      ggsave(filename=paste0(\"data/derived_data/direction_plots/plots/\", lokalitetsnavn_,\".png\"),plot = last_plot())\n    },\n    error=function(cond) {\n      message(\"Here's the original error message:\")\n      message(cond)\n      # Choose a return value in case of error\n      return(NA)\n    },\n    warning=function(cond) {\n      message(\"Here's the original warning message:\")\n      message(cond)\n      # Choose a return value in case of warning\n      return(NULL)\n    }\n  )}"
+    "text": "5.2 And weigh by population size?\n\n\n\n\n\n\nThis is just a dump of plots - needs to be sorted and cleaned up a bit!!!!!"
   },
   {
     "objectID": "localEst.html#hadeland",
@@ -131,5 +131,33 @@
     "title": "4  Vektede populasjonsvekstrater",
     "section": "4.1 plots only including the populations that also have plot data in 2023",
     "text": "4.1 plots only including the populations that also have plot data in 2023"
+  },
+  {
+    "objectID": "localEst.html#gudbrandsdalen",
+    "href": "localEst.html#gudbrandsdalen",
+    "title": "2  Lokale estimater av populasjonsstørrelse",
+    "section": "2.4 Gudbrandsdalen",
+    "text": "2.4 Gudbrandsdalen"
+  },
+  {
+    "objectID": "localEst.html#mjsa",
+    "href": "localEst.html#mjsa",
+    "title": "2  Lokale estimater av populasjonsstørrelse",
+    "section": "2.5 Mj�sa",
+    "text": "2.5 Mj�sa\n\n#Kvennom 22\n#R�yse 27\n#J�r�sen 19\n#Kvamsberget s�r 21\n#Sterud, �stre III 31\n\nplotLocEst(i=22) \n\nWarning: Removed 4 rows containing missing values (`geom_point()`).\n\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\n\nWarning: Removed 4 rows containing missing values (`geom_line()`).\n\n\n\n\nplotLocEst(i=27) \n\n`geom_line()`: Each group consists of only one observation.\nℹ Do you need to adjust the group aesthetic?\n\n\n\n\nplotLocEst(i=19) \n\nWarning: Removed 4 rows containing missing values (`geom_point()`).\n\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\n\nWarning: Removed 4 rows containing missing values (`geom_line()`).\n\n\n\n\nplotLocEst(i=21) \n\nWarning: Removed 4 rows containing missing values (`geom_point()`).\n\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\n\nWarning: Removed 4 rows containing missing values (`geom_line()`).\n\n\n\n\nplotLocEst(i=31) \n\nWarning: Removed 4 rows containing missing values (`geom_point()`).\n\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\nWarning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning\n-Inf\n\n\nWarning: Removed 4 rows containing missing values (`geom_line()`)."
+  },
+  {
+    "objectID": "localEst.html#valdres",
+    "href": "localEst.html#valdres",
+    "title": "2  Lokale estimater av populasjonsstørrelse",
+    "section": "2.6 Valdres",
+    "text": "2.6 Valdres"
+  },
+  {
+    "objectID": "localEst.html#mjøsa",
+    "href": "localEst.html#mjøsa",
+    "title": "2  Lokale estimater av populasjonsstørrelse",
+    "section": "2.5 Mjøsa",
+    "text": "2.5 Mjøsa"
   }
 ]
