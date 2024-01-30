@@ -19,6 +19,8 @@ library(tidyverse)
 
 lokalitetsestimater <- readRDS(paste0(here::here(), "/data/derived_data/lokalitetsestimater.RDS"))
 
+lokalitetsdata <- readRDS("C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/lokalitetsdata.RDS")
+
 plotLocEst<-function(i){
   
 
@@ -76,46 +78,110 @@ p=popstr_plot%>%
    scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
     labs(x="Ã…r", y= "Antall individer")+
     ggtitle(title)+
-    theme_classic()
+    theme_classic()+
+  xlim(2017,year(Sys.Date()))
 
 p
 }
 
 ```
-### this one needs to be updated to include all populations (now only 1-26) - but could we also remove those with only data from transects in 2023 (12 of the 15 new ones - they don't need to take up space. 
-### I wonder if we could also structure the order of the plots differently, so that we have region subtitles, and all localities belonging to that region together, would be easier to read. 
+
+## Hadeland
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
 
+Hadeland_list<-lokalitetsdata |> 
+  filter(Region=="Hadeland") |> 
+  distinct(Lokalitet)
+#Aslaksrud
+#Falang
+#Gjefsen
+#Gran sykehjem
+#Grindaker
+#Lyngstad Vestre
+#Nedre Røykenvik
+#Øvre Røykenvik
 plotLocEst(i=1)
-plotLocEst(i=2)
-plotLocEst(i=3)
-plotLocEst(i=4)
-plotLocEst(i=5)
-plotLocEst(i=6)
-plotLocEst(i=7)
-plotLocEst(i=8)
 plotLocEst(i=9)
 plotLocEst(i=10)
 plotLocEst(i=11)
 plotLocEst(i=12)
-plotLocEst(i=13)
-plotLocEst(i=14)
-plotLocEst(i=15)
-plotLocEst(i=16)
-plotLocEst(i=17)
-plotLocEst(i=18)
-plotLocEst(i=19)
-plotLocEst(i=20)
-plotLocEst(i=21)
-plotLocEst(i=22)
 plotLocEst(i=23)
-plotLocEst(i=24)
-#plotLocEst(i=25)
-plotLocEst(i=26)
+
+
+
+
+```
+
+## Oslo
+
+```{r} 
+#| echo: false
+#| message: false 
+#| warning: false
+
+Oslo_list<-lokalitetsdata |> 
+  filter(Region=="Oslo") |> 
+  distinct(Lokalitet)
+
+#Ekebergskråningen
+#         Heggholmen
+#             Horgen
+#           Hovedøya
+#         Hovedøya V
+#            Kalvøya
+#         Møllerenga
+#         Spireodden
+#        Storøykilen
+#      Svartorseter
+#           Telenor
+#        Vendelenga
+#        Viernbukta
+
+plotLocEst(i=7) 
+plotLocEst(i=14) 
+plotLocEst(i=15) 
+plotLocEst(i=16) 
+plotLocEst(i=17) 
+plotLocEst(i=20)
+plotLocEst(i=24) 
+plotLocEst(i=29) 
+plotLocEst(i=33) 
+plotLocEst(i=34) 
+plotLocEst(i=37) 
+plotLocEst(i=39) 
+
+```
+
+## Ringerike
+
+```{r} 
+#| echo: false 
+#| message: false 
+#| warning: false
+
+Ringerike_list<-lokalitetsdata |> 
+  filter(Region=="Ringerike") |> 
+  distinct(Lokalitet)
+
+#                            Auren
+#                       Buss-stopp
+# Haugsbygd, vestvendt vegskråning
+#                        Hurumåsen
+#                    Nordre Ultvet
+#                        Ultvet SØ
+#                     Åsaporten NØ
+
+plotLocEst(i=2) 
+plotLocEst(i=4) 
+plotLocEst(i=13) 
+plotLocEst(i=18) 
+plotLocEst(i=25) 
+plotLocEst(i=38)
+plotLocEst(i=41) 
 
 
 ```
