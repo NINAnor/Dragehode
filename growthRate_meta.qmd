@@ -11,12 +11,7 @@ Denne tilnÃ¦rmingen gjÃ¸r at vi kan vekte effekten av endringer i store popu
 
 Populasjonsvekstraten er log-transformert. Det betyr at en vekstrate pÃ¥ 0 indikerer en stabil populasjon, vekstrate \> 0 indikerer en populasjon i vekst og vekstrate \< 0 indikerer en populasjon i nedgang. Figurene viser vektet gjennomsnitt med 95 % konfidensintervall.
 
-Populasjonsstørrelse og -vekstrate kan bare beregnes for populasjonene med detaljert overvåking (overvåkingsruter). Regionale og naturtype-spesifikke vekstrater er derfor bare beregnet med de populasjonene inkludert, som også har data fra overvåkingsruter i 2023.   
-
-## plots only including the populations that also have plot data in 2023 
-## this subtitle can be deleted
-
-## weight by area
+Populasjonsstørrelse og -vekstrate kan bare beregnes for populasjonene med detaljert overvåking (overvåkingsruter). Regionale og naturtype-spesifikke vekstrater er derfor bare beregnet med de populasjonene inkludert, som også har data fra overvåkingsruter i 2023.
 
 As we can no longer estimate population size based on the quadrats we weight the regressions by the area of the site. Area is a good but not perfect proxy for population size (species area relationship)
 
