@@ -4,11 +4,13 @@ lang: no
 fontenc: iso-8859-1
 ---
 
-# Lokale estimater av populasjonsstørrelse {#sec-local}
+# Lokale estimater av populasjonsstÃ¸rrelse {#sec-local}
 
-Disse figurene viser estimert populasjonsstørrelse, totalt og fordelt på de tre størrelsesklassene fertile, vegetative og småplanter, for hvert år i de 25 lokalitetene som inngår i overvåkingen.
+Disse figurene viser estimert populasjonsstÃ¸rrelse, totalt og fordelt pÃ¥ de tre stÃ¸rrelsesklassene fertile, vegetative og smÃ¥planter, for hvert Ã¥r i lokalitetene som inngÃ¥r i overvÃ¥kingen.
 
-Populasjonsstørrelse er estimert ved å bruke tettheten av individer i overvåkingsrutene, samt arealet dragehode forekommer på (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overvåkingsruter (‘bootstrapping’) med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gjør det mulig å beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
+PopulasjonsstÃ¸rrelse er estimert ved Ã¥ bruke tettheten av individer i overvÃ¥kingsrutene, samt arealet dragehode forekommer pÃ¥ (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overvÃ¥kingsruter (â€˜bootstrappingâ€™) med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gjÃ¸r det mulig Ã¥ beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
+
+Fordi vi bruker tettheten av individer i overvÃ¥kingsrutene, er populasjonsstørrelse bare beregnet i 2023 for de lokalitetene der detaljert overvåking, med både overvåkingsruter og transekter, ble gjennomført. Se rapporten for detaljer. 
 
 ```{r}
 #| echo: false
@@ -27,7 +29,7 @@ plotLocEst<-function(i){
 
 title=lokalitetsestimater[[i]]$lokalitet
 popstr=as_tibble(lokalitetsestimater[[i]])
-names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "Småplanter",      "Totalt",     
+names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "SmÃ¥planter",      "Totalt",     
                     "Fert.CI",   "Veg.CI",    "Sma.CI",    "Tot.CI" )
   
   
@@ -46,7 +48,7 @@ popstrCI=popstr %>%
     mutate(var=gsub(".CI","", key))
   
   popstrCI=popstrCI%>% 
-    mutate(var=rep(c("Fertile", "Vegetative", "Småplanter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
+    mutate(var=rep(c("Fertile", "Vegetative", "SmÃ¥planter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
     mutate(upper=value[,2]) %>% 
     mutate(lower=value[,1]) %>% 
     select(!value)
@@ -65,7 +67,7 @@ popstr_plot=popstr %>%
     select(!lokalitet) %>% 
     pivot_longer(!year, names_to = "key", values_to = "value") %>%
     #filter(!key%in% c("Fert.CI", "Veg.CI","Sma.CI", "Tot.CI")) %>% 
-    filter(key%in% c("Fertile", "Småplanter", "Totalt", "Vegetative")) %>% 
+    filter(key%in% c("Fertile", "SmÃ¥planter", "Totalt", "Vegetative")) %>% 
     mutate(upper=popstrCI$upper) %>% 
     mutate(lower=popstrCI$lower)
   
@@ -76,7 +78,7 @@ p=popstr_plot%>%
     scale_fill_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"), guide="none")+
     geom_line( size=1.2)+
    scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
-    labs(x="År", y= "Antall individer")+
+    labs(x="Ã…r", y= "Antall individer")+
     ggtitle(title)+
     theme_classic()+
   xlim(2017,year(Sys.Date()))
@@ -86,6 +88,9 @@ p
 
 ```
 
+## Matt, there is a bug here - there should be an updated plot for Nordre Ultvet (Ringerike). I checked the data and they seem to be updated. Could you check?
+## nice that they are organised after region, looks very good :-)
+## we could include only the one locality from each of Gudbrandsdalen, Mjøsa and Valdres that actually have data, but it's not important. 
 
 ## Hadeland
 
@@ -103,8 +108,8 @@ Hadeland_list<-lokalitetsdata |>
 #Gran sykehjem
 #Grindaker
 #Lyngstad Vestre
-#Nedre R�ykenvik
-#�vre R�ykenvik
+#Nedre Røykenvik
+#Øvre Røykenvik
 plotLocEst(i=1)
 plotLocEst(i=9)
 plotLocEst(i=10)
@@ -128,15 +133,15 @@ Oslo_list<-lokalitetsdata |>
   filter(Region=="Oslo") |> 
   distinct(Lokalitet)
 
-#Ekebergskr�ningen
+#Ekebergskråningen
 #         Heggholmen
 #             Horgen
-#           Hoved�ya
-#         Hoved�ya V
-#            Kalv�ya
-#         M�llerenga
+#           Hovedøya
+#         Hovedøya V
+#            Kalvøya
+#         Møllerenga
 #         Spireodden
-#        Stor�ykilen
+#        Storøykilen
 #      Svartorseter
 #           Telenor
 #        Vendelenga
@@ -170,11 +175,11 @@ Ringerike_list<-lokalitetsdata |>
 
 #                            Auren
 #                       Buss-stopp
-# Haugsbygd, vestvendt vegskr�ning
-#                        Hurum�sen
+# Haugsbygd, vestvendt vegskråning
+#                        Hurumåsen
 #                    Nordre Ultvet
-#                        Ultvet S�
-#                     �saporten N�
+#                        Ultvet SØ
+#                     Åsaporten NØ
 
 plotLocEst(i=2) 
 plotLocEst(i=4) 
