@@ -13,15 +13,61 @@ Populasjonsvekstraten er log-transformert. Det betyr at en vekstrate på 0 indik
 
 ## plots only including the populations that also have plot data in 2023
 
+## weight by area
+
+As we can no longer estimate population size based on the quadrats we weight the regressions by the area of the site. Area is a good but not perfect proxy for population size (species area relationship)
+
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-cap: "Thirty-eight percent of the variation in the mean population size is explained by area"
 library(tidyverse)
 library(metafor)
 source("_common.R")
 options(encoding="UTF-8")
 #get the data
+Area <- readRDS("C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/Area.RDS")
+lokalitetsestimater <- readRDS("C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/derived_data/lokalitetsestimater.RDS")
+lokalitetsdata <- readRDS("C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/lokalitetsdata.RDS")
+
+rds_combo <- list.files(path ="data/derived_data/direction_plots" , pattern = "*.RDS", full.names = TRUE ) %>%
+  map_dfr(readRDS)
+
+
+local=lokalitetsdata %>% 
+  select(Region, Kommune, Lokalitet) %>% 
+  rename(lokalitet=Lokalitet)
+rds_combo=rds_combo %>% 
+  left_join(
+    .,local
+  )
+
+site_area<-rds_combo |> 
+  distinct() |> 
+  left_join(Area, by=c("lokalitet"="Lokalitet"))
+
+sum_site_area<-site_area |> 
+  group_by(lokalitet, Area, Region) |> 
+  summarise(mn_pop=mean(nTot, na.rm = TRUE)) 
+
+#summary(lm(log(mn_pop)~log(Area), data=sum_site_area))
+
+sum_site_area|> 
+  ggplot(aes(log(Area), log(mn_pop)))+
+  ggpmisc::stat_poly_line() +
+  ggpmisc::stat_poly_eq(ggpmisc::use_label(c("R2"))) +
+  geom_point(colour="darkgreen")+
+  geom_smooth(method = lm)+
+  ggthemes::theme_base()+
+  labs(x="log(Area)", y="log(mean population size)")
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
 
 popvekstdata <- readRDS(paste0(here::here(),"/data/derived_data/popvekstdata.RDS"))
 #unweighted growth rate mean of site and mean of location
@@ -33,7 +79,6 @@ df <- popvekstdata[!is.infinite(popvekstdata$vekstrate),]
 #| echo: false
 #| message: false
 #| warning: false
-lokalitetsestimater <- readRDS(paste0(here::here(),"/data/derived_data/lokalitetsestimater.RDS"))
 
 df_lok <- plyr::ldply (lokalitetsestimater, data.frame)
 
@@ -47,6 +92,10 @@ join_df<-
   join_df |> 
   filter(Lokalitet %in% list_of_sites) 
 
+
+join_df<-join_df |> 
+  inner_join(Area)
+
 testmeta_2018=join_df |> 
   group_by(Lokalitet, Region) |> 
   filter(Year==2018) |> 
@@ -55,7 +104,8 @@ testmeta_2018=join_df |>
             VARGR=var(vekstrate,na.rm = TRUE),
             meanTpop=mean(nTot, na.rm=TRUE),
             sdTpop=sd(nTot, na.rm=TRUE),
-            VARTpop=var(nTot, na.rm=TRUE)
+            VARTpop=var(nTot, na.rm=TRUE),
+            meanArea=mean(Area, na.rm=TRUE)
             ) 
 # |> 
  # filter(!Lokalitet=="Viernbukta")
@@ -68,7 +118,8 @@ testmeta_2019=join_df |>
             VARGR=var(vekstrate,na.rm = TRUE),
             meanTpop=mean(nTot, na.rm=TRUE),
             sdTpop=sd(nTot, na.rm=TRUE),
-            VARTpop=var(nTot, na.rm=TRUE)
+            VARTpop=var(nTot, na.rm=TRUE),
+            meanArea=mean(Area, na.rm=TRUE)
             ) #|> 
   #filter(!Lokalitet=="Viernbukta")
 
@@ -80,7 +131,8 @@ testmeta_2020=join_df |>
             VARGR=var(vekstrate,na.rm = TRUE),
             meanTpop=mean(nTot, na.rm=TRUE),
             sdTpop=sd(nTot, na.rm=TRUE),
-            VARTpop=var(nTot, na.rm=TRUE)
+            VARTpop=var(nTot, na.rm=TRUE),
+            meanArea=mean(Area, na.rm=TRUE)
             ) #|> 
   #filter(!Lokalitet=="Viernbukta")
 
@@ -92,7 +144,8 @@ testmeta_2021=join_df |>
             VARGR=var(vekstrate,na.rm = TRUE),
             meanTpop=mean(nTot, na.rm=TRUE),
             sdTpop=sd(nTot, na.rm=TRUE),
-            VARTpop=var(nTot, na.rm=TRUE)
+            VARTpop=var(nTot, na.rm=TRUE),
+            meanArea=mean(Area, na.rm=TRUE)
             ) #|> 
   #filter(!Lokalitet=="Viernbukta")
 
@@ -104,18 +157,19 @@ testmeta_2021=join_df |>
              VARGR=var(vekstrate,na.rm = TRUE),
              meanTpop=mean(nTot, na.rm=TRUE),
              sdTpop=sd(nTot, na.rm=TRUE),
-             VARTpop=var(nTot, na.rm=TRUE)
+             VARTpop=var(nTot, na.rm=TRUE),
+            meanArea=mean(Area, na.rm=TRUE)
              ) |> 
   # filter(!Lokalitet=="Viernbukta") |> 
    filter(!is.nan(meanGR))
 
 
 
-res_2018 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2018)
-res_2019 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2019)
-res_2020 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2020)
-res_2021 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2021)
-res_2022 <- metafor::rma(meanGR, VARGR, weights=meanTpop,slab=Lokalitet, data=testmeta_2022)
+res_2018 <- metafor::rma(meanGR, VARGR, weights=meanArea,slab=Lokalitet, data=testmeta_2018)
+res_2019 <- metafor::rma(meanGR, VARGR, weights=meanArea,slab=Lokalitet, data=testmeta_2019)
+res_2020 <- metafor::rma(meanGR, VARGR, weights=meanArea,slab=Lokalitet, data=testmeta_2020)
+res_2021 <- metafor::rma(meanGR, VARGR, weights=meanArea,slab=Lokalitet, data=testmeta_2021)
+res_2022 <- metafor::rma(meanGR, VARGR, weights=meanArea,slab=Lokalitet, data=testmeta_2022)
 
 
 
@@ -170,23 +224,23 @@ data3 |>
 #| message: false
 #| warning: false
 
-res.H_2018 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2018)
-res.H_2019 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2019)
-res.H_2020 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2020)
-res.H_2021 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2021)
-res.H_2022 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2022)
+res.H_2018 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2018)
+res.H_2019 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2019)
+res.H_2020 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2020)
+res.H_2021 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2021)
+res.H_2022 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Hadeland"), slab=Lokalitet, data=testmeta_2022)
 
 #res.R_2018 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2018)
-res.R_2019 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2019)
-res.R_2020 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2020)
-res.R_2021 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2021)
-res.R_2022 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2022)
+res.R_2019 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2019)
+res.R_2020 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2020)
+res.R_2021 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2021)
+res.R_2022 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Ringerike"), slab=Lokalitet, data=testmeta_2022)
 
-res.O_2018 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2018)
-res.O_2019 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2019)
-res.O_2020 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2020)
-res.O_2021 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2021)
-res.O_2022 <- rma(meanGR, VARGR, weights=meanTpop,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2022)
+res.O_2018 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2018)
+res.O_2019 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2019)
+res.O_2020 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2020)
+res.O_2021 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2021)
+res.O_2022 <- rma(meanGR, VARGR, weights=meanArea,subset=(Region=="Oslo"), slab=Lokalitet, data=testmeta_2022)
 
 dat.comp_2018 <- data.frame(estimate = c(coef(res.H_2018),coef(res.O_2018)), stderror = c(res.H_2018$se,res.O_2018$se),
                        meta = c("Hadeland", 

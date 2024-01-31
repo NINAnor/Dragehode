@@ -186,3 +186,64 @@ plotLocEst(i=41)
 
 
 ```
+
+## Gudbrandsdalen
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#Dampsaga 6
+#Storberget 32
+#Solbakken 28
+#Syltbakkin 35
+#Steberg 30
+plotLocEst(i=6) 
+plotLocEst(i=32) 
+plotLocEst(i=28) 
+plotLocEst(i=35) 
+plotLocEst(i=30) 
+
+
+```
+
+## MjÃ¸sa
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#Kvennom 22
+#Røyse 27
+#Jøråsen 19
+#Kvamsberget sør 21
+#Sterud, Østre III 31
+
+plotLocEst(i=22) 
+plotLocEst(i=27) 
+plotLocEst(i=19) 
+plotLocEst(i=21) 
+plotLocEst(i=31) 
+
+
+```
+
+## Valdres
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#Brone 3
+#Enger 8
+#Sørre Skrindsrud 36
+#Ryparten, vegkant 26
+#Bøseimarke 5
+plotLocEst(i=3) 
+plotLocEst(i=8) 
+plotLocEst(i=36) 
+plotLocEst(i=26) 
+plotLocEst(i=5) 
+
+```
+
