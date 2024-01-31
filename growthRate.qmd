@@ -9,12 +9,9 @@ Disse figurene viser estimert populasjonsvekstrate for hvert år lokalitetene so
 
 Vekstrate ble beregnet som forholdet mellom populasjonsstørrelsen (antall individer totalt) i år t over antall individer i år t ‒ 1. Et gjennomsnitt ble beregnet for hver lokalitet og år, over alle overvåkingsruter på lokaliteten. I figurene er vekstraten log-transformert. En log-vekstrate på 0 betyr at populasjonen er stabil (antall individer i år t = antall individer i år t ‒ 1). En positiv log-vekstrate (\> 0) betyr en populasjon i økning, mens en negativ log-vekstrate (\< 0) betyr en populasjon i nedgang. Året langs x-aksen angir år t ‒ 1, dvs. vekstraten i 2020 representerer endringen som er skjedd fra 2020 til 2021 (log(antall individer i 2021/antall individer i 2020).
 
-Fordi beregningen av vekstrate er avhengig av data fra overvåkingsruter, er vekstraten bare beregnet for de lokalitetene/årene med detaljert datainnsamling (overvåkingsruter og transekter). Vekstrater mangler foreløpig for de tre nyetablerte lokalitetene i Gudbrandsdalen, Mjøsa og Valdres. 
+Fordi beregningen av vekstrate er avhengig av data fra overvåkingsruter, er vekstraten bare beregnet for de lokalitetene/årene med detaljert datainnsamling (overvåkingsruter og transekter). Vekstrater mangler foreløpig for de tre nyetablerte lokalitetene i Gudbrandsdalen, Mjøsa og Valdres.
 
 I figurene vises hver overvåkingsrute som en prikk, gjennomsnittsverdien for lokaliteten som tykk blå strek og 95 % konfindensintervall som grått skravert område.
-
-## could you do the same re-organisation of plots that you did in local estimates? I.e., first Hadeland, then Oslo, then Ringerike? Skip Gudbrandsdalen, Mjøsa and Valdres here, as we have no data. 
-## Here Nordre Ultvet is included, so nothing wrong with data then (ref. comment in localEst)
 
 ```{r}
 #| echo: false
@@ -55,41 +52,92 @@ return(p)
 
 ```
 
+## Hadeland
+
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+
+#Aslaksrud
+#Falang
+#Gjefsen
+#Gran sykehjem
+#Grindaker
+#Lyngstad Vestre
+#Nedre Røykenvik
+#Øvre Røykenvik
 local_list<-unique(df$Lokalitet)
 
 plot_logR(local_list[1])
-plot_logR(local_list[2])
-plot_logR(local_list[3])
-plot_logR(local_list[4])
 plot_logR(local_list[5])
 plot_logR(local_list[6])
 plot_logR(local_list[7])
 plot_logR(local_list[8])
-plot_logR(local_list[9])
-plot_logR(local_list[10])
-plot_logR(local_list[11])
-plot_logR(local_list[12])
-plot_logR(local_list[13])
-plot_logR(local_list[14])
-plot_logR(local_list[15])
 plot_logR(local_list[16])
+
+```
+
+## Oslo
+
+```{r}
+#| echo: false 
+#| message: false 
+#| warning: false  
+
+#Ekebergskråningen
+#         Heggholmen
+#             Horgen
+#           Hovedøya
+#         Hovedøya V
+#            Kalvøya
+#         Møllerenga
+#         Spireodden
+#        Storøykilen
+#      Svartorseter
+#           Telenor
+#        Vendelenga
+#        Viernbukta
+
+plot_logR(local_list[4]) 
+plot_logR(local_list[10]) 
+plot_logR(local_list[11]) 
+plot_logR(local_list[12]) 
+plot_logR(local_list[13]) 
+plot_logR(local_list[15])
 plot_logR(local_list[17])
-plot_logR(local_list[18])
 plot_logR(local_list[19])
 plot_logR(local_list[20])
 plot_logR(local_list[21])
 plot_logR(local_list[22])
-plot_logR(local_list[23])
 plot_logR(local_list[24])
-#plot_logR(local_list[25])
-plot_logR(local_list[26])
-#plot_logR(local_list[27])
-#plot_logR(local_list[28])
-#plot_logR(local_list[29])
-
 
 ```
+
+## Ringerike
+
+```{r}
+#| echo: false 
+#| message: false 
+#| warning: false  
+
+#                            Auren
+#                       Buss-stopp
+# Haugsbygd, vestvendt vegskråning
+#                        Hurumåsen
+#                    Nordre Ultvet
+#                        Ultvet SØ
+#                     Åsaporten NØ
+
+
+plot_logR(local_list[2]) 
+plot_logR(local_list[3]) 
+plot_logR(local_list[9]) 
+plot_logR(local_list[14]) 
+plot_logR(local_list[18]) 
+plot_logR(local_list[23])
+plot_logR(local_list[26])
+
+```
+
+## 
