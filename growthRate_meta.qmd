@@ -5,13 +5,16 @@ lang: no
 fontenc: iso-8859-1
 ---
 
-For å oppsummere vekstratene på tvers av populasjoner brukte vi en vektet regresjon, en til-nærming som brukes i meta-analyser («random effects meta-analysis»). Vi vektet popula-sjonsvekstratene per lokalitet med den overordnede populasjonsstørrelsen (i den gitte lokali-teten i det gitte året), og et vektet gjennomsnitt ble deretter beregnet totalt (over alle populas-joner), per region og per naturtype.
+For Ã¥ oppsummere vekstratene pÃ¥ tvers av populasjoner brukte vi en vektet regresjon, en tilnÃ¦rming som brukes i meta-analyser (Â«random effects meta-analysisÂ»). Vi vektet populasjonsvekstratene per lokalitet med den overordnede populasjonsstÃ¸rrelsen (i den gitte lokali-teten i det gitte Ã¥ret), og et vektet gjennomsnitt ble deretter beregnet totalt (over alle populasjoner), per region og per naturtype.
 
-Denne tilnærmingen gjør at vi kan vekte effekten av endringer i store populasjoner mer, mens endringer i små populasjoner har mindre effekt på overordnede vekstrater. Populasjonsvekst-ratene gir dermed et representativt estimat på endringer i dragehodepopulasjonen innenfor regionen/naturtypen.
+Denne tilnÃ¦rmingen gjÃ¸r at vi kan vekte effekten av endringer i store populasjoner mer, mens endringer i smÃ¥ populasjoner har mindre effekt pÃ¥ overordnede vekstrater. Populasjonsvekstratene gir dermed et representativt estimat pÃ¥ endringer i dragehodepopulasjonen innenfor regionen/naturtypen.
 
-Populasjonsvekstraten er log-transformert. Det betyr at en vekstrate på 0 indikerer en stabil populasjon, vekstrate \> 0 indikerer en populasjon i vekst og vekstrate \< 0 indikerer en populasjon i nedgang. Figurene viser vektet gjennomsnitt med 95 % konfidensintervall.
+Populasjonsvekstraten er log-transformert. Det betyr at en vekstrate pÃ¥ 0 indikerer en stabil populasjon, vekstrate \> 0 indikerer en populasjon i vekst og vekstrate \< 0 indikerer en populasjon i nedgang. Figurene viser vektet gjennomsnitt med 95 % konfidensintervall.
 
-## plots only including the populations that also have plot data in 2023
+Populasjonsstørrelse og -vekstrate kan bare beregnes for populasjonene med detaljert overvåking (overvåkingsruter). Regionale og naturtype-spesifikke vekstrater er derfor bare beregnet med de populasjonene inkludert, som også har data fra overvåkingsruter i 2023.   
+
+## plots only including the populations that also have plot data in 2023 
+## this subtitle can be deleted
 
 ## weight by area
 
@@ -85,8 +88,8 @@ df_lok <- plyr::ldply (lokalitetsestimater, data.frame)
 join_df=df |> 
   left_join(df_lok, by=c("Lokalitet"="lokalitet"))
 
-list_of_sites<-c("Spireodden", "Ekebergskr�ningen", "Hoved�ya", 
-"Hoved�ya V", "Horgen","Buss-stopp", "Nordre Ultvet", "Grindaker", "Lyngstad Vestre")
+list_of_sites<-c("Spireodden", "Ekebergskråningen", "Hovedøya", 
+"Hovedøya V", "Horgen","Buss-stopp", "Nordre Ultvet", "Grindaker", "Lyngstad Vestre")
 
 join_df<-
   join_df |> 
