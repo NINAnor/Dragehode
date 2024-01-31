@@ -5,11 +5,16 @@ lang: no
 fontenc: iso-8859-1
 ---
 
-Disse figurene viser estimert populasjonsvekstrate for hvert år i de 25 lokalitetene som inngår i overvåkingen.
+Disse figurene viser estimert populasjonsvekstrate for hvert år lokalitetene som inngår i overvåkingen.
 
 Vekstrate ble beregnet som forholdet mellom populasjonsstørrelsen (antall individer totalt) i år t over antall individer i år t ‒ 1. Et gjennomsnitt ble beregnet for hver lokalitet og år, over alle overvåkingsruter på lokaliteten. I figurene er vekstraten log-transformert. En log-vekstrate på 0 betyr at populasjonen er stabil (antall individer i år t = antall individer i år t ‒ 1). En positiv log-vekstrate (\> 0) betyr en populasjon i økning, mens en negativ log-vekstrate (\< 0) betyr en populasjon i nedgang. Året langs x-aksen angir år t ‒ 1, dvs. vekstraten i 2020 representerer endringen som er skjedd fra 2020 til 2021 (log(antall individer i 2021/antall individer i 2020).
 
+Fordi beregningen av vekstrate er avhengig av data fra overvåkingsruter, er vekstraten bare beregnet for de lokalitetene/årene med detaljert datainnsamling (overvåkingsruter og transekter). Vekstrater mangler foreløpig for de tre nyetablerte lokalitetene i Gudbrandsdalen, Mjøsa og Valdres. 
+
 I figurene vises hver overvåkingsrute som en prikk, gjennomsnittsverdien for lokaliteten som tykk blå strek og 95 % konfindensintervall som grått skravert område.
+
+## could you do the same re-organisation of plots that you did in local estimates? I.e., first Hadeland, then Oslo, then Ringerike? Skip Gudbrandsdalen, Mjøsa and Valdres here, as we have no data. 
+## Here Nordre Ultvet is included, so nothing wrong with data then (ref. comment in localEst)
 
 ```{r}
 #| echo: false
