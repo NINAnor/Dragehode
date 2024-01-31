@@ -4,13 +4,13 @@ lang: no
 fontenc: iso-8859-1
 ---
 
-# Lokale estimater av populasjonsstÃ¸rrelse {#sec-local}
+# Lokale estimater av populasjonsst�¸rrelse {#sec-local}
 
-Disse figurene viser estimert populasjonsstÃ¸rrelse, totalt og fordelt pÃ¥ de tre stÃ¸rrelsesklassene fertile, vegetative og smÃ¥planter, for hvert Ã¥r i lokalitetene som inngÃ¥r i overvÃ¥kingen.
+Disse figurene viser estimert populasjonsst��,rrelse, totalt og fordelt p�¥ de tre st�¸rrelsesklassene fertile, vegetative og sm�¥planter, for hvert �¥r i lokalitetene som inng�¥r i overv�¥kingen.
 
-PopulasjonsstÃ¸rrelse er estimert ved Ã¥ bruke tettheten av individer i overvÃ¥kingsrutene, samt arealet dragehode forekommer pÃ¥ (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overvÃ¥kingsruter (â€˜bootstrappingâ€™) med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gjÃ¸r det mulig Ã¥ beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
+Populasjonsst�¸rrelse er estimert ved �¥ bruke tettheten av individer i overv�¥kingsrutene, samt arealet dragehode forekommer p�¥ (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overv�¥kingsruter (â��bootstrappingâ��) med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gj�¸r det mulig �¥ beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
 
-Fordi vi bruker tettheten av individer i overvÃ¥kingsrutene, er populasjonsstørrelse bare beregnet i 2023 for de lokalitetene der detaljert overvåking, med både overvåkingsruter og transekter, ble gjennomført. Se rapporten for detaljer. 
+Fordi vi bruker tettheten av individer i overv�¥kingsrutene, er populasjonsstørrelse bare beregnet i 2023 for de lokalitetene der detaljert overvåking, med både overvåkingsruter og transekter, ble gjennomført. Se rapporten for detaljer.
 
 ```{r}
 #| echo: false
@@ -91,6 +91,7 @@ p
 }
 
 ```
+
 ## Hadeland
 
 ```{r}
@@ -123,7 +124,7 @@ plotLocEst(i=23)
 
 ## Oslo
 
-```{r} 
+```{r}
 #| echo: false
 #| message: false 
 #| warning: false
@@ -163,7 +164,7 @@ plotLocEst(i=39)
 
 ## Ringerike
 
-```{r} 
+```{r}
 #| echo: false 
 #| message: false 
 #| warning: false
@@ -250,4 +251,3 @@ plotLocEst(i=3)
 #plotLocEst(i=5) 
 
 ```
-
