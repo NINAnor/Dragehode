@@ -21,6 +21,10 @@ library(tidyverse)
 
 lokalitetsestimater <- readRDS(paste0(here::here(), "/data/derived_data/lokalitetsestimater.RDS"))
 
+# A quick fix but needs to be addressed back in the function to create estimates 
+
+lokalitetsestimater$`Nordre Ultvet`$year<-c(2019, 2020, 2021, 2022, 2023)
+
 lokalitetsdata <- readRDS("C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/lokalitetsdata.RDS")
 
 plotLocEst<-function(i){
@@ -87,11 +91,6 @@ p
 }
 
 ```
-
-## Matt, there is a bug here - there should be an updated plot for Nordre Ultvet (Ringerike). I checked the data and they seem to be updated. Could you check?
-## nice that they are organised after region, looks very good :-)
-## we could include only the one locality from each of Gudbrandsdalen, MjÃ¸sa and Valdres that actually have data, but it's not important. 
-
 ## Hadeland
 
 ```{r}
@@ -204,10 +203,10 @@ plotLocEst(i=41)
 #Syltbakkin 35
 #Steberg 30
 plotLocEst(i=6) 
-plotLocEst(i=32) 
-plotLocEst(i=28) 
-plotLocEst(i=35) 
-plotLocEst(i=30) 
+#plotLocEst(i=32) 
+#plotLocEst(i=28) 
+#plotLocEst(i=35) 
+#plotLocEst(i=30) 
 
 
 ```
@@ -224,11 +223,11 @@ plotLocEst(i=30)
 #Kvamsberget sør 21
 #Sterud, Østre III 31
 
-plotLocEst(i=22) 
+#plotLocEst(i=22) 
 plotLocEst(i=27) 
 plotLocEst(i=19) 
-plotLocEst(i=21) 
-plotLocEst(i=31) 
+#plotLocEst(i=21) 
+#plotLocEst(i=31) 
 
 
 ```
@@ -245,10 +244,10 @@ plotLocEst(i=31)
 #Ryparten, vegkant 26
 #Bøseimarke 5
 plotLocEst(i=3) 
-plotLocEst(i=8) 
-plotLocEst(i=36) 
-plotLocEst(i=26) 
-plotLocEst(i=5) 
+#plotLocEst(i=8) 
+#plotLocEst(i=36) 
+#plotLocEst(i=26) 
+#plotLocEst(i=5) 
 
 ```
 
