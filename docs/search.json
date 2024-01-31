@@ -138,5 +138,33 @@
     "title": "4  Vektede populasjonsvekstrater",
     "section": "",
     "text": "For Ã¥ oppsummere vekstratene pÃ¥ tvers av populasjoner brukte vi en vektet regresjon, en tilnÃ¦rming som brukes i meta-analyser (Â«random effects meta-analysisÂ»). Vi vektet populasjonsvekstratene per lokalitet med den overordnede populasjonsstÃ¸rrelsen (i den gitte lokali-teten i det gitte Ã¥ret), og et vektet gjennomsnitt ble deretter beregnet totalt (over alle populasjoner), per region og per naturtype.\nDenne tilnÃ¦rmingen gjÃ¸r at vi kan vekte effekten av endringer i store populasjoner mer, mens endringer i smÃ¥ populasjoner har mindre effekt pÃ¥ overordnede vekstrater. Populasjonsvekstratene gir dermed et representativt estimat pÃ¥ endringer i dragehodepopulasjonen innenfor regionen/naturtypen.\nPopulasjonsvekstraten er log-transformert. Det betyr at en vekstrate pÃ¥ 0 indikerer en stabil populasjon, vekstrate &gt; 0 indikerer en populasjon i vekst og vekstrate &lt; 0 indikerer en populasjon i nedgang. Figurene viser vektet gjennomsnitt med 95 % konfidensintervall.\nPopulasjonsstørrelse og -vekstrate kan bare beregnes for populasjonene med detaljert overvåking (overvåkingsruter). Regionale og naturtype-spesifikke vekstrater er derfor bare beregnet med de populasjonene inkludert, som også har data fra overvåkingsruter i 2023.\nAs we can no longer estimate population size based on the quadrats we weight the regressions by the area of the site. Area is a good but not perfect proxy for population size (species area relationship)\n\n\n\n\n\nThirty-eight percent of the variation in the mean population size is explained by area"
+  },
+  {
+    "objectID": "direction_plots.html#hadeland",
+    "href": "direction_plots.html#hadeland",
+    "title": "5  Figurer som viser retning i endring",
+    "section": "5.1 Hadeland",
+    "text": "5.1 Hadeland\n\n\n5.1.1 Sites"
+  },
+  {
+    "objectID": "direction_plots.html#oslo",
+    "href": "direction_plots.html#oslo",
+    "title": "5  Figurer som viser retning i endring",
+    "section": "5.2 Oslo",
+    "text": "5.2 Oslo\n\n\n5.2.1 Sites"
+  },
+  {
+    "objectID": "direction_plots.html#ringerike",
+    "href": "direction_plots.html#ringerike",
+    "title": "5  Figurer som viser retning i endring",
+    "section": "5.3 Ringerike",
+    "text": "5.3 Ringerike"
+  },
+  {
+    "objectID": "direction_plots.html#sites-2",
+    "href": "direction_plots.html#sites-2",
+    "title": "5  Figurer som viser retning i endring",
+    "section": "5.4 Sites",
+    "text": "5.4 Sites"
   }
 ]

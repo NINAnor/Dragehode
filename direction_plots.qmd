@@ -3,14 +3,9 @@ title: "Figurer som viser retning i endring"
 editor: visual
 ---
 
-# i will add some text here when text is inputed in report. 
-# it would also here be nice to sort by region, as in localEst. 
-# we need to sort with some headers here and there to get the regional estimates more visible
-# alternatively we could have the regional estimate at the top - for each region - followed by the specific populations. - I think it is interesting that the probability that populations at Hadeland and Ringerike are increasing is really high, whereas in Oslo-area it is more probable that they are decreasing. 
 
-::: callout-important
-## This is just a dump of plots - needs to be sorted and cleaned up a bit!!!!!
-:::
+
+
 
 ```{r}
 #| echo: false
@@ -94,7 +89,6 @@ for (i in seq_along(lokalitetsestimater)){
 
 ```
 
-![](data/derived_data/direction_plots/plots/Aslaksrud.png) ![](data/derived_data/direction_plots/plots/Auren.png) ![](data/derived_data/direction_plots/plots/Buss-stopp.png) ![](data/derived_data/direction_plots/plots/Ekebergskråningen.png) ![](data/derived_data/direction_plots/plots/Falang.png) ![](data/derived_data/direction_plots/plots/Gjefsen.png) ![](data/derived_data/direction_plots/plots/Gran%20sykehjem.png) ![](data/derived_data/direction_plots/plots/Grindaker.png) ![](data/derived_data/direction_plots/plots/Haugsbygd,%20vestvendt%20vegskråning.png) ![](data/derived_data/direction_plots/plots/Heggholmen.png) ![](data/derived_data/direction_plots/plots/Horgen.png) ![](data/derived_data/direction_plots/plots/Hovedøya%20V.png) ![](data/derived_data/direction_plots/plots/Hovedøya.png) ![](data/derived_data/direction_plots/plots/Hurumåsen.png) ![](data/derived_data/direction_plots/plots/Kalvøya.png) ![](data/derived_data/direction_plots/plots/Lyngstad%20Vestre.png) ![](data/derived_data/direction_plots/plots/Møllerenga.png) ![](data/derived_data/direction_plots/plots/Nordre%20Ultvet.png) ![](data/derived_data/direction_plots/plots/Spireodden.png) ![](data/derived_data/direction_plots/plots/Storøykilen.png) ![](data/derived_data/direction_plots/plots/Svartorseter.png) ![](data/derived_data/direction_plots/plots/Telenor.png) ![](data/derived_data/direction_plots/plots/Ultvet%20SØ.png) ![](data/derived_data/direction_plots/plots/Vendelenga.png) ![](data/derived_data/direction_plots/plots/Åsaporten%20NØ.png)
 
 ```{r}
 #| echo: false
@@ -144,8 +138,72 @@ for (i in seq_along(unique(rds_combo$Region))){
 
 ```
 
+## Hadeland
+
 ![](data/derived_data/direction_plots/plots/Hadeland.png)
 
-![](data/derived_data/direction_plots/plots/Ringerike.png)
+### Sites
+
+![](data/derived_data/direction_plots/plots/Aslaksrud.png)
+
+![](data/derived_data/direction_plots/plots/Falang.png)
+
+![](data/derived_data/direction_plots/plots/Gjefsen.png)
+
+![](data/derived_data/direction_plots/plots/Gran sykehjem.png) 
+
+![](data/derived_data/direction_plots/plots/Grindaker.png)
+
+![](data/derived_data/direction_plots/plots/Lyngstad Vestre.png)
+
+## Oslo
+
 ![](data/derived_data/direction_plots/plots/Oslo.png)
+
+### Sites
+
+![](data/derived_data/direction_plots/plots/Ekebergskråningen.png) 
+
+![](data/derived_data/direction_plots/plots/Heggholmen.png)
+
+![](data/derived_data/direction_plots/plots/Horgen.png) 
+
+![](data/derived_data/direction_plots/plots/Hovedøya V.png) 
+
+![](data/derived_data/direction_plots/plots/Hovedøya.png)
+
+![](data/derived_data/direction_plots/plots/Kalvøya.png) 
+
+![](data/derived_data/direction_plots/plots/Møllerenga.png)
+
+![](data/derived_data/direction_plots/plots/Spireodden.png)
+
+![](data/derived_data/direction_plots/plots/Storøykilen.png) 
+
+![](data/derived_data/direction_plots/plots/Svartorseter.png)
+
+![](data/derived_data/direction_plots/plots/Telenor.png)
+
+![](data/derived_data/direction_plots/plots/Vendelenga.png)
+
+## Ringerike
+
+![](data/derived_data/direction_plots/plots/Ringerike.png)
+
+## Sites
+![](data/derived_data/direction_plots/plots/Auren.png) 
+
+![](data/derived_data/direction_plots/plots/Buss-stopp.png)   
+
+![](data/derived_data/direction_plots/plots/Haugsbygd, vestvendt vegskråning.png)  
+
+![](data/derived_data/direction_plots/plots/Hurumåsen.png) 
+
+![](data/derived_data/direction_plots/plots/Nordre Ultvet.png)   
+
+![](data/derived_data/direction_plots/plots/Ultvet SØ.png)  
+
+![](data/derived_data/direction_plots/plots/Åsaporten NØ.png)
+
+
 
