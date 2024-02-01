@@ -1,16 +1,15 @@
 ---
+title: "Lokale estimater av populasjonsst�rrelse"
 editor: visual
 lang: no
 fontenc: iso-8859-1
 ---
 
-# Lokale estimater av populasjonsstÃ¸rrelse {#sec-local}
+Disse figurene viser estimert populasjonsst¸rrelse, totalt og fordelt på de tre størrelsesklassene fertile, vegetative og sm¥planter, for hvert ¥r i lokalitetene som inng¥r i overv¥kingen.
 
-Disse figurene viser estimert populasjonsstÃ¸rrelse, totalt og fordelt på de tre størrelsesklassene fertile, vegetative og smÂ¥planter, for hvert Â¥r i lokalitetene som inngÂ¥r i overvÃ¥kingen.
+Populasjonsst¸rrelse er estimert ved ¥ bruke tettheten av individer i overv¥kingsrutene, samt arealet dragehode forekommer p¥ (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overv¥kingsruter ("bootstrapping") med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gj¸r det mulig ¥ beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
 
-PopulasjonsstÂ¸rrelse er estimert ved Â¥ bruke tettheten av individer i overvÂ¥kingsrutene, samt arealet dragehode forekommer pÃ¥ (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overvÃ¥kingsruter (Ã¢â¬ËbootstrappingÃ¢â¬â¢) med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gjÂ¸r det mulig Â¥ beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
-
-Fordi vi bruker tettheten av individer i overvÃ¥kingsrutene, er populasjonsstÃ¸rrelse bare beregnet i 2023 for de lokalitetene der detaljert overvÃ¥king, med bÃ¥de overvÃ¥kingsruter og transekter, ble gjennomfÃ¸rt. Se rapporten for detaljer.
+Fordi vi bruker tettheten av individer i overv¥kingsrutene, er populasjonsst¸rrelse bare beregnet i 2023 for de lokalitetene der detaljert overv¥king, med b¥de overv¥kingsruter og transekter, ble gjennomf¸rt. Se rapporten for detaljer.
 
 ```{r}
 #| echo: false
@@ -90,6 +89,31 @@ p=popstr_plot%>%
 p}
 ```
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+plot_logR<-function(Lokal){
+  sub_set_df<-df |> filter(Lokalitet == {{Lokal}})
+  
+  p=sub_set_df |> 
+  ggplot(aes(as.integer(Year), logR)) +
+  geom_point(colour="darkred", alpha=0.5)+
+  stat_smooth()+
+  labs(x="Overvåkingsår",y="Log vekstrate")+
+  scale_x_continuous(breaks=scales::breaks_pretty(n=4, min.n=2))+
+  #scale_x_continuous(label = ~ scales::comma(.x, accuracy =1))+
+  geom_hline(yintercept = 0, lty=2, linewidth=1, colour="black")+
+  theme_classic()+
+  ggtitle(paste0("Log vekstrate for ", {{Lokal}}))
+
+return(p)
+}
+
+
+```
+
 ## Hadeland
 
 ```{r}
@@ -97,9 +121,9 @@ p}
 #| message: false
 #| warning: false
 
-Hadeland_list<-lokalitetsdata |> 
-  filter(Region=="Hadeland") |> 
-  distinct(Lokalitet)
+# Hadeland_list<-lokalitetsdata |> 
+#   filter(Region=="Hadeland") |> 
+#   distinct(Lokalitet)
 #Aslaksrud
 #Falang
 #Gjefsen
@@ -116,8 +140,6 @@ plotLocEst(i=12)
 plotLocEst(i=23)
 
 
-
-
 ```
 
 ## Oslo
@@ -127,9 +149,9 @@ plotLocEst(i=23)
 #| message: false 
 #| warning: false
 
-Oslo_list<-lokalitetsdata |> 
-  filter(Region=="Oslo") |> 
-  distinct(Lokalitet)
+# Oslo_list<-lokalitetsdata |> 
+#   filter(Region=="Oslo") |> 
+#   distinct(Lokalitet)
 
 #EkebergskrÃ¥ningen
 #         Heggholmen
@@ -167,9 +189,9 @@ plotLocEst(i=39)
 #| message: false 
 #| warning: false
 
-Ringerike_list<-lokalitetsdata |> 
-  filter(Region=="Ringerike") |> 
-  distinct(Lokalitet)
+# Ringerike_list<-lokalitetsdata |> 
+#   filter(Region=="Ringerike") |> 
+#   distinct(Lokalitet)
 
 #                            Auren
 #                       Buss-stopp
@@ -190,62 +212,4 @@ plotLocEst(i=41)
 
 ```
 
-## Gudbrandsdalen
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-#Dampsaga 6
-#Storberget 32
-#Solbakken 28
-#Syltbakkin 35
-#Steberg 30
-plotLocEst(i=6) 
-#plotLocEst(i=32) 
-#plotLocEst(i=28) 
-#plotLocEst(i=35) 
-#plotLocEst(i=30) 
-
-
-```
-
-## MjÃ¸sa
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-#Kvennom 22
-#Røyse 27
-#Jøråsen 19
-#Kvamsberget sør 21
-#Sterud, Østre III 31
-
-#plotLocEst(i=22) 
-plotLocEst(i=27) 
-plotLocEst(i=19) 
-#plotLocEst(i=21) 
-#plotLocEst(i=31) 
-
-
-```
-
-## Valdres
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-#Brone 3
-#Enger 8
-#Sørre Skrindsrud 36
-#Ryparten, vegkant 26
-#Bøseimarke 5
-plotLocEst(i=3) 
-#plotLocEst(i=8) 
-#plotLocEst(i=36) 
-#plotLocEst(i=26) 
-#plotLocEst(i=5) 
-
-```
+## 

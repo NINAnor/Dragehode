@@ -123,17 +123,17 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
 
 ![](Figurer/trans_Est/Horgen_plot.png)
 
-![](Figurer/trans_Est/HovedÃ¸ya V_plot.png)
+![](Figurer/trans_Est/Hovedøya V_plot.png)
 
-![](Figurer/trans_Est/HovedÃ¸ya_plot.png)
+![](Figurer/trans_Est/Hovedøya_plot.png)
 
-![](Figurer/trans_Est/KalvÃ¸ya_plot.png)
+![](Figurer/trans_Est/Kalvøya_plot.png)
 
-![](Figurer/trans_Est/MÃ¸llerenga_plot.png)
+![](Figurer/trans_Est/Møllerenga_plot.png)
 
 ![](Figurer/trans_Est/Spireodden_plot.png)
 
-![](Figurer/trans_Est/StorÃ¸ykilen_plot.png)
+![](Figurer/trans_Est/Storøykilen_plot.png)
 
 ![](Figurer/trans_Est/Svartorseter_plot.png)
 
@@ -149,16 +149,14 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
 
 # ![](Figurer/trans_Est/Buss-stopp_plot.png)
 
-# ![](Figurer/trans_Est/Haugsbygd, vestvendt vegskrÃ¥ning_plot.png)
+![](Figurer/trans_Est/Haugsbygd, vestvendt vegskråning_plot.png)
 
-# 
+![](Figurer/trans_Est/Hurumåsen_plot.png)
 
-![](Figurer/trans_Est/HurumÃ¥sen_plot.png)
+# ![](Figurer/trans_Est/Nordre%20Ultvet_plot.png)
 
-# ![](Figurer/trans_Est/Nordre Ultvet_plot.png)
+![](Figurer/trans_Est/Ultvet SØ_plot.png)
 
-# ![](Figurer/trans_Est/Ultvet SÃ˜_plot.png)
-
-![](Figurer/trans_Est/Ã…saporten NÃ˜_plot.png)
+![](Figurer/trans_Est/Åsaporten NØ_plot.png)
 
 # 
