@@ -12,6 +12,7 @@ book:
     - growthRate.qmd
     - growthRate_meta.qmd
     - direction_plots.qmd
+    - transect_est.qmd
     - codeBook.qmd
     - funksjoner.qmd
     
