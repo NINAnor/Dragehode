@@ -1,15 +1,15 @@
 ---
-title: "Lokale estimater av populasjonsst�rrelse"
+title: "Lokale estimater av populasjonsstørrelse"
 editor: visual
 lang: no
 fontenc: iso-8859-1
 ---
 
-Disse figurene viser estimert populasjonsst¸rrelse, totalt og fordelt på de tre størrelsesklassene fertile, vegetative og sm¥planter, for hvert ¥r i lokalitetene som inng¥r i overv¥kingen.
+Disse figurene viser estimert populasjonsstørrelse, totalt og fordelt på de tre størrelsesklassene fertile, vegetative og småplanter, for hvert år i lokalitetene som inngår i overvÂ¥kingen.
 
-Populasjonsst¸rrelse er estimert ved ¥ bruke tettheten av individer i overv¥kingsrutene, samt arealet dragehode forekommer p¥ (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overv¥kingsruter ("bootstrapping") med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gj¸r det mulig ¥ beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
+Populasjonsstørrelse er estimert ved å bruke tettheten av individer i overvåkingsrutene, samt arealet dragehode forekommer på (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overvåkingsruter ("bootstrapping") med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gjør det mulig å beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
 
-Fordi vi bruker tettheten av individer i overv¥kingsrutene, er populasjonsst¸rrelse bare beregnet i 2023 for de lokalitetene der detaljert overv¥king, med b¥de overv¥kingsruter og transekter, ble gjennomf¸rt. Se rapporten for detaljer.
+Fordi vi bruker tettheten av individer i overvåkingsrutene, er populasjonsstørrelse bare beregnet i 2023 for de lokalitetene der detaljert overvåking, med både overvåkingsruter og transekter, ble gjennomført. Se rapporten for detaljer.
 
 ```{r}
 #| echo: false
@@ -32,7 +32,7 @@ plotLocEst<-function(i){
 
 title=lokalitetsestimater[[i]]$lokalitet
 popstr=as_tibble(lokalitetsestimater[[i]])
-names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "SmÃƒÂ¥planter",      "Totalt",     
+names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "SmÃƒÆ’Ã‚Â¥planter",      "Totalt",     
                     "Fert.CI",   "Veg.CI",    "Sma.CI",    "Tot.CI" )
   
   
@@ -51,7 +51,7 @@ popstrCI=popstr %>%
     mutate(var=gsub(".CI","", key))
   
   popstrCI=popstrCI%>% 
-    mutate(var=rep(c("Fertile", "Vegetative", "SmÃƒÂ¥planter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
+    mutate(var=rep(c("Fertile", "Vegetative", "SmÃƒÆ’Ã‚Â¥planter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
     mutate(upper=value[,2]) %>% 
     mutate(lower=value[,1]) %>% 
     select(!value)
@@ -70,7 +70,7 @@ popstr_plot=popstr %>%
     select(!lokalitet) %>% 
     pivot_longer(!year, names_to = "key", values_to = "value") %>%
     #filter(!key%in% c("Fert.CI", "Veg.CI","Sma.CI", "Tot.CI")) %>% 
-    filter(key%in% c("Fertile", "SmÃƒÂ¥planter", "Totalt", "Vegetative")) %>% 
+    filter(key%in% c("Fertile", "SmÃƒÆ’Ã‚Â¥planter", "Totalt", "Vegetative")) %>% 
     mutate(upper=popstrCI$upper) %>% 
     mutate(lower=popstrCI$lower)
   
@@ -81,7 +81,7 @@ p=popstr_plot%>%
     scale_fill_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"), guide="none")+
     geom_line( size=1.2)+
    scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
-    labs(x="Ãƒâ€¦r", y= "Antall individer")+
+    labs(x="ÃƒÆ’Ã¢â‚¬Â¦r", y= "Antall individer")+
     ggtitle(title)+
     theme_classic()+
   xlim(2017,year(Sys.Date()))
@@ -101,7 +101,7 @@ plot_logR<-function(Lokal){
   ggplot(aes(as.integer(Year), logR)) +
   geom_point(colour="darkred", alpha=0.5)+
   stat_smooth()+
-  labs(x="Overvåkingsår",y="Log vekstrate")+
+  labs(x="OvervÃ¥kingsÃ¥r",y="Log vekstrate")+
   scale_x_continuous(breaks=scales::breaks_pretty(n=4, min.n=2))+
   #scale_x_continuous(label = ~ scales::comma(.x, accuracy =1))+
   geom_hline(yintercept = 0, lty=2, linewidth=1, colour="black")+
@@ -130,8 +130,8 @@ return(p)
 #Gran sykehjem
 #Grindaker
 #Lyngstad Vestre
-#Nedre RÃ¸ykenvik
-#Ãvre RÃ¸ykenvik
+#Nedre RÃƒÂ¸ykenvik
+#ÃƒÂ˜vre RÃƒÂ¸ykenvik
 plotLocEst(i=1)
 plotLocEst(i=9)
 plotLocEst(i=10)
@@ -153,15 +153,15 @@ plotLocEst(i=23)
 #   filter(Region=="Oslo") |> 
 #   distinct(Lokalitet)
 
-#EkebergskrÃ¥ningen
+#EkebergskrÃƒÂ¥ningen
 #         Heggholmen
 #             Horgen
-#           HovedÃ¸ya
-#         HovedÃ¸ya V
-#            KalvÃ¸ya
-#         MÃ¸llerenga
+#           HovedÃƒÂ¸ya
+#         HovedÃƒÂ¸ya V
+#            KalvÃƒÂ¸ya
+#         MÃƒÂ¸llerenga
 #         Spireodden
-#        StorÃ¸ykilen
+#        StorÃƒÂ¸ykilen
 #      Svartorseter
 #           Telenor
 #        Vendelenga
@@ -195,11 +195,11 @@ plotLocEst(i=39)
 
 #                            Auren
 #                       Buss-stopp
-# Haugsbygd, vestvendt vegskrÃ¥ning
-#                        HurumÃ¥sen
+# Haugsbygd, vestvendt vegskrÃƒÂ¥ning
+#                        HurumÃƒÂ¥sen
 #                    Nordre Ultvet
-#                        Ultvet SÃ
-#                     Ãsaporten NÃ
+#                        Ultvet SÃƒÂ˜
+#                     ÃƒÂ…saporten NÃƒÂ˜
 
 plotLocEst(i=2) 
 plotLocEst(i=4) 
