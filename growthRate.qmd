@@ -139,5 +139,3 @@ plot_logR(local_list[23])
 plot_logR(local_list[26])
 
 ```
-
-## 
