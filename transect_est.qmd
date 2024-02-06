@@ -1,7 +1,9 @@
 ---
-title: "Transect estimation of population size"
+title: "Transektbaserte estimater av populasjonsstørrelse"
 editor: visual
 ---
+
+Vi brukte data på lengden på transektene, antallet forekomstruter med individer registrert langs transektet og beregnet tetthet som antall ruter med forekomst delt på lengden av transektet (=gjennomsnittlig tetthet langs transektet). For hvert simulerte datasett beregnet vi gjennomsnittlig tetthet langs transektene og ekstrapolerte denne tettheten for å estimere total populasjon. Gjennom å bootstrappe datasettet (1000 ganger) genererte vi en fordeling av populasjonsestimater, som ga innsikt i hvor stort spenn av potensielle verdier for populasjons-størrelser det var for hver lokalitet, og usikkerheten ved estimatene. 
 
 ```{r}
 #| echo: false
@@ -27,7 +29,7 @@ perform_bootstrapping <- function(num_iterations, transect_density, transect_len
   
   return(total_population_samples)
 }
-unique_sites_years <- unique(transektdata[, c("Lokalitet", "År")])
+unique_sites_years <- unique(transektdata[, c("Lokalitet", "Ã…r")])
 
 # Initialize an empty data frame to store results
 results_df <- data.frame()
@@ -36,10 +38,10 @@ results_df <- data.frame()
 for (i in 1:nrow(unique_sites_years)) {
   # Extract current site and year
   current_site <- unique_sites_years$Lokalitet[i]
-  current_year <- unique_sites_years$År[i]
+  current_year <- unique_sites_years$Ã…r[i]
   
   # Subset data for the current site and year
-  subset_data <- transektdata[transektdata$Lokalitet == current_site & transektdata$År == current_year, ]
+  subset_data <- transektdata[transektdata$Lokalitet == current_site & transektdata$Ã…r == current_year, ]
   
   num_transects <- dim(subset_data)[1]
   transect_lengths <- subset_data$Lengde
@@ -86,7 +88,7 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
   p <- ggplot(site_data) +
     geom_pointrange(aes(Year, mean_estimate, ymin = confidence_interval_low, ymax = confidence_interval_high), colour = "darkgreen") +
     theme_classic() +
-    labs(x = "Survey year", y = "Mean estimate from transect data") +
+    labs(x = "Aar", y = "Gjennomsnittlig estimat fra transektdata") +
     ggtitle(paste0(site))
   
   # Save the plot to a PDF file in the 'plots' folder
@@ -109,29 +111,29 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
 
 ![](Figurer/trans_Est/Lyngstad%20Vestre_plot.png)
 
-![](Figurer/trans_Est/Nedre R�ykenvik_plot.png)
+#![](Figurer/trans_Est/Nedre Røykenvik_plot.png)
 
-![](Figurer/trans_Est/�vre R�ykenvik_plot.png)
+#![](Figurer/trans_Est/Øvre Røykenvik_plot.png)
 
 ## Oslo
 
-![](Figurer/trans_Est/Ekebergskr�ningen_plot.png)
+#![](Figurer/trans_Est/Ekebergskråningen_plot.png)
 
 ![](Figurer/trans_Est/Heggholmen_plot.png)
 
 ![](Figurer/trans_Est/Horgen_plot.png)
 
-![](Figurer/trans_Est/Hoved�ya%20V_plot.png)
+![](Figurer/trans_Est/Hovedøya%20V_plot.png)
 
-![](Figurer/trans_Est/Hoved�ya_plot.png)
+![](Figurer/trans_Est/Hovedøya_plot.png)
 
-![](Figurer/trans_Est/Kalv�ya_plot.png)
+![](Figurer/trans_Est/Kalvøya_plot.png)
 
-![](Figurer/trans_Est/M�llerenga_plot.png)
+![](Figurer/trans_Est/Møllerenga_plot.png)
 
 ![](Figurer/trans_Est/Spireodden_plot.png)
 
-![](Figurer/trans_Est/Stor�ykilen_plot.png)
+![](Figurer/trans_Est/Storøykilen_plot.png)
 
 ![](Figurer/trans_Est/Svartorseter_plot.png)
 
@@ -139,7 +141,7 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
 
 ![](Figurer/trans_Est/Vendelenga_plot.png)
 
-![](Figurer/trans_Est/Viernbukta_plot.png)
+#![](Figurer/trans_Est/Viernbukta_plot.png)
 
 ## Ringerike
 
@@ -147,12 +149,12 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
 
 ![](Figurer/trans_Est/Buss-stopp_plot.png)
 
-![](Figurer/trans_Est/Haugsbygd,%20vestvendt%20vegskr�ning_plot.png)
+![](Figurer/trans_Est/Haugsbygd,%20vestvendt%20vegskråning_plot.png)
 
-![](Figurer/trans_Est/Hurum�sen_plot.png)
+![](Figurer/trans_Est/Hurumåsen_plot.png)
 
 ![](Figurer/trans_Est/Nordre%20Ultvet_plot.png)
 
-![](Figurer/trans_Est/Ultvet%20S�_plot.png)
+![](Figurer/trans_Est/Ultvet%20SØ_plot.png)
 
-![](Figurer/trans_Est/�saporten%20N�_plot.png)
+![](Figurer/trans_Est/Åsaporten%20NØ_plot.png)
