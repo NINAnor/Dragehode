@@ -212,5 +212,14 @@ plotLocEst(i=41)
 
 
 ```
-
-## 
+```{r}
+#| echo: false 
+#| message: false 
+#| warning: false
+## Mjøsa
+# please plot lokalitet "Røyse"
+## Gudbrandsdalen
+# please plot lokalitet "Dampsaga"
+## Valdres
+# please plot lokalitet "Brone"
+```
