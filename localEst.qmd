@@ -32,7 +32,7 @@ plotLocEst<-function(i){
 
 title=lokalitetsestimater[[i]]$lokalitet
 popstr=as_tibble(lokalitetsestimater[[i]])
-names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "SmÃƒÆ’Ã‚Â¥planter",      "Totalt",     
+names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "Småplanter",      "Totalt",     
                     "Fert.CI",   "Veg.CI",    "Sma.CI",    "Tot.CI" )
   
   
@@ -51,7 +51,7 @@ popstrCI=popstr %>%
     mutate(var=gsub(".CI","", key))
   
   popstrCI=popstrCI%>% 
-    mutate(var=rep(c("Fertile", "Vegetative", "SmÃƒÆ’Ã‚Â¥planter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
+    mutate(var=rep(c("Fertile", "Vegetative", "Småplanter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
     mutate(upper=value[,2]) %>% 
     mutate(lower=value[,1]) %>% 
     select(!value)
@@ -70,7 +70,7 @@ popstr_plot=popstr %>%
     select(!lokalitet) %>% 
     pivot_longer(!year, names_to = "key", values_to = "value") %>%
     #filter(!key%in% c("Fert.CI", "Veg.CI","Sma.CI", "Tot.CI")) %>% 
-    filter(key%in% c("Fertile", "SmÃƒÆ’Ã‚Â¥planter", "Totalt", "Vegetative")) %>% 
+    filter(key%in% c("Fertile", "Småplanter", "Totalt", "Vegetative")) %>% 
     mutate(upper=popstrCI$upper) %>% 
     mutate(lower=popstrCI$lower)
   
@@ -81,7 +81,7 @@ p=popstr_plot%>%
     scale_fill_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"), guide="none")+
     geom_line( size=1.2)+
    scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
-    labs(x="ÃƒÆ’Ã¢â‚¬Â¦r", y= "Antall individer")+
+    labs(x="ær", y= "Antall individer")+
     ggtitle(title)+
     theme_classic()+
   xlim(2017,year(Sys.Date()))
@@ -101,7 +101,7 @@ plot_logR<-function(Lokal){
   ggplot(aes(as.integer(Year), logR)) +
   geom_point(colour="darkred", alpha=0.5)+
   stat_smooth()+
-  labs(x="OvervÃ¥kingsÃ¥r",y="Log vekstrate")+
+  labs(x="Overvåkingsår",y="Log vekstrate")+
   scale_x_continuous(breaks=scales::breaks_pretty(n=4, min.n=2))+
   #scale_x_continuous(label = ~ scales::comma(.x, accuracy =1))+
   geom_hline(yintercept = 0, lty=2, linewidth=1, colour="black")+

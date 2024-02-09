@@ -109,9 +109,9 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
 
 ![](Figurer/trans_Est/Lyngstad%20Vestre_plot.png)
 
-![](Figurer/trans_Est/Nedre Røykenvik_plot.png)
+![](Figurer/trans_Est/Nedre%20Røykenvik_plot.png)
 
-![](Figurer/trans_Est/Øvre Røykenvik_plot.png)
+![](Figurer/trans_Est/Øvre%20Røykenvik_plot.png)
 
 ## Oslo
 
