@@ -81,7 +81,7 @@ p=popstr_plot%>%
     scale_fill_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"), guide="none")+
     geom_line( size=1.2)+
    scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
-    labs(x="�r", y= "Antall individer")+
+    labs(x="Overvåkingsår", y= "Antall individer")+
     ggtitle(title)+
     theme_classic()+
   xlim(2017,year(Sys.Date()))
