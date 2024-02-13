@@ -81,7 +81,11 @@ p=popstr_plot%>%
     scale_fill_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"), guide="none")+
     geom_line( size=1.2)+
    scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
+<<<<<<< HEAD
     labs(x="ær", y= "Antall individer")+
+=======
+    labs(x="ÃƒÆ’Ã‚Â¥r", y= "Antall individer")+
+>>>>>>> d5d63884d28eb5b71230f27442d167968b272a91
     ggtitle(title)+
     theme_classic()+
   xlim(2017,year(Sys.Date()))
@@ -179,6 +183,7 @@ plotLocEst(i=33)
 plotLocEst(i=34) 
 plotLocEst(i=37) 
 plotLocEst(i=39) 
+#check why Spireodden lacks data for 2023
 
 ```
 
@@ -211,5 +216,14 @@ plotLocEst(i=41)
 
 
 ```
-
-## 
+```{r}
+#| echo: false 
+#| message: false 
+#| warning: false
+## Mjøsa
+# please plot lokalitet "Røyse"
+## Gudbrandsdalen
+# please plot lokalitet "Dampsaga"
+## Valdres
+# please plot lokalitet "Brone"
+```

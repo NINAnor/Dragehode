@@ -3,6 +3,17 @@ title: "Figurer som viser retning i endring"
 editor: visual
 ---
 
+<<<<<<< HEAD
+=======
+Figurene presentert her viser sannsynligheten for at en populasjon er i økning, nedgang eller stabil. Vi vurderte usikkerheten i retningen til en populasjonsutvikling ved først å modellere forholdet mellom total populasjon og år (for hver lokalitet og for hver region), ved å bruke en bayesiansk regresjonsmodell. Etter å ha kjørt hver modell beregnet vi sannsynligheten for retning, dvs. stigningstallet for regresjonslinjen mellom populasjonsstørrelse og år, altså populasjonstrenden. 
+
+Sannsynligheten for at stigningstallet er negativt (altså at populasjonsutviklingen er nedadgående) er vist i rødt, mens sannsynligheten for at stigningstallet er positivt (altså at populasjonen er økende) er vist i blått. 
+
+
+
+
+
+>>>>>>> d5d63884d28eb5b71230f27442d167968b272a91
 ```{r}
 #| echo: false
 #| message: false
@@ -137,7 +148,7 @@ for (i in seq_along(unique(rds_combo$Region))){
 
 ![](data/derived_data/direction_plots/plots/Hadeland.png)
 
-### Sites
+### Lokaliteter
 
 ![](data/derived_data/direction_plots/plots/Aslaksrud.png)
 
@@ -155,7 +166,7 @@ for (i in seq_along(unique(rds_combo$Region))){
 
 ![](data/derived_data/direction_plots/plots/Oslo.png)
 
-### Sites
+### Lokaliteter
 
 ![](data/derived_data/direction_plots/plots/Ekebergskråningen.png)
 
@@ -185,7 +196,12 @@ for (i in seq_along(unique(rds_combo$Region))){
 
 ![](data/derived_data/direction_plots/plots/Ringerike.png)
 
+<<<<<<< HEAD
 ## Sites
+=======
+### Lokaliteter
+![](data/derived_data/direction_plots/plots/Auren.png) 
+>>>>>>> d5d63884d28eb5b71230f27442d167968b272a91
 
 ![](data/derived_data/direction_plots/plots/Auren.png)
 
