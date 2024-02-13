@@ -3,17 +3,12 @@ title: "Figurer som viser retning i endring"
 editor: visual
 ---
 
-<<<<<<< HEAD
-=======
+
 Figurene presentert her viser sannsynligheten for at en populasjon er i økning, nedgang eller stabil. Vi vurderte usikkerheten i retningen til en populasjonsutvikling ved først å modellere forholdet mellom total populasjon og år (for hver lokalitet og for hver region), ved å bruke en bayesiansk regresjonsmodell. Etter å ha kjørt hver modell beregnet vi sannsynligheten for retning, dvs. stigningstallet for regresjonslinjen mellom populasjonsstørrelse og år, altså populasjonstrenden. 
 
 Sannsynligheten for at stigningstallet er negativt (altså at populasjonsutviklingen er nedadgående) er vist i rødt, mens sannsynligheten for at stigningstallet er positivt (altså at populasjonen er økende) er vist i blått. 
 
 
-
-
-
->>>>>>> d5d63884d28eb5b71230f27442d167968b272a91
 ```{r}
 #| echo: false
 #| message: false
@@ -156,11 +151,11 @@ for (i in seq_along(unique(rds_combo$Region))){
 
 ![](data/derived_data/direction_plots/plots/Gjefsen.png)
 
-![](data/derived_data/direction_plots/plots/Gran%20sykehjem.png)
+![](data/derived_data/direction_plots/plots/Gran sykehjem.png)
 
 ![](data/derived_data/direction_plots/plots/Grindaker.png)
 
-![](data/derived_data/direction_plots/plots/Lyngstad%20Vestre.png)
+![](data/derived_data/direction_plots/plots/Lyngstad Vestre.png)
 
 ## Oslo
 
@@ -168,23 +163,23 @@ for (i in seq_along(unique(rds_combo$Region))){
 
 ### Lokaliteter
 
-![](data/derived_data/direction_plots/plots/Ekebergskråningen.png)
+![](data/derived_data/direction_plots/plots/Ekebergskr�ningen.png)
 
 ![](data/derived_data/direction_plots/plots/Heggholmen.png)
 
 ![](data/derived_data/direction_plots/plots/Horgen.png)
 
-![](data/derived_data/direction_plots/plots/Hovedøya%20V.png)
+![](data/derived_data/direction_plots/plots/Hoved�ya V.png)
 
-![](data/derived_data/direction_plots/plots/Hovedøya.png)
+![](data/derived_data/direction_plots/plots/Hoved�ya.png)
 
-![](data/derived_data/direction_plots/plots/Kalvøya.png)
+![](data/derived_data/direction_plots/plots/Kalv�ya.png)
 
-![](data/derived_data/direction_plots/plots/Møllerenga.png)
+![](data/derived_data/direction_plots/plots/M�llerenga.png)
 
 ![](data/derived_data/direction_plots/plots/Spireodden.png)
 
-![](data/derived_data/direction_plots/plots/Storøykilen.png)
+![](data/derived_data/direction_plots/plots/Stor�ykilen.png)
 
 ![](data/derived_data/direction_plots/plots/Svartorseter.png)
 
@@ -196,23 +191,17 @@ for (i in seq_along(unique(rds_combo$Region))){
 
 ![](data/derived_data/direction_plots/plots/Ringerike.png)
 
-<<<<<<< HEAD
-## Sites
-=======
 ### Lokaliteter
 ![](data/derived_data/direction_plots/plots/Auren.png) 
->>>>>>> d5d63884d28eb5b71230f27442d167968b272a91
-
-![](data/derived_data/direction_plots/plots/Auren.png)
 
 ![](data/derived_data/direction_plots/plots/Buss-stopp.png)
 
-![](data/derived_data/direction_plots/plots/Haugsbygd,%20vestvendt%20vegskråning.png)
+![](data/derived_data/direction_plots/plots/Haugsbygd, vestvendt vegskr�ning.png)
 
-![](data/derived_data/direction_plots/plots/Hurumåsen.png)
+![](data/derived_data/direction_plots/plots/Hurum�sen.png)
 
-![](data/derived_data/direction_plots/plots/Nordre%20Ultvet.png)
+![](data/derived_data/direction_plots/plots/Nordre Ultvet.png)
 
-![](data/derived_data/direction_plots/plots/Ultvet%20SØ.png)
+![](data/derived_data/direction_plots/plots/Ultvet S�.png)
 
-![](data/derived_data/direction_plots/plots/Åsaporten%20NØ.png)
+![](data/derived_data/direction_plots/plots/�saporten N�.png)

@@ -1,0 +1,215 @@
+---
+title: "Lokale estimater av populasjonsst�rrelse"
+editor: visual
+lang: no
+fontenc: iso-8859-1
+---
+
+Disse figurene viser estimert populasjonsst¸rrelse, totalt og fordelt på de tre størrelsesklassene fertile, vegetative og sm¥planter, for hvert ¥r i lokalitetene som inng¥r i overv¥kingen.
+
+Populasjonsst¸rrelse er estimert ved ¥ bruke tettheten av individer i overv¥kingsrutene, samt arealet dragehode forekommer p¥ (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overv¥kingsruter ("bootstrapping") med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gj¸r det mulig ¥ beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
+
+Fordi vi bruker tettheten av individer i overv¥kingsrutene, er populasjonsst¸rrelse bare beregnet i 2023 for de lokalitetene der detaljert overv¥king, med b¥de overv¥kingsruter og transekter, ble gjennomf¸rt. Se rapporten for detaljer.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+
+lokalitetsestimater <- readRDS(paste0(here::here(), "/data/derived_data/lokalitetsestimater.RDS"))
+
+# A quick fix but needs to be addressed back in the function to create estimates 
+
+lokalitetsestimater$`Nordre Ultvet`$year<-c(2019, 2020, 2021, 2022, 2023)
+
+lokalitetsdata <- readRDS("C:/Users/matthew.grainger/Documents/Projects_in_development/Dragehode2023/data/lokalitetsdata.RDS")
+
+plotLocEst<-function(i){
+  
+
+
+title=lokalitetsestimater[[i]]$lokalitet
+popstr=as_tibble(lokalitetsestimater[[i]])
+names(popstr)<-c( "lokalitet" ,"year",      "Fertile",     "Vegetative",      "SmÃƒÂ¥planter",      "Totalt",     
+                    "Fert.CI",   "Veg.CI",    "Sma.CI",    "Tot.CI" )
+  
+  
+popstrCI=popstr %>% 
+    mutate("Fert.CI_upper"= Fert.CI[,2]) %>% 
+    mutate("Fert.CI_lower"= Fert.CI[,1]) %>% 
+    mutate("Tot.CI_upper"= Tot.CI[,2]) %>% 
+    mutate("Tot.CI_lower"= Tot.CI[,1]) %>%
+    mutate("Veg.CI_upper"= Veg.CI[,2]) %>% 
+    mutate("Veg.CI_lower"= Veg.CI[,1]) %>%
+    mutate("Sma.CI_upper"= Sma.CI[,2]) %>% 
+    mutate("Sma.CI_lower"= Sma.CI[,1]) %>%
+    select(!lokalitet) %>% 
+    pivot_longer(!year, names_to = "key", values_to = "value") %>% 
+    filter(key%in% c("Fert.CI", "Veg.CI","Sma.CI", "Tot.CI")) %>% 
+    mutate(var=gsub(".CI","", key))
+  
+  popstrCI=popstrCI%>% 
+    mutate(var=rep(c("Fertile", "Vegetative", "SmÃƒÂ¥planter", "Totalt"),(dim(popstrCI)[1]/4))) %>% 
+    mutate(upper=value[,2]) %>% 
+    mutate(lower=value[,1]) %>% 
+    select(!value)
+    
+  
+  
+popstr_plot=popstr %>% 
+    mutate("Fert.CI_upper"= Fert.CI[,2]) %>% 
+    mutate("Fert.CI_lower"= Fert.CI[,1]) %>% 
+    mutate("Tot.CI_upper"= Tot.CI[,2]) %>% 
+    mutate("Tot.CI_lower"= Tot.CI[,1]) %>%
+    mutate("Veg.CI_upper"= Veg.CI[,2]) %>% 
+    mutate("Veg.CI_lower"= Veg.CI[,1]) %>%
+    mutate("Sma.CI_upper"= Sma.CI[,2]) %>% 
+    mutate("Sma.CI_lower"= Sma.CI[,1]) %>%
+    select(!lokalitet) %>% 
+    pivot_longer(!year, names_to = "key", values_to = "value") %>%
+    #filter(!key%in% c("Fert.CI", "Veg.CI","Sma.CI", "Tot.CI")) %>% 
+    filter(key%in% c("Fertile", "SmÃƒÂ¥planter", "Totalt", "Vegetative")) %>% 
+    mutate(upper=popstrCI$upper) %>% 
+    mutate(lower=popstrCI$lower)
+  
+p=popstr_plot%>% 
+    ggplot(aes(year,value[,1], colour=key))+
+    geom_point(size=2)+
+    geom_ribbon(aes(ymin=lower, ymax=upper, fill=key), alpha=0.2)+
+    scale_fill_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"), guide="none")+
+    geom_line( size=1.2)+
+   scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
+    labs(x="Ãƒâ€¦r", y= "Antall individer")+
+    ggtitle(title)+
+    theme_classic()+
+  xlim(2017,year(Sys.Date()))
+
+p}
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+plot_logR<-function(Lokal){
+  sub_set_df<-df |> filter(Lokalitet == {{Lokal}})
+  
+  p=sub_set_df |> 
+  ggplot(aes(as.integer(Year), logR)) +
+  geom_point(colour="darkred", alpha=0.5)+
+  stat_smooth()+
+  labs(x="Overvåkingsår",y="Log vekstrate")+
+  scale_x_continuous(breaks=scales::breaks_pretty(n=4, min.n=2))+
+  #scale_x_continuous(label = ~ scales::comma(.x, accuracy =1))+
+  geom_hline(yintercept = 0, lty=2, linewidth=1, colour="black")+
+  theme_classic()+
+  ggtitle(paste0("Log vekstrate for ", {{Lokal}}))
+
+return(p)
+}
+
+
+```
+
+## Hadeland
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Hadeland_list<-lokalitetsdata |> 
+#   filter(Region=="Hadeland") |> 
+#   distinct(Lokalitet)
+#Aslaksrud
+#Falang
+#Gjefsen
+#Gran sykehjem
+#Grindaker
+#Lyngstad Vestre
+#Nedre RÃ¸ykenvik
+#Ãvre RÃ¸ykenvik
+plotLocEst(i=1)
+plotLocEst(i=9)
+plotLocEst(i=10)
+plotLocEst(i=11)
+plotLocEst(i=12)
+plotLocEst(i=23)
+
+
+```
+
+## Oslo
+
+```{r}
+#| echo: false
+#| message: false 
+#| warning: false
+
+# Oslo_list<-lokalitetsdata |> 
+#   filter(Region=="Oslo") |> 
+#   distinct(Lokalitet)
+
+#EkebergskrÃ¥ningen
+#         Heggholmen
+#             Horgen
+#           HovedÃ¸ya
+#         HovedÃ¸ya V
+#            KalvÃ¸ya
+#         MÃ¸llerenga
+#         Spireodden
+#        StorÃ¸ykilen
+#      Svartorseter
+#           Telenor
+#        Vendelenga
+#        Viernbukta
+
+plotLocEst(i=7) 
+plotLocEst(i=14) 
+plotLocEst(i=15) 
+plotLocEst(i=16) 
+plotLocEst(i=17) 
+plotLocEst(i=20)
+plotLocEst(i=24) 
+plotLocEst(i=29) 
+plotLocEst(i=33) 
+plotLocEst(i=34) 
+plotLocEst(i=37) 
+plotLocEst(i=39) 
+
+```
+
+## Ringerike
+
+```{r}
+#| echo: false 
+#| message: false 
+#| warning: false
+
+# Ringerike_list<-lokalitetsdata |> 
+#   filter(Region=="Ringerike") |> 
+#   distinct(Lokalitet)
+
+#                            Auren
+#                       Buss-stopp
+# Haugsbygd, vestvendt vegskrÃ¥ning
+#                        HurumÃ¥sen
+#                    Nordre Ultvet
+#                        Ultvet SÃ
+#                     Ãsaporten NÃ
+
+plotLocEst(i=2) 
+plotLocEst(i=4) 
+plotLocEst(i=13) 
+plotLocEst(i=18) 
+plotLocEst(i=25) 
+plotLocEst(i=38)
+plotLocEst(i=41) 
+
+
+```
+
+## 

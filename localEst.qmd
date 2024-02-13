@@ -5,7 +5,7 @@ lang: no
 fontenc: iso-8859-1
 ---
 
-Disse figurene viser estimert populasjonsstørrelse, totalt og fordelt på de tre størrelsesklassene fertile, vegetative og småplanter, for hvert år i lokalitetene som inngår i overvÂ¥kingen.
+Disse figurene viser estimert populasjonsstørrelse, totalt og fordelt på de tre størrelsesklassene fertile, vegetative og småplanter, for hvert år i lokalitetene som inngår i overv¥kingen.
 
 Populasjonsstørrelse er estimert ved å bruke tettheten av individer i overvåkingsrutene, samt arealet dragehode forekommer på (registrert i forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i populasjonsestimatene ble beregnet ved tilfeldige trekninger av forekomstruter og overvåkingsruter ("bootstrapping") med 2000 gjentak. Bootstrapping er en re-samplingsmetode som gjør det mulig å beregne usikkerhet rundt en gjennomsnittsverdi. Strekene viser gjennomsnittsverdi, mens de skraverte feltene viser 95 % konfidensintervaller.
 
@@ -81,11 +81,7 @@ p=popstr_plot%>%
     scale_fill_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"), guide="none")+
     geom_line( size=1.2)+
    scale_colour_manual(values = c("darkred", "darkblue", "darkgrey", "darkgreen"))+
-<<<<<<< HEAD
-    labs(x="ær", y= "Antall individer")+
-=======
-    labs(x="ÃƒÆ’Ã‚Â¥r", y= "Antall individer")+
->>>>>>> d5d63884d28eb5b71230f27442d167968b272a91
+    labs(x="�r", y= "Antall individer")+
     ggtitle(title)+
     theme_classic()+
   xlim(2017,year(Sys.Date()))
@@ -216,6 +212,7 @@ plotLocEst(i=41)
 
 
 ```
+
 ```{r}
 #| echo: false 
 #| message: false 

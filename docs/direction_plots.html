@@ -114,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./localEst.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lokale estimater av populasjonsst�rrelse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lokale estimater av populasjonsstørrelse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -138,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./transect_est.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transect estimation of population size</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transektbaserte estimater av populasjonsstørrelse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -165,14 +165,16 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#hadeland" id="toc-hadeland" class="nav-link active" data-scroll-target="#hadeland"><span class="header-section-number">5.1</span> Hadeland</a>
   <ul class="collapse">
-  <li><a href="#sites" id="toc-sites" class="nav-link" data-scroll-target="#sites"><span class="header-section-number">5.1.1</span> Sites</a></li>
+  <li><a href="#lokaliteter" id="toc-lokaliteter" class="nav-link" data-scroll-target="#lokaliteter"><span class="header-section-number">5.1.1</span> Lokaliteter</a></li>
   </ul></li>
   <li><a href="#oslo" id="toc-oslo" class="nav-link" data-scroll-target="#oslo"><span class="header-section-number">5.2</span> Oslo</a>
   <ul class="collapse">
-  <li><a href="#sites-1" id="toc-sites-1" class="nav-link" data-scroll-target="#sites-1"><span class="header-section-number">5.2.1</span> Sites</a></li>
+  <li><a href="#lokaliteter-1" id="toc-lokaliteter-1" class="nav-link" data-scroll-target="#lokaliteter-1"><span class="header-section-number">5.2.1</span> Lokaliteter</a></li>
   </ul></li>
-  <li><a href="#ringerike" id="toc-ringerike" class="nav-link" data-scroll-target="#ringerike"><span class="header-section-number">5.3</span> Ringerike</a></li>
-  <li><a href="#sites-2" id="toc-sites-2" class="nav-link" data-scroll-target="#sites-2"><span class="header-section-number">5.4</span> Sites</a></li>
+  <li><a href="#ringerike" id="toc-ringerike" class="nav-link" data-scroll-target="#ringerike"><span class="header-section-number">5.3</span> Ringerike</a>
+  <ul class="collapse">
+  <li><a href="#lokaliteter-2" id="toc-lokaliteter-2" class="nav-link" data-scroll-target="#lokaliteter-2"><span class="header-section-number">5.3.1</span> Lokaliteter</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -196,11 +198,13 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>Figurene presentert her viser sannsynligheten for at en populasjon er i økning, nedgang eller stabil. Vi vurderte usikkerheten i retningen til en populasjonsutvikling ved først å modellere forholdet mellom total populasjon og år (for hver lokalitet og for hver region), ved å bruke en bayesiansk regresjonsmodell. Etter å ha kjørt hver modell beregnet vi sannsynligheten for retning, dvs. stigningstallet for regresjonslinjen mellom populasjonsstørrelse og år, altså populasjonstrenden.</p>
+<p>Sannsynligheten for at stigningstallet er negativt (altså at populasjonsutviklingen er nedadgående) er vist i rødt, mens sannsynligheten for at stigningstallet er positivt (altså at populasjonen er økende) er vist i blått.</p>
 <section id="hadeland" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="hadeland"><span class="header-section-number">5.1</span> Hadeland</h2>
 <p><img src="data/derived_data/direction_plots/plots/Hadeland.png" class="img-fluid"></p>
-<section id="sites" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="sites"><span class="header-section-number">5.1.1</span> Sites</h3>
+<section id="lokaliteter" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="lokaliteter"><span class="header-section-number">5.1.1</span> Lokaliteter</h3>
 <p><img src="data/derived_data/direction_plots/plots/Aslaksrud.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Falang.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Gjefsen.png" class="img-fluid"></p>
@@ -212,17 +216,17 @@ ul.task-list li input[type="checkbox"] {
 <section id="oslo" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="oslo"><span class="header-section-number">5.2</span> Oslo</h2>
 <p><img src="data/derived_data/direction_plots/plots/Oslo.png" class="img-fluid"></p>
-<section id="sites-1" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="sites-1"><span class="header-section-number">5.2.1</span> Sites</h3>
-<p><img src="data/derived_data/direction_plots/plots/Ekebergskråningen.png" class="img-fluid"></p>
+<section id="lokaliteter-1" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="lokaliteter-1"><span class="header-section-number">5.2.1</span> Lokaliteter</h3>
+<p><img src="data/derived_data/direction_plots/plots/Ekebergskr�ningen.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Heggholmen.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Horgen.png" class="img-fluid"></p>
-<p><img src="data/derived_data/direction_plots/plots/Hovedøya V.png" class="img-fluid"></p>
-<p><img src="data/derived_data/direction_plots/plots/Hovedøya.png" class="img-fluid"></p>
-<p><img src="data/derived_data/direction_plots/plots/Kalvøya.png" class="img-fluid"></p>
-<p><img src="data/derived_data/direction_plots/plots/Møllerenga.png" class="img-fluid"></p>
+<p><img src="data/derived_data/direction_plots/plots/Hoved�ya V.png" class="img-fluid"></p>
+<p><img src="data/derived_data/direction_plots/plots/Hoved�ya.png" class="img-fluid"></p>
+<p><img src="data/derived_data/direction_plots/plots/Kalv�ya.png" class="img-fluid"></p>
+<p><img src="data/derived_data/direction_plots/plots/M�llerenga.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Spireodden.png" class="img-fluid"></p>
-<p><img src="data/derived_data/direction_plots/plots/Storøykilen.png" class="img-fluid"></p>
+<p><img src="data/derived_data/direction_plots/plots/Stor�ykilen.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Svartorseter.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Telenor.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Vendelenga.png" class="img-fluid"></p>
@@ -231,18 +235,18 @@ ul.task-list li input[type="checkbox"] {
 <section id="ringerike" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="ringerike"><span class="header-section-number">5.3</span> Ringerike</h2>
 <p><img src="data/derived_data/direction_plots/plots/Ringerike.png" class="img-fluid"></p>
-</section>
-<section id="sites-2" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="sites-2"><span class="header-section-number">5.4</span> Sites</h2>
+<section id="lokaliteter-2" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="lokaliteter-2"><span class="header-section-number">5.3.1</span> Lokaliteter</h3>
 <p><img src="data/derived_data/direction_plots/plots/Auren.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Buss-stopp.png" class="img-fluid"></p>
-<p><img src="data/derived_data/direction_plots/plots/Haugsbygd, vestvendt vegskråning.png" class="img-fluid"></p>
-<p><img src="data/derived_data/direction_plots/plots/Hurumåsen.png" class="img-fluid"></p>
+<p><img src="data/derived_data/direction_plots/plots/Haugsbygd, vestvendt vegskr�ning.png" class="img-fluid"></p>
+<p><img src="data/derived_data/direction_plots/plots/Hurum�sen.png" class="img-fluid"></p>
 <p><img src="data/derived_data/direction_plots/plots/Nordre Ultvet.png" class="img-fluid"></p>
-<p><img src="data/derived_data/direction_plots/plots/Ultvet SØ.png" class="img-fluid"></p>
-<p><img src="data/derived_data/direction_plots/plots/Åsaporten NØ.png" class="img-fluid"></p>
+<p><img src="data/derived_data/direction_plots/plots/Ultvet S�.png" class="img-fluid"></p>
+<p><img src="data/derived_data/direction_plots/plots/�saporten N�.png" class="img-fluid"></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -487,7 +491,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./transect_est.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transect estimation of population size</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transektbaserte estimater av populasjonsstørrelse</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

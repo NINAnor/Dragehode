@@ -29,7 +29,7 @@ perform_bootstrapping <- function(num_iterations, transect_density, transect_len
   
   return(total_population_samples)
 }
-unique_sites_years <- unique(transektdata[, c("Lokalitet", "Ãƒâ€¦r")])
+unique_sites_years <- unique(transektdata[, c("Lokalitet", "År")])
 
 # Initialize an empty data frame to store results
 results_df <- data.frame()
@@ -38,10 +38,10 @@ results_df <- data.frame()
 for (i in 1:nrow(unique_sites_years)) {
   # Extract current site and year
   current_site <- unique_sites_years$Lokalitet[i]
-  current_year <- unique_sites_years$Ãƒâ€¦r[i]
+  current_year <- unique_sites_years$År[i]
   
   # Subset data for the current site and year
-  subset_data <- transektdata[transektdata$Lokalitet == current_site & transektdata$Ãƒâ€¦r == current_year, ]
+  subset_data <- transektdata[transektdata$Lokalitet == current_site & transektdata$År == current_year, ]
   
   num_transects <- dim(subset_data)[1]
   transect_lengths <- subset_data$Lengde
@@ -105,41 +105,39 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
 
 ![](Figurer/trans_Est/Gjefsen_plot.png)
 
-![](Figurer/trans_Est/Gran%20sykehjem_plot.png)
+![](Figurer/trans_Est/Gran sykehjem_plot.png)
 
 ![](Figurer/trans_Est/Grindaker_plot.png)
 
-![](Figurer/trans_Est/Lyngstad%20Vestre_plot.png)
+![](Figurer/trans_Est/Lyngstad Vestre_plot.png)
 
-<<<<<<< HEAD
-![](Figurer/trans_Est/Nedre%20Røykenvik_plot.png)
+![](Figurer/trans_Est/Nedre Røykenvik_plot.png)
 
-![](Figurer/trans_Est/Øvre%20Røykenvik_plot.png)
-=======
-#![](Figurer/trans_Est/Nedre RÃ¸ykenvik_plot.png)
+![](Figurer/trans_Est/Øvre Røykenvik_plot.png)
 
-#![](Figurer/trans_Est/Ã˜vre RÃ¸ykenvik_plot.png)
->>>>>>> d5d63884d28eb5b71230f27442d167968b272a91
+#![](Figurer/trans_Est/Nedre Røykenvik_plot.png)
+
+#![](Figurer/trans_Est/Øvre Røykenvik_plot.png)
 
 ## Oslo
 
-#![](Figurer/trans_Est/EkebergskrÃ¥ningen_plot.png)
+![](Figurer/trans_Est/Ekebergskråningen_plot.png)
 
 ![](Figurer/trans_Est/Heggholmen_plot.png)
 
 ![](Figurer/trans_Est/Horgen_plot.png)
 
-![](Figurer/trans_Est/HovedÃ¸ya%20V_plot.png)
+![](Figurer/trans_Est/Hovedøya V_plot.png)
 
-![](Figurer/trans_Est/HovedÃ¸ya_plot.png)
+![](Figurer/trans_Est/Hovedøya_plot.png)
 
-![](Figurer/trans_Est/KalvÃ¸ya_plot.png)
+![](Figurer/trans_Est/Kalvøya_plot.png)
 
-![](Figurer/trans_Est/MÃ¸llerenga_plot.png)
+![](Figurer/trans_Est/Møllerenga_plot.png)
 
 ![](Figurer/trans_Est/Spireodden_plot.png)
 
-![](Figurer/trans_Est/StorÃ¸ykilen_plot.png)
+![](Figurer/trans_Est/Storøykilen_plot.png)
 
 ![](Figurer/trans_Est/Svartorseter_plot.png)
 
@@ -155,12 +153,12 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
 
 ![](Figurer/trans_Est/Buss-stopp_plot.png)
 
-![](Figurer/trans_Est/Haugsbygd,%20vestvendt%20vegskrÃ¥ning_plot.png)
+![](Figurer/trans_Est/Haugsbygd, vestvendt vegskråning_plot.png)
 
-![](Figurer/trans_Est/HurumÃ¥sen_plot.png)
+![](Figurer/trans_Est/Hurumåsen_plot.png)
 
-![](Figurer/trans_Est/Nordre%20Ultvet_plot.png)
+![](Figurer/trans_Est/Nordre Ultvet_plot.png)
 
-![](Figurer/trans_Est/Ultvet%20SÃ˜_plot.png)
+![](Figurer/trans_Est/Ultvet Sø_plot.png)
 
-![](Figurer/trans_Est/Ã…saporten%20NÃ˜_plot.png)
+![](Figurer/trans_Est/Åsaporten Nø_plot.png)
