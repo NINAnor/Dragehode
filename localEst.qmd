@@ -218,16 +218,35 @@ plotLocEst(i=41)
 #| echo: false 
 #| message: false 
 #| warning: false
-## Mjøsa
-# please plot lokalitet "Røyse"
-## Gudbrandsdalen
-# please plot lokalitet "Dampsaga"
-## Valdres
-# please plot lokalitet "Brone"
+
 
 plotLocEst(i=3) 
-plotLocEst(i=6) 
-plotLocEst(i=27) 
+#plotLocEst(i=6) 
+#plotLocEst(i=27) 
 
+
+```
+## Gudbrandsdalen
+```{r}
+#| echo: false 
+#| message: false 
+#| warning: false
+
+
+#plotLocEst(i=3) 
+plotLocEst(i=6) 
+#plotLocEst(i=27) 
+
+```
+## Valdres
+```{r}
+#| echo: false 
+#| message: false 
+#| warning: false
+
+
+#plotLocEst(i=3) 
+#plotLocEst(i=6) 
+plotLocEst(i=27) 
 
 ```
