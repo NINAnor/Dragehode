@@ -204,7 +204,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, sharp corners, interior hidden, frame hidden, breakable, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, sharp corners, enhanced, breakable, boxrule=0pt, interior hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -220,7 +220,7 @@
 
 \markboth{Velkommen}{Velkommen}
 
-Dette er nettstedet for overvåkingsrapporten for Dragehode i 2024.
+Dette er nettstedet for årsrapport for overvåking av dragehode i 2023.
 
 Denne nettsiden er og vil alltid være gratis, lisensiert under CC
 BY-NC-ND 3.0-lisensen.
@@ -249,28 +249,28 @@ Overvåking av dragehode finansieres av Statsforvalteren i Oslo og Viken.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{lokale-estimater-av-populasjonsstrrelse}{%
+\hypertarget{lokale-estimater-av-populasjonsstuxf8rrelse}{%
 \chapter{Lokale estimater av
-populasjonsst�rrelse}\label{lokale-estimater-av-populasjonsstrrelse}}
+populasjonsstørrelse}\label{lokale-estimater-av-populasjonsstuxf8rrelse}}
 
-Disse figurene viser estimert populasjonsst¸rrelse, totalt og fordelt på
-de tre størrelsesklassene fertile, vegetative og sm¥planter, for hvert
-¥r i lokalitetene som inng¥r i overv¥kingen.
+Disse figurene viser estimert populasjonsstørrelse, totalt og fordelt på
+de tre størrelsesklassene fertile, vegetative og småplanter, for hvert
+år i lokalitetene som inngår i overv¥kingen.
 
-Populasjonsst¸rrelse er estimert ved ¥ bruke tettheten av individer i
-overv¥kingsrutene, samt arealet dragehode forekommer p¥ (registrert i
+Populasjonsstørrelse er estimert ved å bruke tettheten av individer i
+overvåkingsrutene, samt arealet dragehode forekommer på (registrert i
 forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i
 populasjonsestimatene ble beregnet ved tilfeldige trekninger av
-forekomstruter og overv¥kingsruter (``bootstrapping'') med 2000 gjentak.
-Bootstrapping er en re-samplingsmetode som gj¸r det mulig ¥ beregne
+forekomstruter og overvåkingsruter (``bootstrapping'') med 2000 gjentak.
+Bootstrapping er en re-samplingsmetode som gjør det mulig å beregne
 usikkerhet rundt en gjennomsnittsverdi. Strekene viser
 gjennomsnittsverdi, mens de skraverte feltene viser 95 \%
 konfidensintervaller.
 
-Fordi vi bruker tettheten av individer i overv¥kingsrutene, er
-populasjonsst¸rrelse bare beregnet i 2023 for de lokalitetene der
-detaljert overv¥king, med b¥de overv¥kingsruter og transekter, ble
-gjennomf¸rt. Se rapporten for detaljer.
+Fordi vi bruker tettheten av individer i overvåkingsrutene, er
+populasjonsstørrelse bare beregnet i 2023 for de lokalitetene der
+detaljert overvåking, med både overvåkingsruter og transekter, ble
+gjennomført. Se rapporten for detaljer.
 
 \hypertarget{hadeland}{%
 \section{Hadeland}\label{hadeland}}
@@ -330,9 +330,6 @@ gjennomf¸rt. Se rapporten for detaljer.
 \includegraphics{localEst_files/figure-pdf/unnamed-chunk-5-6.pdf}
 
 \includegraphics{localEst_files/figure-pdf/unnamed-chunk-5-7.pdf}
-
-\hypertarget{section}{%
-\section{}\label{section}}
 
 \bookmarksetup{startatroot}
 
@@ -424,42 +421,36 @@ grått skravert område.
 
 \includegraphics{growthRate_files/figure-pdf/unnamed-chunk-5-7.pdf}
 
-\hypertarget{section-1}{%
-\section{}\label{section-1}}
-
 \bookmarksetup{startatroot}
 
 \hypertarget{vektede-populasjonsvekstrater}{%
 \chapter{Vektede
 populasjonsvekstrater}\label{vektede-populasjonsvekstrater}}
 
-For Ã¥ oppsummere vekstratene pÃ¥ tvers av populasjoner brukte vi en
-vektet regresjon, en tilnÃ¦rming som brukes i meta-analyser (Â«random
+For å oppsummere vekstratene på tvers av populasjoner brukte vi en
+vektet regresjon, en tilnærming som brukes i meta-analyser (Â«random
 effects meta-analysisÂ»). Vi vektet populasjonsvekstratene per lokalitet
-med den overordnede populasjonsstÃ¸rrelsen (i den gitte lokali-teten i
-det gitte Ã¥ret), og et vektet gjennomsnitt ble deretter beregnet totalt
+med den overordnede populasjonsstørrelsen (i den gitte lokaliteten i det
+gitte året), og et vektet gjennomsnitt ble deretter beregnet totalt
 (over alle populasjoner), per region og per naturtype.
 
-Denne tilnÃ¦rmingen gjÃ¸r at vi kan vekte effekten av endringer i store
-populasjoner mer, mens endringer i smÃ¥ populasjoner har mindre effekt
-pÃ¥ overordnede vekstrater. Populasjonsvekstratene gir dermed et
-representativt estimat pÃ¥ endringer i dragehodepopulasjonen innenfor
+Denne tilnærmingen gjør at vi kan vekte effekten av endringer i store
+populasjoner mer, mens endringer i små populasjoner har mindre effekt på
+overordnede vekstrater. Populasjonsvekstratene gir dermed et
+representativt estimat på endringer i dragehodepopulasjonen innenfor
 regionen/naturtypen.
 
-Populasjonsvekstraten er log-transformert. Det betyr at en vekstrate pÃ¥
+Populasjonsvekstraten er log-transformert. Det betyr at en vekstrate på
 0 indikerer en stabil populasjon, vekstrate \textgreater{} 0 indikerer
 en populasjon i vekst og vekstrate \textless{} 0 indikerer en populasjon
 i nedgang. Figurene viser vektet gjennomsnitt med 95 \%
 konfidensintervall.
 
 Populasjonsstørrelse og -vekstrate kan bare beregnes for populasjonene
-med detaljert overvåking (overvåkingsruter). Regionale og
-naturtype-spesifikke vekstrater er derfor bare beregnet med de
-populasjonene inkludert, som også har data fra overvåkingsruter i 2023.
-
-As we can no longer estimate population size based on the quadrats we
-weight the regressions by the area of the site. Area is a good but not
-perfect proxy for population size (species area relationship)
+med detaljert overvåking (overvåkingsruter). Fordi vi mangler det for de
+fleste lokalitetene i år, har vi i stedet for populasjonsstørrelse
+vektet regresjonene med arealet av hver lokalitet. Areal er en god, men
+ikke perfekt, proxy for populasjonsstørrelse (art-areal-forholdet).
 
 \begin{figure}
 
@@ -467,8 +458,8 @@ perfect proxy for population size (species area relationship)
 
 }
 
-\caption{Thirty-eight percent of the variation in the mean population
-size is explained by area}
+\caption{Trettiåtte prosent av variasjonen i gjennomsnittlig
+populasjonsstørrelse er forklart av lokalitetsareal}
 
 \end{figure}
 
@@ -484,13 +475,26 @@ size is explained by area}
 \chapter{Figurer som viser retning i
 endring}\label{figurer-som-viser-retning-i-endring}}
 
+Figurene presentert her viser sannsynligheten for at en populasjon er i
+økning, nedgang eller stabil. Vi vurderte usikkerheten i retningen til
+en populasjonsutvikling ved først å modellere forholdet mellom total
+populasjon og år (for hver lokalitet og for hver region), ved å bruke en
+bayesiansk regresjonsmodell. Etter å ha kjørt hver modell beregnet vi
+sannsynligheten for retning, dvs. stigningstallet for regresjonslinjen
+mellom populasjonsstørrelse og år, altså populasjonstrenden.
+
+Sannsynligheten for at stigningstallet er negativt (altså at
+populasjonsutviklingen er nedadgående) er vist i rødt, mens
+sannsynligheten for at stigningstallet er positivt (altså at
+populasjonen er økende) er vist i blått.
+
 \hypertarget{hadeland-2}{%
 \section{Hadeland}\label{hadeland-2}}
 
 \includegraphics{data/derived_data/direction_plots/plots/Hadeland.png}
 
-\hypertarget{sites}{%
-\subsection{Sites}\label{sites}}
+\hypertarget{lokaliteter}{%
+\subsection{Lokaliteter}\label{lokaliteter}}
 
 \includegraphics{data/derived_data/direction_plots/plots/Aslaksrud.png}
 
@@ -509,26 +513,26 @@ endring}\label{figurer-som-viser-retning-i-endring}}
 
 \includegraphics{data/derived_data/direction_plots/plots/Oslo.png}
 
-\hypertarget{sites-1}{%
-\subsection{Sites}\label{sites-1}}
+\hypertarget{lokaliteter-1}{%
+\subsection{Lokaliteter}\label{lokaliteter-1}}
 
-\includegraphics{data/derived_data/direction_plots/plots/Ekebergskråningen.png}
+\includegraphics{data/derived_data/direction_plots/plots/Ekebergskr�ningen.png}
 
 \includegraphics{data/derived_data/direction_plots/plots/Heggholmen.png}
 
 \includegraphics{data/derived_data/direction_plots/plots/Horgen.png}
 
-\includegraphics{data/derived_data/direction_plots/plots/Hovedøya V.png}
+\includegraphics{data/derived_data/direction_plots/plots/Hoved�ya V.png}
 
-\includegraphics{data/derived_data/direction_plots/plots/Hovedøya.png}
+\includegraphics{data/derived_data/direction_plots/plots/Hoved�ya.png}
 
-\includegraphics{data/derived_data/direction_plots/plots/Kalvøya.png}
+\includegraphics{data/derived_data/direction_plots/plots/Kalv�ya.png}
 
-\includegraphics{data/derived_data/direction_plots/plots/Møllerenga.png}
+\includegraphics{data/derived_data/direction_plots/plots/M�llerenga.png}
 
 \includegraphics{data/derived_data/direction_plots/plots/Spireodden.png}
 
-\includegraphics{data/derived_data/direction_plots/plots/Storøykilen.png}
+\includegraphics{data/derived_data/direction_plots/plots/Stor�ykilen.png}
 
 \includegraphics{data/derived_data/direction_plots/plots/Svartorseter.png}
 
@@ -541,28 +545,39 @@ endring}\label{figurer-som-viser-retning-i-endring}}
 
 \includegraphics{data/derived_data/direction_plots/plots/Ringerike.png}
 
-\hypertarget{sites-2}{%
-\section{Sites}\label{sites-2}}
+\hypertarget{lokaliteter-2}{%
+\subsection{Lokaliteter}\label{lokaliteter-2}}
 
 \includegraphics{data/derived_data/direction_plots/plots/Auren.png}
 
 \includegraphics{data/derived_data/direction_plots/plots/Buss-stopp.png}
 
-\includegraphics{data/derived_data/direction_plots/plots/Haugsbygd, vestvendt vegskråning.png}
+\includegraphics{data/derived_data/direction_plots/plots/Haugsbygd, vestvendt vegskr�ning.png}
 
-\includegraphics{data/derived_data/direction_plots/plots/Hurumåsen.png}
+\includegraphics{data/derived_data/direction_plots/plots/Hurum�sen.png}
 
 \includegraphics{data/derived_data/direction_plots/plots/Nordre Ultvet.png}
 
-\includegraphics{data/derived_data/direction_plots/plots/Ultvet SØ.png}
+\includegraphics{data/derived_data/direction_plots/plots/Ultvet S�.png}
 
-\includegraphics{data/derived_data/direction_plots/plots/Åsaporten NØ.png}
+\includegraphics{data/derived_data/direction_plots/plots/�saporten N�.png}
 
 \bookmarksetup{startatroot}
 
-\hypertarget{transect-estimation-of-population-size}{%
-\chapter{Transect estimation of population
-size}\label{transect-estimation-of-population-size}}
+\hypertarget{transektbaserte-estimater-av-populasjonsstuxf8rrelse}{%
+\chapter{Transektbaserte estimater av
+populasjonsstørrelse}\label{transektbaserte-estimater-av-populasjonsstuxf8rrelse}}
+
+Vi brukte data på lengden på transektene, antallet forekomstruter med
+individer registrert langs transektet og beregnet tetthet som antall
+ruter med forekomst delt på lengden av transektet (=gjennomsnittlig
+tetthet langs transektet). For hvert simulerte datasett beregnet vi
+gjennomsnittlig tetthet langs transektene og ekstrapolerte denne
+tettheten for å estimere total populasjon. Gjennom å bootstrappe
+datasettet (1000 ganger) genererte vi en fordeling av
+populasjonsestimater, som ga innsikt i hvor stort spenn av potensielle
+verdier for populasjons-størrelser det var for hver lokalitet, og
+usikkerheten ved estimatene.
 
 \hypertarget{hadeland-3}{%
 \section{Hadeland}\label{hadeland-3}}
@@ -573,38 +588,40 @@ size}\label{transect-estimation-of-population-size}}
 
 \includegraphics{Figurer/trans_Est/Gjefsen_plot.png}
 
-\includegraphics{Figurer/trans_Est/Gran_plot.png}
-
 \includegraphics{Figurer/trans_Est/Gran sykehjem_plot.png}
 
 \includegraphics{Figurer/trans_Est/Grindaker_plot.png}
 
 \includegraphics{Figurer/trans_Est/Lyngstad Vestre_plot.png}
 
-\includegraphics{Figurer/trans_Est/Nedre Røykenvik_plot.png}
+\includegraphics{Figurer/trans_Est/Nedre R�ykenvik_plot.png}
 
-\includegraphics{Figurer/trans_Est/Øvre Røykenvik_plot.png}
+\includegraphics{Figurer/trans_Est/�vre R�ykenvik_plot.png}
+
+\#\includegraphics{Figurer/trans_Est/Nedre R�ykenvik_plot.png}
+
+\#\includegraphics{Figurer/trans_Est/�vre R�ykenvik_plot.png}
 
 \hypertarget{oslo-3}{%
 \section{Oslo}\label{oslo-3}}
 
-\includegraphics{Figurer/trans_Est/Ekebergskråningen_plot.png}
+\includegraphics{Figurer/trans_Est/Ekebergskr�ningen_plot.png}
 
 \includegraphics{Figurer/trans_Est/Heggholmen_plot.png}
 
 \includegraphics{Figurer/trans_Est/Horgen_plot.png}
 
-\includegraphics{Figurer/trans_Est/Hovedøya V_plot.png}
+\includegraphics{Figurer/trans_Est/Hoved�ya V_plot.png}
 
-\includegraphics{Figurer/trans_Est/Hovedøya_plot.png}
+\includegraphics{Figurer/trans_Est/Hoved�ya_plot.png}
 
-\includegraphics{Figurer/trans_Est/Kalvøya_plot.png}
+\includegraphics{Figurer/trans_Est/Kalv�ya_plot.png}
 
-\includegraphics{Figurer/trans_Est/Møllerenga_plot.png}
+\includegraphics{Figurer/trans_Est/M�llerenga_plot.png}
 
 \includegraphics{Figurer/trans_Est/Spireodden_plot.png}
 
-\includegraphics{Figurer/trans_Est/Storøykilen_plot.png}
+\includegraphics{Figurer/trans_Est/Stor�ykilen_plot.png}
 
 \includegraphics{Figurer/trans_Est/Svartorseter_plot.png}
 
@@ -612,46 +629,24 @@ size}\label{transect-estimation-of-population-size}}
 
 \includegraphics{Figurer/trans_Est/Vendelenga_plot.png}
 
-\includegraphics{Figurer/trans_Est/Viernbukta_plot.png}
+\#\includegraphics{Figurer/trans_Est/Viernbukta_plot.png}
 
 \hypertarget{ringerike-3}{%
 \section{Ringerike}\label{ringerike-3}}
 
 \includegraphics{Figurer/trans_Est/Auren_plot.png}
 
-\bookmarksetup{startatroot}
+\includegraphics{Figurer/trans_Est/Buss-stopp_plot.png}
 
-\hypertarget{section-2}{%
-\chapter{\texorpdfstring{\protect\includegraphics{Figurer/trans_Est/Buss-stopp_plot.png}}{}}\label{section-2}}
+\includegraphics{Figurer/trans_Est/Haugsbygd, vestvendt vegskr�ning_plot.png}
 
-\bookmarksetup{startatroot}
+\includegraphics{Figurer/trans_Est/Hurum�sen_plot.png}
 
-\hypertarget{section-3}{%
-\chapter{\texorpdfstring{\protect\includegraphics{Figurer/trans_Est/Haugsbygd, vestvendt vegskråning_plot.png}}{}}\label{section-3}}
+\includegraphics{Figurer/trans_Est/Nordre Ultvet_plot.png}
 
-\bookmarksetup{startatroot}
+\includegraphics{Figurer/trans_Est/Ultvet S�_plot.png}
 
-\hypertarget{section-4}{%
-\chapter{}\label{section-4}}
-
-\includegraphics{Figurer/trans_Est/Hurumåsen_plot.png}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{section-5}{%
-\chapter{\texorpdfstring{\protect\includegraphics{Figurer/trans_Est/Nordre Ultvet_plot.png}}{}}\label{section-5}}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{section-6}{%
-\chapter{\texorpdfstring{\protect\includegraphics{Figurer/trans_Est/Ultvet SØ_plot.png}}{}}\label{section-6}}
-
-\includegraphics{Figurer/trans_Est/Åsaporten NØ_plot.png}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{section-7}{%
-\chapter{}\label{section-7}}
+\includegraphics{Figurer/trans_Est/�saporten N�_plot.png}
 
 \bookmarksetup{startatroot}
 

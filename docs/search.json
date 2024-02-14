@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Dragehode",
-    "section": "",
-    "text": "Velkommen\nDette er nettstedet for overvåkingsrapporten for Dragehode i 2024.\nDenne nettsiden er og vil alltid være gratis, lisensiert under CC BY-NC-ND 3.0-lisensen."
-  },
-  {
     "objectID": "localEst.html#hadeland",
     "href": "localEst.html#hadeland",
     "title": "2  Lokale estimater av populasjonsstørrelse",
@@ -28,101 +21,10 @@
     "text": "2.3 Ringerike"
   },
   {
-    "objectID": "localEst.html#section",
-    "href": "localEst.html#section",
+    "objectID": "localEst.html#mjøsa",
+    "href": "localEst.html#mjøsa",
     "title": "2  Lokale estimater av populasjonsstørrelse",
-    "section": "2.4 ",
-    "text": "2.4"
-  },
-  {
-    "objectID": "growthRate.html#hadeland",
-    "href": "growthRate.html#hadeland",
-    "title": "3  Lokale estimater av populasjonsvekstrate",
-    "section": "3.1 Hadeland",
-    "text": "3.1 Hadeland"
-  },
-  {
-    "objectID": "growthRate.html#oslo",
-    "href": "growthRate.html#oslo",
-    "title": "3  Lokale estimater av populasjonsvekstrate",
-    "section": "3.2 Oslo",
-    "text": "3.2 Oslo"
-  },
-  {
-    "objectID": "growthRate.html#ringerike",
-    "href": "growthRate.html#ringerike",
-    "title": "3  Lokale estimater av populasjonsvekstrate",
-    "section": "3.3 Ringerike",
-    "text": "3.3 Ringerike"
-  },
-  {
-    "objectID": "growthRate.html#section",
-    "href": "growthRate.html#section",
-    "title": "3  Lokale estimater av populasjonsvekstrate",
-    "section": "3.4 ",
-    "text": "3.4"
-  },
-  {
-    "objectID": "growthRate_meta.html",
-    "href": "growthRate_meta.html",
-    "title": "4  Vektede populasjonsvekstrater",
-    "section": "",
-    "text": "For Ã¥ oppsummere vekstratene pÃ¥ tvers av populasjoner brukte vi en vektet regresjon, en tilnÃ¦rming som brukes i meta-analyser (Â«random effects meta-analysisÂ»). Vi vektet populasjonsvekstratene per lokalitet med den overordnede populasjonsstÃ¸rrelsen (i den gitte lokali-teten i det gitte Ã¥ret), og et vektet gjennomsnitt ble deretter beregnet totalt (over alle populasjoner), per region og per naturtype.\nDenne tilnÃ¦rmingen gjÃ¸r at vi kan vekte effekten av endringer i store populasjoner mer, mens endringer i smÃ¥ populasjoner har mindre effekt pÃ¥ overordnede vekstrater. Populasjonsvekstratene gir dermed et representativt estimat pÃ¥ endringer i dragehodepopulasjonen innenfor regionen/naturtypen.\nPopulasjonsvekstraten er log-transformert. Det betyr at en vekstrate pÃ¥ 0 indikerer en stabil populasjon, vekstrate &gt; 0 indikerer en populasjon i vekst og vekstrate &lt; 0 indikerer en populasjon i nedgang. Figurene viser vektet gjennomsnitt med 95 % konfidensintervall.\nPopulasjonsstørrelse og -vekstrate kan bare beregnes for populasjonene med detaljert overvåking (overvåkingsruter). Regionale og naturtype-spesifikke vekstrater er derfor bare beregnet med de populasjonene inkludert, som også har data fra overvåkingsruter i 2023.\nAs we can no longer estimate population size based on the quadrats we weight the regressions by the area of the site. Area is a good but not perfect proxy for population size (species area relationship)\n\n\n\n\n\nThirty-eight percent of the variation in the mean population size is explained by area"
-  },
-  {
-    "objectID": "direction_plots.html#hadeland",
-    "href": "direction_plots.html#hadeland",
-    "title": "5  Figurer som viser retning i endring",
-    "section": "5.1 Hadeland",
-    "text": "5.1 Hadeland\n\n\n5.1.1 Lokaliteter"
-  },
-  {
-    "objectID": "direction_plots.html#oslo",
-    "href": "direction_plots.html#oslo",
-    "title": "5  Figurer som viser retning i endring",
-    "section": "5.2 Oslo",
-    "text": "5.2 Oslo\n\n\n5.2.1 Lokaliteter"
-  },
-  {
-    "objectID": "direction_plots.html#ringerike",
-    "href": "direction_plots.html#ringerike",
-    "title": "5  Figurer som viser retning i endring",
-    "section": "5.3 Ringerike",
-    "text": "5.3 Ringerike\n\n\n5.3.1 Lokaliteter"
-  },
-  {
-    "objectID": "direction_plots.html#sites-2",
-    "href": "direction_plots.html#sites-2",
-    "title": "5  Figurer som viser retning i endring",
-    "section": "5.4 Sites",
-    "text": "5.4 Sites"
-  },
-  {
-    "objectID": "transect_est.html",
-    "href": "transect_est.html",
-    "title": "6  Transect estimation of population size",
-    "section": "",
-    "text": "7"
-  },
-  {
-    "objectID": "transect_est.html#hadeland",
-    "href": "transect_est.html#hadeland",
-    "title": "6  Transektbaserte estimater av populasjonsstørrelse",
-    "section": "6.1 Hadeland",
-    "text": "6.1 Hadeland\n\n\n\n\n\n\n\n\n#\n#"
-  },
-  {
-    "objectID": "transect_est.html#oslo",
-    "href": "transect_est.html#oslo",
-    "title": "6  Transektbaserte estimater av populasjonsstørrelse",
-    "section": "6.2 Oslo",
-    "text": "6.2 Oslo\n\n\n\n\n\n\n\n\n\n\n\n\n#"
-  },
-  {
-    "objectID": "transect_est.html#ringerike",
-    "href": "transect_est.html#ringerike",
-    "title": "6  Transektbaserte estimater av populasjonsstørrelse",
-    "section": "6.3 Ringerike",
-    "text": "6.3 Ringerike"
+    "section": "2.4 Mjøsa",
+    "text": "2.4 Mjøsa"
   }
 ]

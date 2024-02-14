@@ -179,7 +179,6 @@ plotLocEst(i=33)
 plotLocEst(i=34) 
 plotLocEst(i=37) 
 plotLocEst(i=39) 
-#check why Spireodden lacks data for 2023
 
 ```
 
@@ -213,6 +212,8 @@ plotLocEst(i=41)
 
 ```
 
+## Mjøsa
+
 ```{r}
 #| echo: false 
 #| message: false 
@@ -223,4 +224,10 @@ plotLocEst(i=41)
 # please plot lokalitet "Dampsaga"
 ## Valdres
 # please plot lokalitet "Brone"
+
+plotLocEst(i=3) 
+plotLocEst(i=6) 
+plotLocEst(i=27) 
+
+
 ```
