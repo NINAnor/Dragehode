@@ -3,11 +3,9 @@ title: "Figurer som viser retning i endring"
 editor: visual
 ---
 
+Figurene presentert her viser sannsynligheten for at en populasjon er i økning, nedgang eller stabil. Vi vurderte usikkerheten i retningen til en populasjonsutvikling ved først å modellere forholdet mellom total populasjon og år (for hver lokalitet og for hver region), ved å bruke en bayesiansk regresjonsmodell. Etter å ha kjørt hver modell beregnet vi sannsynligheten for retning, dvs. stigningstallet for regresjonslinjen mellom populasjonsstørrelse og år, altså populasjonstrenden.
 
-Figurene presentert her viser sannsynligheten for at en populasjon er i økning, nedgang eller stabil. Vi vurderte usikkerheten i retningen til en populasjonsutvikling ved først å modellere forholdet mellom total populasjon og år (for hver lokalitet og for hver region), ved å bruke en bayesiansk regresjonsmodell. Etter å ha kjørt hver modell beregnet vi sannsynligheten for retning, dvs. stigningstallet for regresjonslinjen mellom populasjonsstørrelse og år, altså populasjonstrenden. 
-
-Sannsynligheten for at stigningstallet er negativt (altså at populasjonsutviklingen er nedadgående) er vist i rødt, mens sannsynligheten for at stigningstallet er positivt (altså at populasjonen er økende) er vist i blått. 
-
+Sannsynligheten for at stigningstallet er negativt (altså at populasjonsutviklingen er nedadgående) er vist i rødt, mens sannsynligheten for at stigningstallet er positivt (altså at populasjonen er økende) er vist i blått.
 
 ```{r}
 #| echo: false
@@ -71,7 +69,13 @@ for (i in seq_along(lokalitetsestimater)){
       model1<-stan_glm(nTot~year, data=modeldata)
       saveRDS(model1, file=paste0("data/derived_data/direction_plots/models/",lokalitetsnavn_, ".RDS"))
       pd=bayestestR::p_direction(model1)
-      p=plot(pd)+ggtitle(paste0(lokalitetsnavn_))
+      p=plot(pd)
+      
+      if(sum(p$data$fill=="Positive")>=(dim(p$data)[1]/2)){
+        p+ggtitle(paste0(lokalitetsnavn_),subtitle=paste0("Probability of positive trend= ",pd$pd[2]*100, "%"))
+      }else{
+        p+ggtitle(paste0(lokalitetsnavn_),subtitle=paste0("Probability of negative trend= ",pd$pd[2]*100, "%"))
+      }
       ggsave(filename=paste0("data/derived_data/direction_plots/plots/", lokalitetsnavn_,".png"),plot = last_plot())
     },
     error=function(cond) {
@@ -120,7 +124,12 @@ for (i in seq_along(unique(rds_combo$Region))){
       model1<-stan_glm(nTot~year, data=modeldata)
       saveRDS(model1, file=paste0("data/derived_data/direction_plots/models/",Regionsnavn_, ".RDS"))
       pd=bayestestR::p_direction(model1)
-      p=plot(pd)+ggtitle(paste0(Regionsnavn_))
+      p=plot(pd)
+      if(sum(p$data$fill=="Positive")>=(dim(p$data)[1]/2)){
+        p+ggtitle(paste0(Regionsnavn_),subtitle=paste0("Probability of positive trend= ",pd$pd[2]*100, "%"))
+      }else{
+        p+ggtitle(paste0(Regionsnavn_),subtitle=paste0("Probability of negative trend= ",pd$pd[2]*100, "%"))
+      }
       ggsave(filename=paste0("data/derived_data/direction_plots/plots/", Regionsnavn_,".png"),plot = last_plot())
     },
     error=function(cond) {
@@ -137,6 +146,10 @@ for (i in seq_along(unique(rds_combo$Region))){
     }
   )}
 
+# fix spaces in filenames
+#filesstrings::remove_filename_spaces(dir = "data/derived_data/direction_plots/plots", pattern = " ", replacement = "_")
+
+#filesstrings::rename_with_nums(dir = "data/derived_data/direction_plots/plots", pattern=".png")
 ```
 
 ## Hadeland
@@ -151,11 +164,11 @@ for (i in seq_along(unique(rds_combo$Region))){
 
 ![](data/derived_data/direction_plots/plots/Gjefsen.png)
 
-![](data/derived_data/direction_plots/plots/Gran sykehjem.png)
+![](data/derived_data/direction_plots/plots/07.png)
 
 ![](data/derived_data/direction_plots/plots/Grindaker.png)
 
-![](data/derived_data/direction_plots/plots/Lyngstad Vestre.png)
+![](data/derived_data/direction_plots/plots/17.png)
 
 ## Oslo
 
@@ -163,23 +176,23 @@ for (i in seq_along(unique(rds_combo$Region))){
 
 ### Lokaliteter
 
-![](data/derived_data/direction_plots/plots/Ekebergskr�ningen.png)
+![](data/derived_data/direction_plots/plots/04.png)
 
 ![](data/derived_data/direction_plots/plots/Heggholmen.png)
 
 ![](data/derived_data/direction_plots/plots/Horgen.png)
 
-![](data/derived_data/direction_plots/plots/Hoved�ya V.png)
+![](data/derived_data/direction_plots/plots/13.png)
 
-![](data/derived_data/direction_plots/plots/Hoved�ya.png)
+![](data/derived_data/direction_plots/plots/14.png)
 
-![](data/derived_data/direction_plots/plots/Kalv�ya.png)
+![](data/derived_data/direction_plots/plots/16.png)
 
-![](data/derived_data/direction_plots/plots/M�llerenga.png)
+![](data/derived_data/direction_plots/plots/18.png)
 
 ![](data/derived_data/direction_plots/plots/Spireodden.png)
 
-![](data/derived_data/direction_plots/plots/Stor�ykilen.png)
+![](data/derived_data/direction_plots/plots/23.png)
 
 ![](data/derived_data/direction_plots/plots/Svartorseter.png)
 
@@ -192,16 +205,17 @@ for (i in seq_along(unique(rds_combo$Region))){
 ![](data/derived_data/direction_plots/plots/Ringerike.png)
 
 ### Lokaliteter
-![](data/derived_data/direction_plots/plots/Auren.png) 
+
+![](data/derived_data/direction_plots/plots/Auren.png)
 
 ![](data/derived_data/direction_plots/plots/Buss-stopp.png)
 
-![](data/derived_data/direction_plots/plots/Haugsbygd, vestvendt vegskr�ning.png)
+![](data/derived_data/direction_plots/plots/10.png)
 
-![](data/derived_data/direction_plots/plots/Hurum�sen.png)
+![](data/derived_data/direction_plots/plots/15.png)
 
-![](data/derived_data/direction_plots/plots/Nordre Ultvet.png)
+![](data/derived_data/direction_plots/plots/Nordre_Ultvet.png)
 
-![](data/derived_data/direction_plots/plots/Ultvet S�.png)
+![](data/derived_data/direction_plots/plots/26.png)
 
-![](data/derived_data/direction_plots/plots/�saporten N�.png)
+![](data/derived_data/direction_plots/plots/28.png)

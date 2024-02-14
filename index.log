@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.2.1)  14 FEB 2024 13:15
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.2.14)  14 FEB 2024 18:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -797,7 +797,7 @@ Package pdfcol Info: pdfTeX's color stacks are not available.
 \tcb@totalupperbox=\box91
 \tcb@totallowerbox=\box92
 )) (c:/Users/matthew.grainger/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2024/01/07 v24.1 The Babel package
+Package: babel 2024/02/07 v24.2 The Babel package
 \babel@savecnt=\count352
 \U@D=\dimen300
 \l@unhyphenated=\language5
@@ -805,9 +805,9 @@ Package: babel 2024/01/07 v24.1 The Babel package
 \bbl@readstream=\read5
 \bbl@dirlevel=\count353
 Package babel Info: You haven't specified a language as a class or package
-(babel)             option. I'll load 'nil'. Reported on input line 4342.
+(babel)             option. I'll load 'nil'. Reported on input line 4258.
 (c:/Users/matthew.grainger/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/nil.ldf
-Language: nil 2024/01/07 v24.1 Nil language
+Language: nil 2024/02/07 v24.2 Nil language
 \l@nil=\language6
 ))
 \everypar=\toks44
@@ -1229,89 +1229,96 @@ File: localEst_files/figure-pdf/unnamed-chunk-5-6.pdf Graphic file (type pdf)
 [16]
 File: localEst_files/figure-pdf/unnamed-chunk-5-7.pdf Graphic file (type pdf)
 <use localEst_files/figure-pdf/unnamed-chunk-5-7.pdf>
+File: localEst_files/figure-pdf/unnamed-chunk-6-1.pdf Graphic file (type pdf)
+<use localEst_files/figure-pdf/unnamed-chunk-6-1.pdf>
 [17]
+File: localEst_files/figure-pdf/unnamed-chunk-6-2.pdf Graphic file (type pdf)
+<use localEst_files/figure-pdf/unnamed-chunk-6-2.pdf>
+File: localEst_files/figure-pdf/unnamed-chunk-6-3.pdf Graphic file (type pdf)
+<use localEst_files/figure-pdf/unnamed-chunk-6-3.pdf>
+[18] [19]
 chapter 3.
 Missing character: There is no ‒ (U+2012) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no ‒ (U+2012) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no ‒ (U+2012) in font [lmroman10-regular]:mapping=tex-text;!
 File: growthRate_files/figure-pdf/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-3-1.pdf>
-[18
+[20
 
 ]
 File: growthRate_files/figure-pdf/unnamed-chunk-3-2.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-3-2.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-3-3.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-3-3.pdf>
-[19]
+[21]
 File: growthRate_files/figure-pdf/unnamed-chunk-3-4.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-3-4.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-3-5.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-3-5.pdf>
-[20]
+[22]
 File: growthRate_files/figure-pdf/unnamed-chunk-3-6.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-3-6.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-4-1.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-1.pdf>
-[21]
+[23]
 File: growthRate_files/figure-pdf/unnamed-chunk-4-2.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-2.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-4-3.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-3.pdf>
-[22]
+[24]
 File: growthRate_files/figure-pdf/unnamed-chunk-4-4.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-4.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-4-5.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-5.pdf>
-[23]
+[25]
 File: growthRate_files/figure-pdf/unnamed-chunk-4-6.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-6.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-4-7.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-7.pdf>
-[24]
+[26]
 File: growthRate_files/figure-pdf/unnamed-chunk-4-8.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-8.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-4-9.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-9.pdf>
-[25]
+[27]
 File: growthRate_files/figure-pdf/unnamed-chunk-4-10.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-10.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-4-11.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-11.pdf>
-[26]
+[28]
 File: growthRate_files/figure-pdf/unnamed-chunk-4-12.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-4-12.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-5-1.pdf>
-[27]
+[29]
 File: growthRate_files/figure-pdf/unnamed-chunk-5-2.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-5-2.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-5-3.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-5-3.pdf>
-[28]
+[30]
 File: growthRate_files/figure-pdf/unnamed-chunk-5-4.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-5-4.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-5-5.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-5-5.pdf>
-[29]
+[31]
 File: growthRate_files/figure-pdf/unnamed-chunk-5-6.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-5-6.pdf>
 File: growthRate_files/figure-pdf/unnamed-chunk-5-7.pdf Graphic file (type pdf)
 <use growthRate_files/figure-pdf/unnamed-chunk-5-7.pdf>
-[30] [31]
+[32] [33]
 chapter 4.
 
-Underfull \hbox (badness 1137) in paragraph at lines 437--442
+Underfull \hbox (badness 1137) in paragraph at lines 446--451
 []\TU/lmr/m/n/10.95 Denne tilnærmingen gjør at vi kan vekte effekten av endringer i store populasjoner
  []
 
 
-Overfull \hbox (16.98338pt too wide) in paragraph at lines 437--442
+Overfull \hbox (16.98338pt too wide) in paragraph at lines 446--451
 \TU/lmr/m/n/10.95 Populasjonsvekstratene gir dermed et representativt estimat på endringer i dragehodepopulasjonen
  []
 
 
-Underfull \hbox (badness 1337) in paragraph at lines 449--454
+Underfull \hbox (badness 1337) in paragraph at lines 458--463
 []\TU/lmr/m/n/10.95 Populasjonsstørrelse og -vekstrate kan bare beregnes for populasjonene med detaljert
  []
 
@@ -1319,70 +1326,102 @@ File: growthRate_meta_files/figure-pdf/unnamed-chunk-1-1.pdf Graphic file (type 
 <use growthRate_meta_files/figure-pdf/unnamed-chunk-1-1.pdf>
 File: growthRate_meta_files/figure-pdf/unnamed-chunk-4-1.pdf Graphic file (type pdf)
 <use growthRate_meta_files/figure-pdf/unnamed-chunk-4-1.pdf>
-[32
+[34
 
 ]
 File: growthRate_meta_files/figure-pdf/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use growthRate_meta_files/figure-pdf/unnamed-chunk-5-1.pdf>
-[33]
+[35]
 File: growthRate_meta_files/figure-pdf/unnamed-chunk-6-1.pdf Graphic file (type pdf)
 <use growthRate_meta_files/figure-pdf/unnamed-chunk-6-1.pdf>
-[34]
+[36]
 chapter 5.
 
-Underfull \hbox (badness 1776) in paragraph at lines 486--490
+Underfull \hbox (badness 1776) in paragraph at lines 495--499
 []\TU/lmr/m/n/10.95 Sannsynligheten for at stigningstallet er negativt (altså at populasjonsutviklingen er
  []
 
 File: data/derived_data/direction_plots/plots/Hadeland.png Graphic file (type bmp)
 <data/derived_data/direction_plots/plots/Hadeland.png>
 
-Overfull \hbox (10.95787pt too wide) in paragraph at lines 494--495
+Overfull \hbox (10.95787pt too wide) in paragraph at lines 503--504
 [] 
  []
 
-[35
+[37
 
 ]
 File: data/derived_data/direction_plots/plots/Aslaksrud.png Graphic file (type bmp)
 <data/derived_data/direction_plots/plots/Aslaksrud.png>
 
-Overfull \hbox (10.95787pt too wide) in paragraph at lines 499--500
+Overfull \hbox (10.95787pt too wide) in paragraph at lines 508--509
 [] 
  []
 
-[36]
+[38]
 File: data/derived_data/direction_plots/plots/Falang.png Graphic file (type bmp)
 <data/derived_data/direction_plots/plots/Falang.png>
 
-Overfull \hbox (10.95787pt too wide) in paragraph at lines 501--502
+Overfull \hbox (10.95787pt too wide) in paragraph at lines 510--511
 [][] 
  []
 
-[37]
+[39]
 File: data/derived_data/direction_plots/plots/Gjefsen.png Graphic file (type bmp)
 <data/derived_data/direction_plots/plots/Gjefsen.png>
 
-Overfull \hbox (10.95787pt too wide) in paragraph at lines 503--504
+Overfull \hbox (10.95787pt too wide) in paragraph at lines 512--513
 [][] 
  []
 
-[38]
+[40]
+File: data/derived_data/direction_plots/plots/Gran_sykehjem.png Graphic file (type bmp)
+<data/derived_data/direction_plots/plots/Gran_sykehjem.png>
 
-LaTeX Warning: File `data/derived_data/direction_plots/plots/Gran sykehjem.png' not found on input line 505.
+Overfull \hbox (10.95787pt too wide) in paragraph at lines 514--515
+[][] 
+ []
 
-! Unable to load picture or PDF file '"data/derived_data/direction_plots/plots/Gran sykehjem.png"'.
+[41]
+File: data/derived_data/direction_plots/plots/Grindaker.png Graphic file (type bmp)
+<data/derived_data/direction_plots/plots/Grindaker.png>
+
+Overfull \hbox (10.95787pt too wide) in paragraph at lines 516--517
+[][] 
+ []
+
+[42]
+File: data/derived_data/direction_plots/plots/Lyngstad_Vestre.png Graphic file (type bmp)
+<data/derived_data/direction_plots/plots/Lyngstad_Vestre.png>
+
+Overfull \hbox (10.95787pt too wide) in paragraph at lines 518--519
+[][] 
+ []
+
+[43]
+File: data/derived_data/direction_plots/plots/Oslo.png Graphic file (type bmp)
+<data/derived_data/direction_plots/plots/Oslo.png>
+
+Overfull \hbox (10.95787pt too wide) in paragraph at lines 523--524
+[] 
+ []
+
+[44]
+
+LaTeX Warning: File `data/derived_data/direction_plots/plots/Ekebergskr�ningen.png' not found on input line 528.
+
+! Unable to load picture or PDF file 'data/derived_data/direction_plots/plots/Ekebergskr�ningen.png'.
 <to be read again> 
                    }
-l.505 .../direction_plots/plots/Gran sykehjem.png}
+l.528 ...ection_plots/plots/Ekebergskr�ningen.png}
                                                    
 Here is how much of TeX's memory you used:
- 38933 strings out of 476877
- 833793 string characters out of 5802546
+ 38996 strings out of 476877
+ 837326 string characters out of 5802545
  1922630 words of memory out of 5000000
- 60283 multiletter control sequences out of 15000+600000
+ 60340 multiletter control sequences out of 15000+600000
  561657 words of font info for 68 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  122i,8n,121p,10910b,408s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on index.pdf (38 pages).
+Output written on index.pdf (44 pages).
