@@ -1,0 +1,1418 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreport}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[iso-8859-1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{norsk}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Dragehode},
+  pdflang={no},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Dragehode}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, sharp corners, interior hidden, frame hidden, breakable, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\bookmarksetup{startatroot}
+
+\hypertarget{velkommen}{%
+\chapter*{Velkommen}\label{velkommen}}
+\addcontentsline{toc}{chapter}{Velkommen}
+
+\markboth{Velkommen}{Velkommen}
+
+Dette er nettstedet for overvåkingsrapporten for Dragehode i 2024.
+
+Denne nettsiden er og vil alltid være gratis, lisensiert under CC
+BY-NC-ND 3.0-lisensen.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{sec-intro}{%
+\chapter{Introduksjon}\label{sec-intro}}
+
+Denne nettsiden presenterer resultater fra overvåking av dragehode
+\emph{Dracocephalum ruysciana} i Norge. Dragehode er kategorisert som
+sårbar (VU) på den norske rødlista for arter, og dragehode er en
+prioritert art, med egen forskrift og handlingsplan.
+
+Du kan lese mer om dragehode og overvåkingsprosjektet på
+\href{https://www.nina.no/Naturmangfold/Trua-natur/Dragehode}{NINAs
+nettsider}
+
+Årsrapporten for 2023, som denne nettsiden refererer til, finner du
+\href{https://brage.nina.no/nina-xmlui/handle/11250/3052108}{her}
+
+\hypertarget{finansiering}{%
+\section{Finansiering}\label{finansiering}}
+
+Overvåking av dragehode finansieres av Statsforvalteren i Oslo og Viken.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{lokale-estimater-av-populasjonsstrrelse}{%
+\chapter{Lokale estimater av
+populasjonsst�rrelse}\label{lokale-estimater-av-populasjonsstrrelse}}
+
+Disse figurene viser estimert populasjonsst¸rrelse, totalt og fordelt på
+de tre størrelsesklassene fertile, vegetative og sm¥planter, for hvert
+¥r i lokalitetene som inng¥r i overv¥kingen.
+
+Populasjonsst¸rrelse er estimert ved ¥ bruke tettheten av individer i
+overv¥kingsrutene, samt arealet dragehode forekommer p¥ (registrert i
+forekomstruter langs transekter) innenfor lokaliteten. Usikkerheten i
+populasjonsestimatene ble beregnet ved tilfeldige trekninger av
+forekomstruter og overv¥kingsruter (``bootstrapping'') med 2000 gjentak.
+Bootstrapping er en re-samplingsmetode som gj¸r det mulig ¥ beregne
+usikkerhet rundt en gjennomsnittsverdi. Strekene viser
+gjennomsnittsverdi, mens de skraverte feltene viser 95 \%
+konfidensintervaller.
+
+Fordi vi bruker tettheten av individer i overv¥kingsrutene, er
+populasjonsst¸rrelse bare beregnet i 2023 for de lokalitetene der
+detaljert overv¥king, med b¥de overv¥kingsruter og transekter, ble
+gjennomf¸rt. Se rapporten for detaljer.
+
+\hypertarget{hadeland}{%
+\section{Hadeland}\label{hadeland}}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-3-1.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-3-2.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-3-3.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-3-4.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-3-5.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-3-6.pdf}
+
+\hypertarget{oslo}{%
+\section{Oslo}\label{oslo}}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-2.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-3.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-4.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-5.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-6.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-7.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-8.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-9.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-10.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-11.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-4-12.pdf}
+
+\hypertarget{ringerike}{%
+\section{Ringerike}\label{ringerike}}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-5-1.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-5-2.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-5-3.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-5-4.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-5-5.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-5-6.pdf}
+
+\includegraphics{localEst_files/figure-pdf/unnamed-chunk-5-7.pdf}
+
+\hypertarget{section}{%
+\section{}\label{section}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{lokale-estimater-av-populasjonsvekstrate}{%
+\chapter{Lokale estimater av
+populasjonsvekstrate}\label{lokale-estimater-av-populasjonsvekstrate}}
+
+Disse figurene viser estimert populasjonsvekstrate for hvert år
+lokalitetene som inngår i overvåkingen.
+
+Vekstrate ble beregnet som forholdet mellom populasjonsstørrelsen
+(antall individer totalt) i år t over antall individer i år t ‒ 1. Et
+gjennomsnitt ble beregnet for hver lokalitet og år, over alle
+overvåkingsruter på lokaliteten. I figurene er vekstraten
+log-transformert. En log-vekstrate på 0 betyr at populasjonen er stabil
+(antall individer i år t = antall individer i år t ‒ 1). En positiv
+log-vekstrate (\textgreater{} 0) betyr en populasjon i økning, mens en
+negativ log-vekstrate (\textless{} 0) betyr en populasjon i nedgang.
+Året langs x-aksen angir år t ‒ 1, dvs. vekstraten i 2020 representerer
+endringen som er skjedd fra 2020 til 2021 (log(antall individer i
+2021/antall individer i 2020).
+
+Fordi beregningen av vekstrate er avhengig av data fra overvåkingsruter,
+er vekstraten bare beregnet for de lokalitetene/årene med detaljert
+datainnsamling (overvåkingsruter og transekter). Vekstrater mangler
+foreløpig for de tre nyetablerte lokalitetene i Gudbrandsdalen, Mjøsa og
+Valdres.
+
+I figurene vises hver overvåkingsrute som en prikk, gjennomsnittsverdien
+for lokaliteten som tykk blå strek og 95 \% konfindensintervall som
+grått skravert område.
+
+\hypertarget{hadeland-1}{%
+\section{Hadeland}\label{hadeland-1}}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-3-1.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-3-2.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-3-3.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-3-4.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-3-5.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-3-6.pdf}
+
+\hypertarget{oslo-1}{%
+\section{Oslo}\label{oslo-1}}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-2.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-3.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-4.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-5.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-6.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-7.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-8.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-9.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-10.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-11.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-4-12.pdf}
+
+\hypertarget{ringerike-1}{%
+\section{Ringerike}\label{ringerike-1}}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-5-1.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-5-2.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-5-3.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-5-4.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-5-5.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-5-6.pdf}
+
+\includegraphics{growthRate_files/figure-pdf/unnamed-chunk-5-7.pdf}
+
+\hypertarget{section-1}{%
+\section{}\label{section-1}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{vektede-populasjonsvekstrater}{%
+\chapter{Vektede
+populasjonsvekstrater}\label{vektede-populasjonsvekstrater}}
+
+For Ã¥ oppsummere vekstratene pÃ¥ tvers av populasjoner brukte vi en
+vektet regresjon, en tilnÃ¦rming som brukes i meta-analyser (Â«random
+effects meta-analysisÂ»). Vi vektet populasjonsvekstratene per lokalitet
+med den overordnede populasjonsstÃ¸rrelsen (i den gitte lokali-teten i
+det gitte Ã¥ret), og et vektet gjennomsnitt ble deretter beregnet totalt
+(over alle populasjoner), per region og per naturtype.
+
+Denne tilnÃ¦rmingen gjÃ¸r at vi kan vekte effekten av endringer i store
+populasjoner mer, mens endringer i smÃ¥ populasjoner har mindre effekt
+pÃ¥ overordnede vekstrater. Populasjonsvekstratene gir dermed et
+representativt estimat pÃ¥ endringer i dragehodepopulasjonen innenfor
+regionen/naturtypen.
+
+Populasjonsvekstraten er log-transformert. Det betyr at en vekstrate pÃ¥
+0 indikerer en stabil populasjon, vekstrate \textgreater{} 0 indikerer
+en populasjon i vekst og vekstrate \textless{} 0 indikerer en populasjon
+i nedgang. Figurene viser vektet gjennomsnitt med 95 \%
+konfidensintervall.
+
+Populasjonsstørrelse og -vekstrate kan bare beregnes for populasjonene
+med detaljert overvåking (overvåkingsruter). Regionale og
+naturtype-spesifikke vekstrater er derfor bare beregnet med de
+populasjonene inkludert, som også har data fra overvåkingsruter i 2023.
+
+As we can no longer estimate population size based on the quadrats we
+weight the regressions by the area of the site. Area is a good but not
+perfect proxy for population size (species area relationship)
+
+\begin{figure}
+
+{\centering \includegraphics{growthRate_meta_files/figure-pdf/unnamed-chunk-1-1.pdf}
+
+}
+
+\caption{Thirty-eight percent of the variation in the mean population
+size is explained by area}
+
+\end{figure}
+
+\includegraphics{growthRate_meta_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+\includegraphics{growthRate_meta_files/figure-pdf/unnamed-chunk-5-1.pdf}
+
+\includegraphics{growthRate_meta_files/figure-pdf/unnamed-chunk-6-1.pdf}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{figurer-som-viser-retning-i-endring}{%
+\chapter{Figurer som viser retning i
+endring}\label{figurer-som-viser-retning-i-endring}}
+
+\hypertarget{hadeland-2}{%
+\section{Hadeland}\label{hadeland-2}}
+
+\includegraphics{data/derived_data/direction_plots/plots/Hadeland.png}
+
+\hypertarget{sites}{%
+\subsection{Sites}\label{sites}}
+
+\includegraphics{data/derived_data/direction_plots/plots/Aslaksrud.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Falang.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Gjefsen.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Gran sykehjem.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Grindaker.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Lyngstad Vestre.png}
+
+\hypertarget{oslo-2}{%
+\section{Oslo}\label{oslo-2}}
+
+\includegraphics{data/derived_data/direction_plots/plots/Oslo.png}
+
+\hypertarget{sites-1}{%
+\subsection{Sites}\label{sites-1}}
+
+\includegraphics{data/derived_data/direction_plots/plots/Ekebergskråningen.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Heggholmen.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Horgen.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Hovedøya V.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Hovedøya.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Kalvøya.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Møllerenga.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Spireodden.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Storøykilen.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Svartorseter.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Telenor.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Vendelenga.png}
+
+\hypertarget{ringerike-2}{%
+\section{Ringerike}\label{ringerike-2}}
+
+\includegraphics{data/derived_data/direction_plots/plots/Ringerike.png}
+
+\hypertarget{sites-2}{%
+\section{Sites}\label{sites-2}}
+
+\includegraphics{data/derived_data/direction_plots/plots/Auren.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Buss-stopp.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Haugsbygd, vestvendt vegskråning.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Hurumåsen.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Nordre Ultvet.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Ultvet SØ.png}
+
+\includegraphics{data/derived_data/direction_plots/plots/Åsaporten NØ.png}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{transect-estimation-of-population-size}{%
+\chapter{Transect estimation of population
+size}\label{transect-estimation-of-population-size}}
+
+\hypertarget{hadeland-3}{%
+\section{Hadeland}\label{hadeland-3}}
+
+\includegraphics{Figurer/trans_Est/Aslaksrud_plot.png}
+
+\includegraphics{Figurer/trans_Est/Falang_plot.png}
+
+\includegraphics{Figurer/trans_Est/Gjefsen_plot.png}
+
+\includegraphics{Figurer/trans_Est/Gran_plot.png}
+
+\includegraphics{Figurer/trans_Est/Gran sykehjem_plot.png}
+
+\includegraphics{Figurer/trans_Est/Grindaker_plot.png}
+
+\includegraphics{Figurer/trans_Est/Lyngstad Vestre_plot.png}
+
+\includegraphics{Figurer/trans_Est/Nedre Røykenvik_plot.png}
+
+\includegraphics{Figurer/trans_Est/Øvre Røykenvik_plot.png}
+
+\hypertarget{oslo-3}{%
+\section{Oslo}\label{oslo-3}}
+
+\includegraphics{Figurer/trans_Est/Ekebergskråningen_plot.png}
+
+\includegraphics{Figurer/trans_Est/Heggholmen_plot.png}
+
+\includegraphics{Figurer/trans_Est/Horgen_plot.png}
+
+\includegraphics{Figurer/trans_Est/Hovedøya V_plot.png}
+
+\includegraphics{Figurer/trans_Est/Hovedøya_plot.png}
+
+\includegraphics{Figurer/trans_Est/Kalvøya_plot.png}
+
+\includegraphics{Figurer/trans_Est/Møllerenga_plot.png}
+
+\includegraphics{Figurer/trans_Est/Spireodden_plot.png}
+
+\includegraphics{Figurer/trans_Est/Storøykilen_plot.png}
+
+\includegraphics{Figurer/trans_Est/Svartorseter_plot.png}
+
+\includegraphics{Figurer/trans_Est/Telenor_plot.png}
+
+\includegraphics{Figurer/trans_Est/Vendelenga_plot.png}
+
+\includegraphics{Figurer/trans_Est/Viernbukta_plot.png}
+
+\hypertarget{ringerike-3}{%
+\section{Ringerike}\label{ringerike-3}}
+
+\includegraphics{Figurer/trans_Est/Auren_plot.png}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-2}{%
+\chapter{\texorpdfstring{\protect\includegraphics{Figurer/trans_Est/Buss-stopp_plot.png}}{}}\label{section-2}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-3}{%
+\chapter{\texorpdfstring{\protect\includegraphics{Figurer/trans_Est/Haugsbygd, vestvendt vegskråning_plot.png}}{}}\label{section-3}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-4}{%
+\chapter{}\label{section-4}}
+
+\includegraphics{Figurer/trans_Est/Hurumåsen_plot.png}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-5}{%
+\chapter{\texorpdfstring{\protect\includegraphics{Figurer/trans_Est/Nordre Ultvet_plot.png}}{}}\label{section-5}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-6}{%
+\chapter{\texorpdfstring{\protect\includegraphics{Figurer/trans_Est/Ultvet SØ_plot.png}}{}}\label{section-6}}
+
+\includegraphics{Figurer/trans_Est/Åsaporten NØ_plot.png}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-7}{%
+\chapter{}\label{section-7}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{sec-code}{%
+\chapter{Code to recreate the analysis}\label{sec-code}}
+
+To look at the functions used go to Chapter~\ref{sec-funksjoner}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Population estimation script {-}{-}{-}{-}}
+\DocumentationTok{\#\# Load libraries {-}{-}{-}{-}}
+\FunctionTok{library}\NormalTok{(boot)}
+\FunctionTok{library}\NormalTok{(rio)}
+\FunctionTok{library}\NormalTok{(Dragehode)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\CommentTok{\#Sys.setlocale(locale = \textquotesingle{}Norwegian Bokm�l\_Norway\textquotesingle{}) }
+\CommentTok{\# Uncomment this line if you locale is not Norway}
+\FunctionTok{source}\NormalTok{(}\StringTok{\textquotesingle{}R/funksjoner.R\textquotesingle{}}\NormalTok{, }\AttributeTok{encoding =} \StringTok{"UTF{-}8"}\NormalTok{)}
+
+\DocumentationTok{\#\# Dataimport {-}{-}{-}{-}}
+
+\DocumentationTok{\#\#\# save the data with the addition of this years data as "Dragehode\_overvaking\_DATA.xlsx" in the "/data" folder}
+\DocumentationTok{\#\#\# To reduce the burden (data storage on GitHub is not recommended) on the GitHub repo the data will be stored as RDS files}
+
+\NormalTok{lokalitetsdata }\OtherTok{\textless{}{-}} \FunctionTok{import}\NormalTok{(}\StringTok{"data/Dragehode\_overvaking\_DATA.xlsx"}\NormalTok{,}\AttributeTok{sheet=}\StringTok{"Lokalitetsdata"}\NormalTok{,}\AttributeTok{na=}\FunctionTok{c}\NormalTok{(}\StringTok{"NA"}\NormalTok{))}
+\NormalTok{transektdata }\OtherTok{\textless{}{-}} \FunctionTok{import}\NormalTok{(}\StringTok{"data/Dragehode\_overvaking\_DATA.xlsx"}\NormalTok{,}\AttributeTok{sheet=}\StringTok{"Transektdata"}\NormalTok{,}\AttributeTok{na=}\FunctionTok{c}\NormalTok{(}\StringTok{"NA"}\NormalTok{,}\StringTok{" "}\NormalTok{))}
+\NormalTok{rutedata }\OtherTok{\textless{}{-}} \FunctionTok{import}\NormalTok{(}\StringTok{"data/Dragehode\_overvaking\_DATA.xlsx"}\NormalTok{,}\AttributeTok{sheet=}\StringTok{"Rutedata"}\NormalTok{,}\AttributeTok{na=}\FunctionTok{c}\NormalTok{(}\StringTok{"NA"}\NormalTok{))}
+\NormalTok{artsdata }\OtherTok{\textless{}{-}} \FunctionTok{import}\NormalTok{(}\StringTok{"data/Dragehode\_overvaking\_DATA.xlsx"}\NormalTok{,}\AttributeTok{sheet=}\StringTok{"Artsdata"}\NormalTok{,}\AttributeTok{na=}\FunctionTok{c}\NormalTok{(}\StringTok{"NA"}\NormalTok{))}
+\NormalTok{korreksjonsdata }\OtherTok{\textless{}{-}} \FunctionTok{import}\NormalTok{(}\StringTok{"data/siriskuddogind.xlsx"}\NormalTok{)}
+
+\DocumentationTok{\#\#\# Save the data that has been imported to overwrite last years files {-}{-}{-}{-}}
+
+\FunctionTok{saveRDS}\NormalTok{(lokalitetsdata, }\StringTok{"data/lokalitetsdata.RDS"}\NormalTok{)}
+\FunctionTok{saveRDS}\NormalTok{(transektdata, }\StringTok{"data/transektdata.RDS"}\NormalTok{)}
+\FunctionTok{saveRDS}\NormalTok{(rutedata, }\StringTok{"data/rutedata.RDS"}\NormalTok{)}
+\FunctionTok{saveRDS}\NormalTok{(artsdata, }\StringTok{"data/artsdata.RDS"}\NormalTok{)}
+\FunctionTok{saveRDS}\NormalTok{(korreksjonsdata, }\StringTok{"data/korreksjonsdata.RDS"}\NormalTok{)}
+
+
+\CommentTok{\# Datajusteringer {-}{-}{-}{-}}
+
+\DocumentationTok{\#\#\# Remove NAs {-}{-}{-}{-} }
+
+\NormalTok{rutedata }\OtherTok{\textless{}{-}}\NormalTok{ rutedata[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(rutedata}\SpecialCharTok{$}\NormalTok{Lokalitet), ]}
+\NormalTok{lokalitetsdata }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsdata[}\SpecialCharTok{!}\FunctionTok{apply}\NormalTok{(lokalitetsdata,}\DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{all}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(x))\}),]}
+\NormalTok{transektdata }\OtherTok{\textless{}{-}}\NormalTok{ transektdata[}\SpecialCharTok{!}\FunctionTok{apply}\NormalTok{(transektdata,}\DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{all}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(x))\}),]}
+\NormalTok{rutedata }\OtherTok{\textless{}{-}}\NormalTok{ rutedata[}\SpecialCharTok{!}\FunctionTok{apply}\NormalTok{(rutedata,}\DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{all}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(x))\}),]}
+
+\DocumentationTok{\#\#\# change format of Lokalitet to factor {-}{-}{-}{-}}
+\NormalTok{lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet)}
+
+\DocumentationTok{\#\#\# data to be omitted (single sampling event or change in method in earliest years) {-}{-}{-}{-}}
+\NormalTok{lok.utelates }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Nedre R�ykenvik"}\NormalTok{,}\StringTok{"�vre R�ykenvik"}\NormalTok{)}
+\NormalTok{lokalitetsdata }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsdata[}\SpecialCharTok{!}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{\%in\%}\NormalTok{lok.utelates),]; lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet)}
+\NormalTok{transektdata }\OtherTok{\textless{}{-}}\NormalTok{ transektdata[}\SpecialCharTok{!}\NormalTok{(transektdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{\%in\%}\NormalTok{lok.utelates),]; transektdata}\SpecialCharTok{$}\NormalTok{Lokalitet }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(transektdata}\SpecialCharTok{$}\NormalTok{Lokalitet)}
+\NormalTok{rutedata }\OtherTok{\textless{}{-}}\NormalTok{ rutedata[}\SpecialCharTok{!}\NormalTok{(rutedata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{\%in\%}\NormalTok{lok.utelates),]; rutedata}\SpecialCharTok{$}\NormalTok{Lokalitet }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(rutedata}\SpecialCharTok{$}\NormalTok{Lokalitet)}
+
+\NormalTok{lokalitetsdata }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsdata[}\SpecialCharTok{!}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{\%in\%}\FunctionTok{c}\NormalTok{(}\StringTok{"Falang"}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ lokalitetsdata}\SpecialCharTok{$}\NormalTok{�r}\SpecialCharTok{\textless{}}\DecValTok{2020}\NormalTok{),]}
+\NormalTok{transektdata }\OtherTok{\textless{}{-}}\NormalTok{ transektdata[}\SpecialCharTok{!}\NormalTok{(transektdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{\%in\%}\FunctionTok{c}\NormalTok{(}\StringTok{"Falang"}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ transektdata}\SpecialCharTok{$}\NormalTok{�r}\SpecialCharTok{\textless{}}\DecValTok{2020}\NormalTok{),]}
+\NormalTok{rutedata }\OtherTok{\textless{}{-}}\NormalTok{ rutedata[}\SpecialCharTok{!}\NormalTok{(rutedata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{\%in\%}\FunctionTok{c}\NormalTok{(}\StringTok{"Falang"}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ rutedata}\SpecialCharTok{$}\NormalTok{�r}\SpecialCharTok{\textless{}}\DecValTok{2020}\NormalTok{),]}
+\DocumentationTok{\#\#\# Create a hovednaturtype by combining the Naturtypes in to a single column {-}{-}{-}{-}}
+\NormalTok{lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovednaturtype }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\FunctionTok{strsplit}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Naturtype,}\StringTok{"{-}"}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{x[[}\DecValTok{1}\NormalTok{]]\})}
+
+\DocumentationTok{\#\#\# Change character data to character formats and create a hovedskj�tsel coloumn {-}{-}{-}{-}}
+\NormalTok{lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovedskj�tsel }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Krattrydding\_bin�r)}
+\NormalTok{lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovedskj�tsel[lokalitetsdata}\SpecialCharTok{$}\NormalTok{Krattrydding\_bin�r}\SpecialCharTok{==}\StringTok{"Ja"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Krattrydding"}
+\NormalTok{lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovedskj�tsel[lokalitetsdata}\SpecialCharTok{$}\NormalTok{Sl�tt\_bin�r}\SpecialCharTok{==}\StringTok{"Ja"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Sl�tt"}
+\NormalTok{lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovedskj�tsel[lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovedskj�tsel}\SpecialCharTok{==}\StringTok{"Nei"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Ingen/annet"}
+\NormalTok{lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovedskj�tsel }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovedskj�tsel)}
+
+\DocumentationTok{\#\#\# convert "ingen" to NA {-}{-}{-}{-}}
+\NormalTok{transektdata}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Forekomst dragehode (m)}\StringTok{\textasciigrave{}}\NormalTok{[transektdata}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Forekomst dragehode (m)}\StringTok{\textasciigrave{}}\SpecialCharTok{\%in\%}\FunctionTok{c}\NormalTok{(}\StringTok{"ingen"}\NormalTok{,}\StringTok{" "}\NormalTok{)] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+
+\CommentTok{\# Get coverage {-}{-}{-}{-}}
+
+\NormalTok{artsdata}\SpecialCharTok{$}\NormalTok{Vedplante}\OtherTok{\textless{}{-}}\NormalTok{artsdata}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Vedplante i feltsjikt (NY)}\StringTok{\textasciigrave{}}
+
+\NormalTok{rutedata}\SpecialCharTok{$}\NormalTok{Vedpl.dekn }\OtherTok{\textless{}{-}} \FunctionTok{beregn.dekning}\NormalTok{(rutedata,artsdata,}\StringTok{"Vedplante"}\NormalTok{)}
+
+\NormalTok{lokalitetsnavn }\OtherTok{\textless{}{-}} \FunctionTok{levels}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet)}
+\NormalTok{regionnavn }\OtherTok{\textless{}{-}} \FunctionTok{levels}\NormalTok{(}\FunctionTok{factor}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Region))}
+\NormalTok{naturtypenavn }\OtherTok{\textless{}{-}} \FunctionTok{levels}\NormalTok{(}\FunctionTok{factor}\NormalTok{(lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovednaturtype))}
+
+\CommentTok{\# Horgen og M�llerenga: tellinger av skudd (vegetative og fertile) korrigeres til estimert antall individer {-}{-}{-}{-}}
+\FunctionTok{names}\NormalTok{(korreksjonsdata)[}\DecValTok{6}\SpecialCharTok{:}\DecValTok{11}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"x1"}\NormalTok{,}\StringTok{"x2"}\NormalTok{,}\StringTok{"x3"}\NormalTok{,}\StringTok{"y1"}\NormalTok{,}\StringTok{"y2"}\NormalTok{,}\StringTok{"y3"}\NormalTok{)}
+\CommentTok{\#par(mfrow=c(2,2))}
+\CommentTok{\#plot(korreksjonsdata$x1,korreksjonsdata$y1,main="sm�planter")}
+\NormalTok{m1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y1}\SpecialCharTok{\textasciitilde{}{-}}\DecValTok{1}\SpecialCharTok{+}\NormalTok{x1,}\AttributeTok{data=}\NormalTok{korreksjonsdata)}
+\CommentTok{\# summary(m1)}
+\CommentTok{\# abline(m1)}
+\CommentTok{\# plot(korreksjonsdata$x2,korreksjonsdata$y2,main="vegetative")}
+\NormalTok{ m2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y2}\SpecialCharTok{\textasciitilde{}{-}}\DecValTok{1}\SpecialCharTok{+}\NormalTok{x2,}\AttributeTok{data=}\NormalTok{korreksjonsdata)}
+\CommentTok{\# summary(m2)}
+\CommentTok{\# abline(m2)}
+\CommentTok{\#plot(korreksjonsdata$x3,korreksjonsdata$y3,main="fertile")}
+\NormalTok{m3 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y3}\SpecialCharTok{\textasciitilde{}{-}}\DecValTok{1}\SpecialCharTok{+}\NormalTok{x3,}\AttributeTok{data=}\NormalTok{korreksjonsdata)}
+\CommentTok{\# summary(m3)}
+\CommentTok{\# abline(m3)}
+
+\NormalTok{ i }\OtherTok{\textless{}{-}}\NormalTok{ rutedata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{\%in\%}\FunctionTok{c}\NormalTok{(}\StringTok{"Horgen"}\NormalTok{,}\StringTok{"M�llerenga"}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ rutedata}\SpecialCharTok{$}\NormalTok{�r}\SpecialCharTok{\%in\%}\FunctionTok{c}\NormalTok{(}\DecValTok{2019}\NormalTok{,}\DecValTok{2020}\NormalTok{)}
+\NormalTok{ newdat }\OtherTok{\textless{}{-}}\NormalTok{ rutedata[i,}\FunctionTok{c}\NormalTok{(}\StringTok{"Veg.planter"}\NormalTok{,}\StringTok{"Fert.planter"}\NormalTok{)]}
+ \FunctionTok{names}\NormalTok{(newdat) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"x2"}\NormalTok{,}\StringTok{"x3"}\NormalTok{)}
+\NormalTok{ y2 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{predict}\NormalTok{(m2,newdat))}
+\NormalTok{ y3 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{predict}\NormalTok{(m3,newdat))}
+\NormalTok{ y4 }\OtherTok{\textless{}{-}}\NormalTok{ rutedata[i,}\StringTok{"Sm�planter"}\NormalTok{]}\SpecialCharTok{+}\NormalTok{y2}\SpecialCharTok{+}\NormalTok{y3}
+
+ \CommentTok{\#par(mfrow=c(1,3))}
+ \CommentTok{\#plot(rutedata[i,"Veg.planter"],y2)}
+ \CommentTok{\#plot(rutedata[i,"Fert.planter"],y3)}
+ \CommentTok{\#plot(rutedata[i,"Ant.DR"],y4)}
+
+\NormalTok{ rutedata[i,}\StringTok{"Veg.planter"}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ y2}
+\NormalTok{ rutedata[i,}\StringTok{"Fert.planter"}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ y3}
+\NormalTok{ rutedata[i,}\StringTok{"Ant.DR"}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ y4}
+
+\CommentTok{\# Populasjonsst�rrelser {-}{-}{-}{-}}
+
+\CommentTok{\# Sjekk om forekomst varierer med avstand fra midtpunkt}
+\CommentTok{\# par(mfrow=c(1,1))}
+\CommentTok{\# j \textless{}{-} rutedata$Lokalitet!="Ekebergskr�ningen"}
+\CommentTok{\# plot(rutedata$Avst[j],rutedata$Ant.DR[j]\textgreater{}0,main="Alle lokaliteter")}
+\CommentTok{\# par(mfrow=c(5,5))}
+\CommentTok{\# for(i in 1:length(lokalitetsnavn))}
+\CommentTok{\# \{}
+\CommentTok{\#  j \textless{}{-} rutedata$Lokalitet==lokalitetsnavn[i]}
+\CommentTok{\#  plot(rutedata$Avst[j],rutedata$Ant.DR[j]\textgreater{}0,main=lokalitetsnavn[i])}
+\CommentTok{\# \}}
+\CommentTok{\# }
+\CommentTok{\# \# Sjekk om tetthet varierer med avstand fra midtpunkt}
+\CommentTok{\# par(mfrow=c(1,1))}
+\CommentTok{\# j \textless{}{-} rutedata$Ant.DR\textgreater{}0 \& rutedata$Lokalitet!="Ekebergskr�ningen"}
+\CommentTok{\# plot(rutedata$Avst[j],rutedata$Ant.DR[j],main="Alle lokaliteter")}
+\CommentTok{\# par(mfrow=c(5,5))}
+\CommentTok{\# for(i in 1:length(lokalitetsnavn))}
+\CommentTok{\# \{}
+\CommentTok{\#   j \textless{}{-} rutedata$Lokalitet==lokalitetsnavn[i] \& rutedata$Ant.DR\textgreater{}0}
+\CommentTok{\#   plot(rutedata$Avst[j],rutedata$Ant.DR[j],main=lokalitetsnavn[i])}
+\CommentTok{\# \}}
+
+
+\CommentTok{\# For hver populasjon (fordi de har s�regenheter i design, og det er �nskelig � presentere resultater for enkelt{-}populasjoner p� nett)}
+\CommentTok{\# Ogs� for hvert �r (Hensiktsmessig hvis f.eks. design endrer seg...}
+
+\DocumentationTok{\#\# lokalestimater {-}{-}{-}{-}}
+\NormalTok{lokalitetsestimater }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(lokalitetsnavn))}
+\NormalTok{\{}
+  \FunctionTok{tryCatch}\NormalTok{(\{}
+    \FunctionTok{print}\NormalTok{(lokalitetsnavn[i])}
+\NormalTok{    popstr }\OtherTok{\textless{}{-}} \FunctionTok{beregn.popstruktur}\NormalTok{(lokalitetsnavn[i],lokalitetsdata,transektdata,rutedata,}\AttributeTok{quantiles=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.75}\NormalTok{))}
+\NormalTok{    lokalitetsestimater[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ popstr}
+    
+\NormalTok{  \}, }\AttributeTok{error=}\ControlFlowTok{function}\NormalTok{(e)\{}\FunctionTok{cat}\NormalTok{(}\StringTok{"ERROR :"}\NormalTok{,}\FunctionTok{conditionMessage}\NormalTok{(e), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)\})}
+\NormalTok{  \}}
+\FunctionTok{names}\NormalTok{(lokalitetsestimater) }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsnavn}
+
+\CommentTok{\#save the Lokalitetsestimater }
+
+\FunctionTok{saveRDS}\NormalTok{(lokalitetsestimater,}\StringTok{"data/derived\_data/lokalitetsestimater.RDS"}\NormalTok{ )}
+
+\DocumentationTok{\#\#\# Figurer {-}{-}{-}{-}}
+
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{dir.exists}\NormalTok{(}\StringTok{"Figurer"}\NormalTok{)) }\FunctionTok{dir.create}\NormalTok{(}\StringTok{"Figurer"}\NormalTok{)}
+
+\CommentTok{\# "R�" figurer av alle lokaliteter med populasjonsestimater m/CI over tid for fertile, vegetative, sm� og totalt}
+\CommentTok{\#par(mfrow=c(5,5))}
+\FunctionTok{pdf}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Figurer/"}\NormalTok{,}\StringTok{"Alle lokaliteter"}\NormalTok{,}\StringTok{".pdf"}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(lokalitetsestimater))}
+\NormalTok{\{}
+  \FunctionTok{tryCatch}\NormalTok{(\{}
+\NormalTok{  popstr }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsestimater[[i]]}
+  \FunctionTok{plot.popstruktur}\NormalTok{(popstr)}
+  
+\NormalTok{\}, }\AttributeTok{error=}\ControlFlowTok{function}\NormalTok{(e)\{}\FunctionTok{cat}\NormalTok{(}\StringTok{"ERROR :"}\NormalTok{,}\FunctionTok{conditionMessage}\NormalTok{(e), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)\})}
+  
+\NormalTok{\}}
+\FunctionTok{dev.off}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(lokalitetsestimater))}
+\NormalTok{\{}
+  \FunctionTok{tryCatch}\NormalTok{(\{}
+  \CommentTok{\#pdf(paste("Figurer/",lokalitetsnavn[i],".pdf",sep=""))}
+  \CommentTok{\#png(paste("Figurer/",lokalitetsnavn[i],".png",sep=""))}
+  \FunctionTok{jpeg}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Figurer/"}\NormalTok{,lokalitetsnavn[i],}\StringTok{".jpg"}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+\NormalTok{  popstr }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsestimater[[i]]}
+  \FunctionTok{plot.popstruktur}\NormalTok{(popstr)}
+\NormalTok{  \}, }\AttributeTok{error=}\ControlFlowTok{function}\NormalTok{(e)\{}\FunctionTok{cat}\NormalTok{(}\StringTok{"ERROR:"}\NormalTok{, }\FunctionTok{conditionMessage}\NormalTok{(e), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)\})}
+
+    \FunctionTok{dev.off}\NormalTok{()}
+\NormalTok{\}}
+
+
+\CommentTok{\# Populasjonstrender per gruppe, totalt, fertile, vegetative og sm�}
+
+\NormalTok{lokfarge }\OtherTok{\textless{}{-}} \FunctionTok{rainbow}\NormalTok{(}\FunctionTok{length}\NormalTok{(lokalitetsnavn)); }\FunctionTok{names}\NormalTok{(lokfarge) }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsnavn}
+\NormalTok{regsymbol }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{); }\FunctionTok{names}\NormalTok{(regsymbol) }\OtherTok{\textless{}{-}}\NormalTok{ regionnavn}
+\NormalTok{natlinje }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{); }\FunctionTok{names}\NormalTok{(natlinje) }\OtherTok{\textless{}{-}}\NormalTok{ naturtypenavn}
+
+\NormalTok{thisyear}\OtherTok{=}\NormalTok{lubridate}\SpecialCharTok{::}\FunctionTok{year}\NormalTok{(}\FunctionTok{Sys.time}\NormalTok{())}
+
+\NormalTok{tidsrom}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\FloatTok{2016.5}\NormalTok{, thisyear)}
+
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{dir.exists}\NormalTok{(}\StringTok{"Figurer/Regioner"}\NormalTok{)) }\FunctionTok{dir.create}\NormalTok{(}\StringTok{"Figurer/Regioner"}\NormalTok{)}
+\CommentTok{\# Regioner}
+\FunctionTok{pdf}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Figurer/Regioner/"}\NormalTok{,}\StringTok{"Alle regioner"}\NormalTok{,}\StringTok{".pdf"}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+\FunctionTok{plot.gruppetrender}\NormalTok{(lokalitetsdata,}\AttributeTok{gruppevariabel=}\StringTok{"Region"}\NormalTok{,lokalitetsestimater,}\AttributeTok{reverser=}\NormalTok{T,lokalitetsnavn,lokfarge,regsymbol,natlinje)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{,}\AttributeTok{axes=}\NormalTok{F,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{); }\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{1}\NormalTok{,}\AttributeTok{col=}\NormalTok{lokfarge,}\AttributeTok{legend=}\NormalTok{lokalitetsnavn,}\AttributeTok{bty=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{dev.off}\NormalTok{()}
+
+
+
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{dir.exists}\NormalTok{(}\StringTok{"Figurer/Naturtyper"}\NormalTok{)) }\FunctionTok{dir.create}\NormalTok{(}\StringTok{"Figurer/Naturtyper"}\NormalTok{)}
+\CommentTok{\# Naturtyper}
+\FunctionTok{pdf}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Figurer/Naturtyper/"}\NormalTok{,}\StringTok{"Alle hovedtyper"}\NormalTok{,}\StringTok{".pdf"}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+\FunctionTok{plot.gruppetrender}\NormalTok{(lokalitetsdata,}\AttributeTok{gruppevariabel=}\StringTok{"Hovednaturtype"}\NormalTok{,lokalitetsestimater,}\AttributeTok{reverser=}\NormalTok{T,lokalitetsnavn,lokfarge,regsymbol,natlinje)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{,}\AttributeTok{axes=}\NormalTok{F,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{); }\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{1}\NormalTok{,}\AttributeTok{col=}\NormalTok{lokfarge,}\AttributeTok{legend=}\NormalTok{lokalitetsnavn,}\AttributeTok{bty=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{dev.off}\NormalTok{()}
+
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{dir.exists}\NormalTok{(}\StringTok{"Figurer/Skj�tsel"}\NormalTok{)) }\FunctionTok{dir.create}\NormalTok{(}\StringTok{"Figurer/Skj�tsel"}\NormalTok{)}
+\FunctionTok{pdf}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Figurer/Skj�tsel/"}\NormalTok{,}\StringTok{"Hovedskj�tsel"}\NormalTok{,}\StringTok{".pdf"}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+\FunctionTok{plot.gruppetrender}\NormalTok{(lokalitetsdata,}\AttributeTok{gruppevariabel=}\StringTok{"Hovedskj�tsel"}\NormalTok{,lokalitetsestimater,}\AttributeTok{reverser=}\NormalTok{T,lokalitetsnavn,lokfarge,regsymbol,natlinje)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\AttributeTok{type=}\StringTok{"n"}\NormalTok{,}\AttributeTok{axes=}\NormalTok{F,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{); }\FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{1}\NormalTok{,}\AttributeTok{col=}\NormalTok{lokfarge,}\AttributeTok{legend=}\NormalTok{lokalitetsnavn,}\AttributeTok{bty=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{dev.off}\NormalTok{()}
+
+\DocumentationTok{\#\# GGplot versions of figures}
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{dir.exists}\NormalTok{(}\StringTok{"Figurer/ggplots"}\NormalTok{)) }\FunctionTok{dir.create}\NormalTok{(}\StringTok{"Figurer/ggplots"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(lokalitetsestimater))\{}
+  \FunctionTok{tryCatch}\NormalTok{(\{}
+    
+    
+    
+\NormalTok{    popstr }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{lokalitet=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{lokalitet,}\AttributeTok{year=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{year,}\AttributeTok{nFert=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{nFert,}
+                   \AttributeTok{nVeg=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{nVeg,}\AttributeTok{nSma=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{nSma,}\AttributeTok{nTot=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{nTot,}\AttributeTok{Fert.CI=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{Fert.CI,}
+                   \AttributeTok{Veg.CI=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{Veg.CI,}\AttributeTok{Sma.CI=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{Sma.CI,}\AttributeTok{Tot.CI=}\NormalTok{lokalitetsestimater[i][[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{Tot.CI)}
+    
+\NormalTok{    P}\OtherTok{=}\FunctionTok{ggplot.popstruktur}\NormalTok{(popstr)  }
+    
+\NormalTok{  \})}
+  
+\NormalTok{\}}
+
+
+
+\CommentTok{\# \# Populasjonsestimater 2017{-}2020}
+\CommentTok{\# utvalgte.lok \textless{}{-} lokalitetsdata$Lokalitet[lokalitetsdata$�r==2017]}
+\CommentTok{\# for(i in 1:length(utvalgte.lok))}
+\CommentTok{\# \{}
+\CommentTok{\#   lok \textless{}{-} utvalgte.lok[i]}
+\CommentTok{\#   print(lokalitetsestimater[lok])}
+\CommentTok{\# \}}
+
+\CommentTok{\# Forekomst frav�r?}
+
+\CommentTok{\# Vekstrater{-}{-}{-}{-}{-}}
+
+
+\NormalTok{popvekstdata }\OtherTok{\textless{}{-}} \FunctionTok{beregn.vekstrate}\NormalTok{(rutedata,}\StringTok{"Ant.DR"}\NormalTok{,}\StringTok{"RuteID"}\NormalTok{)}
+\NormalTok{popvekstdata}\SpecialCharTok{$}\NormalTok{logR }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(popvekstdata}\SpecialCharTok{$}\NormalTok{vekstrate)}
+\NormalTok{popvekstdata}\SpecialCharTok{$}\NormalTok{logR[popvekstdata}\SpecialCharTok{$}\NormalTok{logR}\SpecialCharTok{\%in\%}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{,}\ConstantTok{Inf}\NormalTok{)] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\CommentTok{\#summary(popvekstdata$logR)}
+\NormalTok{i }\OtherTok{\textless{}{-}} \FunctionTok{match}\NormalTok{(popvekstdata}\SpecialCharTok{$}\NormalTok{Lokalitet,lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet)}
+\NormalTok{popvekstdata}\SpecialCharTok{$}\NormalTok{Region }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsdata}\SpecialCharTok{$}\NormalTok{Region[i]}
+\NormalTok{popvekstdata}\SpecialCharTok{$}\NormalTok{Hovednaturtype }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsdata}\SpecialCharTok{$}\NormalTok{Hovednaturtype[i]}
+\NormalTok{popvekstdata}\SpecialCharTok{$}\NormalTok{Skj�tsel\_bin�r }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsdata}\SpecialCharTok{$}\NormalTok{Skj�tsel\_bin�r[i]}
+\NormalTok{popvekstdata }\OtherTok{\textless{}{-}}\NormalTok{ popvekstdata[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(popvekstdata}\SpecialCharTok{$}\NormalTok{Veg.h�yde),]}
+
+
+\DocumentationTok{\#\# save popvekstdata}
+ \FunctionTok{saveRDS}\NormalTok{(popvekstdata, }\StringTok{"data/derived\_data/popvekstdata.RDS"}\NormalTok{)}
+
+\CommentTok{\# par(mfrow=c(1,1))}
+\CommentTok{\# plot(popvekstdata[,c("vekstrate","logR","Ant.DR","Bunnsjikt","Feltsjikt","Busksjikt","Tresjikt","Veg.h�yde","Vedpl.dekn","Region","Hovednaturtype")]) \# ,"Sm�planter","Veg.planter","Fert.planter"}
+\CommentTok{\# plot(popvekstdata[popvekstdata$�r==2017,c("vekstrate","logR","Veg.h�yde","Vedpl.dekn")])}
+\CommentTok{\# plot(popvekstdata[popvekstdata$�r==2018,c("vekstrate","logR","Veg.h�yde","Vedpl.dekn")])}
+\CommentTok{\# plot(popvekstdata[popvekstdata$�r==2019,c("vekstrate","logR","Veg.h�yde","Vedpl.dekn")])}
+\CommentTok{\# plot(popvekstdata[popvekstdata$�r==2020,c("vekstrate","logR","Veg.h�yde","Vedpl.dekn")])}
+\CommentTok{\# plot(popvekstdata[popvekstdata$�r==2021,c("vekstrate","logR","Veg.h�yde","Vedpl.dekn")])}
+\CommentTok{\# plot(popvekstdata[popvekstdata$�r==2022,c("vekstrate","logR","Veg.h�yde","Vedpl.dekn")])}
+
+
+
+\CommentTok{\# library(gamm4)}
+\CommentTok{\# }
+\CommentTok{\# popvekstdata$logVH \textless{}{-} log(popvekstdata$Veg.h�yde)}
+\CommentTok{\# popvekstdata$Hovednaturtype \textless{}{-} factor(popvekstdata$Hovednaturtype)}
+\CommentTok{\# popvekstdata$Year \textless{}{-} factor(popvekstdata$�r)}
+\CommentTok{\# }
+\CommentTok{\# m1.gam \textless{}{-} gamm4(logR\textasciitilde{}Hovednaturtype+s(Veg.h�yde,by=Hovednaturtype),random=\textasciitilde{}(1|Region)+(1|Lokalitet)+(1|RuteID)+(1|Year),data=popvekstdata)}
+\CommentTok{\# summary(m1.gam$gam)}
+\CommentTok{\# ranef(m1.gam$mer)}
+\CommentTok{\# }
+\CommentTok{\# m1.gam.b \textless{}{-} gamm4(logR\textasciitilde{}Hovednaturtype+s(Veg.h�yde,by=Hovednaturtype)+s(Vedpl.dekn),random=\textasciitilde{}(1|Region)+(1|Lokalitet)+(1|RuteID)+(1|Year),data=popvekstdata)}
+\CommentTok{\# summary(m1.gam.b$gam)}
+\CommentTok{\# }
+\CommentTok{\# m2.gam \textless{}{-} gamm4(logR\textasciitilde{}Hovednaturtype+s(logVH,by=Hovednaturtype),random=\textasciitilde{}(1|Region)+(1|Lokalitet)+(1|RuteID)+(1|Year),data=popvekstdata)}
+\CommentTok{\# summary(m2.gam$gam)}
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# yr \textless{}{-} seq(from=min(popvekstdata$�r), to=max(popvekstdata$�r), by=1)}
+\CommentTok{\# modlist \textless{}{-} vector("list",length(yr)); names(modlist) \textless{}{-} yr}
+\CommentTok{\# for(i in 1:length(yr))}
+\CommentTok{\# \{}
+\CommentTok{\#   y \textless{}{-} popvekstdata$Year==yr[i] \# Bare en Region (Oslo) i 2017, s� ingen random effect for region}
+\CommentTok{\#   if(yr[i]==2017)}
+\CommentTok{\#   \{}
+\CommentTok{\#     m1 \textless{}{-} gamm4(logR\textasciitilde{}Hovednaturtype+s(Veg.h�yde,by=Hovednaturtype),random=\textasciitilde{}(1|Lokalitet),data=popvekstdata[y,])}
+\CommentTok{\#     m2 \textless{}{-} gamm4(logR\textasciitilde{}Hovednaturtype+s(logVH,by=Hovednaturtype),random=\textasciitilde{}(1|Lokalitet),data=popvekstdata[y,])}
+\CommentTok{\#   \}}
+\CommentTok{\#   else}
+\CommentTok{\#   \{}
+\CommentTok{\#     m1 \textless{}{-} gamm4(logR\textasciitilde{}Hovednaturtype+s(Veg.h�yde,by=Hovednaturtype),random=\textasciitilde{}(1|Region)+(1|Lokalitet),data=popvekstdata[y,])}
+\CommentTok{\#     m2 \textless{}{-} gamm4(logR\textasciitilde{}Hovednaturtype+s(logVH,by=Hovednaturtype),random=\textasciitilde{}(1|Region)+(1|Lokalitet),data=popvekstdata[y,])}
+\CommentTok{\#   \}}
+\CommentTok{\#   modlist[[i]] \textless{}{-} list(m1.gam=m1,m2.gam=m2)}
+\CommentTok{\# \}}
+\CommentTok{\# }
+\CommentTok{\# pdf(paste("Figurer/Vekstrater/","Alle plot",".pdf",sep=""))}
+\CommentTok{\# par(mfrow=c(2,2),mar=c(4,4,2,0.1))}
+\CommentTok{\# xlim \textless{}{-} c(0,max(popvekstdata$Veg.h�yde[!is.na(popvekstdata$logR)],na.rm=T))}
+\CommentTok{\# ylim \textless{}{-} range(popvekstdata$logR,na.rm=T)}
+\CommentTok{\# xlab \textless{}{-} c("","Vegetasjonsh�yde (cm)","Vegetasjonsh�yde (cm)")}
+\CommentTok{\# ylab \textless{}{-} c("","log R","")}
+\CommentTok{\# main \textless{}{-} c("2017{-}2018","2018{-}2019","2019{-}2020")}
+\CommentTok{\# }
+\CommentTok{\# i \textless{}{-} as.numeric(popvekstdata$Hovednaturtype=="T2")+1}
+\CommentTok{\# plot(popvekstdata$Veg.h�yde,popvekstdata$logR,pch=21,cex=0.8,bg=c("blue","red")[i],col=c("blue","red")[i],xlab="",ylab="log R",main="Alle �r",xlim=xlim,ylim=ylim)}
+\CommentTok{\# lines(popvekstdata$Veg.h�yde,predict(m1.gam$gam,newdata=data.frame(Veg.h�yde=popvekstdata$Veg.h�yde,Hovednaturtype="T32",Year="2017",Lokalitet=popvekstdata$Lokalitet[1],RuteID=popvekstdata$RuteID[2]),level=0),col="blue",lwd=2)}
+\CommentTok{\# lines(popvekstdata$Veg.h�yde,predict(m1.gam$gam,newdata=data.frame(Veg.h�yde=popvekstdata$Veg.h�yde,Hovednaturtype="T2",Year="2017",Lokalitet=popvekstdata$Lokalitet[1],RuteID=popvekstdata$RuteID[2]),level=0),col="red",lwd=2)}
+\CommentTok{\# abline(h=0,lty=3)}
+\CommentTok{\# legend("bottomright",c("T32 Seminaturlig eng","T2 �pen grunnlendt mark"),lty=c(1,1),col=c("blue","red"),lwd=2,bty="n")}
+\CommentTok{\# }
+\CommentTok{\# for(i in 1:length(yr))}
+\CommentTok{\# \{}
+\CommentTok{\#   y \textless{}{-} popvekstdata$Year==yr[i]}
+\CommentTok{\#   j \textless{}{-} as.numeric(popvekstdata$Hovednaturtype[y]=="T2")+1}
+\CommentTok{\#   plot(popvekstdata$Veg.h�yde[y],popvekstdata$logR[y],pch=21,cex=0.8,bg=c("blue","red")[j],col=c("blue","red")[j],xlab=xlab[i],ylab=ylab[i],main=main[i],xlim=xlim,ylim=ylim)}
+\CommentTok{\#   }
+\CommentTok{\#   if(i\textgreater{}1)}
+\CommentTok{\#   \{}
+\CommentTok{\#     VH \textless{}{-} popvekstdata$Veg.h�yde[y][!is.na(popvekstdata$logR[y])\&popvekstdata$Hovednaturtype[y]=="T32"]}
+\CommentTok{\#     Veg.h�yde \textless{}{-} min(VH,na.rm=T):max(VH,na.rm=T)}
+\CommentTok{\#     lines(Veg.h�yde,predict(modlist[[i]]$m1.gam$gam,newdata=data.frame(Veg.h�yde=Veg.h�yde,Hovednaturtype="T32",Lokalitet=popvekstdata$Lokalitet[1]),level=0),col="blue",lwd=2)}
+\CommentTok{\#   \}}
+\CommentTok{\#   VH \textless{}{-} popvekstdata$Veg.h�yde[y][!is.na(popvekstdata$logR[y])\&popvekstdata$Hovednaturtype[y]=="T2"]}
+\CommentTok{\#   Veg.h�yde \textless{}{-} min(VH,na.rm=T):max(VH,na.rm=T)}
+\CommentTok{\#   lines(Veg.h�yde,predict(modlist[[i]]$m1.gam$gam,newdata=data.frame(Veg.h�yde=Veg.h�yde,Hovednaturtype="T2",Lokalitet=popvekstdata$Lokalitet[1]),level=0),col="red",lwd=2)}
+\CommentTok{\# }
+\CommentTok{\#   abline(h=0,lty=3)}
+\CommentTok{\#   legend("bottomright",c("T32 Seminaturlig eng","T2 �pen grunnlendt mark"),lty=c(1,1),col=c("blue","red"),lwd=2,bty="n")}
+\CommentTok{\# \}}
+\CommentTok{\# dev.off()}
+\CommentTok{\# }
+\CommentTok{\# }
+\CommentTok{\# \# Moodellsammendrag, tabell av random effects}
+\CommentTok{\# summary(m1.gam$gam)}
+\CommentTok{\# summary(m1.gam$mer)}
+\CommentTok{\# ranef(m1.gam$mer)}
+\CommentTok{\# }
+\CommentTok{\# coef(m1.gam$mer)}
+\CommentTok{\# }
+\CommentTok{\# summary(modlist[[3]]$m1.gam$gam)}
+\CommentTok{\# }
+\CommentTok{\# table(popvekstdata$�r, popvekstdata$Hovednaturtype, popvekstdata$logR\textgreater{}0)}
+\end{Highlighting}
+\end{Shaded}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{sec-funksjoner}{%
+\chapter{Funksjoner}\label{sec-funksjoner}}
+
+To see the code which uses these functions go to Chapter~\ref{sec-code}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\textquotesingle{} Calculate coverage}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @param rutedata quadrate data}
+\CommentTok{\#\textquotesingle{} @param artsdata species data}
+\CommentTok{\#\textquotesingle{} @param artsgruppe Species }
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @return coverage }
+\CommentTok{\#\textquotesingle{} @export}
+\CommentTok{\#\textquotesingle{}}
+\NormalTok{beregn.dekning }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(rutedata,artsdata,artsgruppe)\{}
+\NormalTok{  dekning }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{nrow}\NormalTok{(rutedata))}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(rutedata))}
+\NormalTok{  \{}
+\NormalTok{    utvalgte.data }\OtherTok{\textless{}{-}}\NormalTok{ artsdata[,artsgruppe]}\SpecialCharTok{==}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ artsdata}\SpecialCharTok{$}\NormalTok{Rute}\SpecialCharTok{==}\NormalTok{rutedata}\SpecialCharTok{$}\NormalTok{RuteID[i] }\SpecialCharTok{\&}\NormalTok{ artsdata}\SpecialCharTok{$}\NormalTok{�r}\SpecialCharTok{==}\NormalTok{rutedata}\SpecialCharTok{$}\NormalTok{�r[i]}
+    \ControlFlowTok{if}\NormalTok{(}\FunctionTok{length}\NormalTok{(utvalgte.data)}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{) dekning[i] }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(artsdata}\SpecialCharTok{$}\NormalTok{Dekning[utvalgte.data],}\AttributeTok{na.rm=}\NormalTok{T)}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{(dekning)}
+\NormalTok{\}}
+
+
+\CommentTok{\#\textquotesingle{} Calculate area weight}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @param x Quadrate data}
+\CommentTok{\#\textquotesingle{} @param design Linje or Rose}
+\CommentTok{\#\textquotesingle{} @param lokalitetsbredde Width of locality }
+\CommentTok{\#\textquotesingle{} @param rutebredde with of quadrate (defaults to 1)}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @return area weighting of survey to calculate estimates}
+\CommentTok{\#\textquotesingle{} @keywords internal}
+\CommentTok{\#\textquotesingle{}}
+
+\NormalTok{beregn.arealvekt }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x,design,}\AttributeTok{lokalitetsbredde=}\ConstantTok{NA}\NormalTok{,}\AttributeTok{rutebredde=}\DecValTok{1}\NormalTok{)\{}
+  \ControlFlowTok{if}\NormalTok{(design}\SpecialCharTok{==}\StringTok{"Linje"}\NormalTok{)}
+\NormalTok{  \{}
+    \FunctionTok{return}\NormalTok{(}\FunctionTok{rep}\NormalTok{(lokalitetsbredde}\SpecialCharTok{/}\NormalTok{rutebredde,}\FunctionTok{length}\NormalTok{(x)))}
+\NormalTok{  \}}
+  \ControlFlowTok{if}\NormalTok{(design}\SpecialCharTok{==}\StringTok{"Rose"}\NormalTok{)}
+\NormalTok{  \{}
+\NormalTok{    r1 }\OtherTok{\textless{}{-}}\NormalTok{ x             }\CommentTok{\# radius for indre sirkel (rutas avstand fra startpunktet)}
+\NormalTok{    r2 }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{+}\NormalTok{rutebredde  }\CommentTok{\# radius for ytre sirkel}
+    \FunctionTok{return}\NormalTok{( (pi}\SpecialCharTok{*}\NormalTok{r2}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}}\NormalTok{ pi}\SpecialCharTok{*}\NormalTok{r1}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\DecValTok{8}\NormalTok{ )}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+
+
+
+\CommentTok{\#\textquotesingle{} Bootstrap population}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @param tetthet density }
+\CommentTok{\#\textquotesingle{} @param forekomstareal Occurrence area }
+\CommentTok{\#\textquotesingle{} @param nboot number of bootstrap iterations (defaults to 2000)}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @return bootstraped estimates of population per age stage}
+\CommentTok{\#\textquotesingle{} @keywords internal}
+\CommentTok{\#\textquotesingle{}}
+\NormalTok{boot.pop }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(tetthet,forekomstareal,}\AttributeTok{nboot=}\DecValTok{2000}\NormalTok{)\{}
+\NormalTok{  tetthet }\OtherTok{\textless{}{-}}\NormalTok{ tetthet[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(tetthet)]}
+  \ControlFlowTok{if}\NormalTok{(}\FunctionTok{length}\NormalTok{(tetthet)}\SpecialCharTok{==}\DecValTok{0}\NormalTok{) \{}\FunctionTok{print}\NormalTok{(}\StringTok{"Ingen individer"}\NormalTok{); }\FunctionTok{return}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{,nboot))\}}
+\NormalTok{  tetthet.boot }\OtherTok{\textless{}{-}} \FunctionTok{boot}\NormalTok{(tetthet,}\AttributeTok{statistic=}\ControlFlowTok{function}\NormalTok{(x,k)\{}\FunctionTok{mean}\NormalTok{(x[k])\},}\AttributeTok{R=}\NormalTok{nboot)}
+\NormalTok{  forekomstareal.boot }\OtherTok{\textless{}{-}} \FunctionTok{boot}\NormalTok{(forekomstareal,}\AttributeTok{statistic=}\ControlFlowTok{function}\NormalTok{(x,k)\{}\FunctionTok{sum}\NormalTok{(x[k])\},}\AttributeTok{R=}\NormalTok{nboot)}
+\NormalTok{  tetthet.boot}\SpecialCharTok{$}\NormalTok{t }\SpecialCharTok{*}\NormalTok{ forekomstareal.boot}\SpecialCharTok{$}\NormalTok{t}
+\NormalTok{\}}
+
+\CommentTok{\#\textquotesingle{} Calculate the Occurrence area}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @param transektdata transect data }
+\CommentTok{\#\textquotesingle{} @param utvalgt.lokalitet chosen locality }
+\CommentTok{\#\textquotesingle{} @param year year}
+\CommentTok{\#\textquotesingle{} @param design Linje or Rose}
+\CommentTok{\#\textquotesingle{} @param lokalitetsbredde Width of locality }
+\CommentTok{\#\textquotesingle{} @param rutebredde with of quadrate (defaults to 1)}
+\CommentTok{\#\textquotesingle{} @param forekomst\_transekt "Dragehode" column in data}
+\CommentTok{\#\textquotesingle{} @param forekomst\_avstand "Forekomst dragehode (m)" column in data}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @keywords internal}
+\NormalTok{beregn.forekomstareal }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(transektdata,utvalgt.lokalitet,year,design,lokalitetsbredde,}\AttributeTok{rutebredde=}\DecValTok{1}\NormalTok{,}
+                                  \AttributeTok{forekomst\_transekt=}\StringTok{"Dragehode"}\NormalTok{,}\AttributeTok{forekomst\_avstand=}\StringTok{"Forekomst dragehode (m)"}\NormalTok{)\{}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(year))}
+\NormalTok{  \{}
+\NormalTok{    transekter }\OtherTok{\textless{}{-}}\NormalTok{ transektdata[transektdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{==}\NormalTok{utvalgt.lokalitet }\SpecialCharTok{\&}\NormalTok{ transektdata}\SpecialCharTok{$}\NormalTok{�r}\SpecialCharTok{==}\NormalTok{year[i],]}
+    
+    \ControlFlowTok{if}\NormalTok{(}\FunctionTok{all}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(transekter[,forekomst\_transekt])))}
+\NormalTok{    \{}
+    
+      \ControlFlowTok{next}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{(}\FunctionTok{all}\NormalTok{(transekter[,forekomst\_transekt]}\SpecialCharTok{==}\DecValTok{0}\NormalTok{))}
+\NormalTok{    \{}
+      \ControlFlowTok{next}
+\NormalTok{    \}}
+\NormalTok{    forekomstruter }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{unlist}\NormalTok{(}\FunctionTok{sapply}\NormalTok{(transekter[,forekomst\_avstand],strsplit,}\AttributeTok{split=}\StringTok{\textquotesingle{},\textquotesingle{}}\NormalTok{)))}
+\NormalTok{    forekomstruter }\OtherTok{\textless{}{-}}\NormalTok{ forekomstruter[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(forekomstruter)]}
+\NormalTok{    forekomstareal }\OtherTok{\textless{}{-}} \FunctionTok{beregn.arealvekt}\NormalTok{(forekomstruter,design[i],lokalitetsbredde[i],}\AttributeTok{rutebredde=}\NormalTok{rutebredde)}
+\NormalTok{    x[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ forekomstareal}
+\NormalTok{  \}}
+\NormalTok{  mangler }\OtherTok{\textless{}{-}} \FunctionTok{unlist}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(x,is.null))}
+  \ControlFlowTok{if}\NormalTok{(}\FunctionTok{any}\NormalTok{(mangler))}
+\NormalTok{  \{}
+\NormalTok{    erstattes }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(mangler)}
+\NormalTok{    registrert }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(}\SpecialCharTok{!}\NormalTok{mangler)}
+    \CommentTok{\#print(erstattes)}
+    \CommentTok{\#print(registrert)}
+    \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ erstattes)}
+\NormalTok{    \{}
+\NormalTok{      delta }\OtherTok{\textless{}{-}} \FunctionTok{abs}\NormalTok{((registrert}\FloatTok{+0.5}\NormalTok{) }\SpecialCharTok{{-}}\NormalTok{ i)}
+      \CommentTok{\#print(delta)}
+\NormalTok{      j }\OtherTok{\textless{}{-}}\NormalTok{ registrert[delta}\SpecialCharTok{==}\FunctionTok{min}\NormalTok{(delta)]}
+      \CommentTok{\#print(j)}
+\NormalTok{      x[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ x[[j]]}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{(x)}
+\NormalTok{\}}
+
+
+\CommentTok{\#\textquotesingle{} Calculate population structure}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @param utvalgt.lokalitet chosen locality}
+\CommentTok{\#\textquotesingle{} @param lokalitetsdata data for that locality}
+\CommentTok{\#\textquotesingle{} @param transektdata transect data }
+\CommentTok{\#\textquotesingle{} @param rutedata quadrate data}
+\CommentTok{\#\textquotesingle{} @param rutebredde quadrate width (defaults to 1)}
+\CommentTok{\#\textquotesingle{} @param fert Fertile plants column}
+\CommentTok{\#\textquotesingle{} @param veg Vegetative plants column}
+\CommentTok{\#\textquotesingle{} @param sma seedlins column}
+\CommentTok{\#\textquotesingle{} @param tot total plants column}
+\CommentTok{\#\textquotesingle{} @param forekomst\_transekt occurrence transect data}
+\CommentTok{\#\textquotesingle{} @param forekomst\_avstand occurrence distance}
+\CommentTok{\#\textquotesingle{} @param quantiles quantiles to be calsulated (dafaults to 0.025, 0.975)}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @return population structure list per location}
+\CommentTok{\#\textquotesingle{} @export}
+\CommentTok{\#\textquotesingle{}}
+
+\NormalTok{beregn.popstruktur }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(utvalgt.lokalitet,lokalitetsdata,transektdata,rutedata,}\AttributeTok{rutebredde=}\DecValTok{1}\NormalTok{,}
+                               \AttributeTok{fert=}\StringTok{"Fert.planter"}\NormalTok{,}\AttributeTok{veg=}\StringTok{"Veg.planter"}\NormalTok{,}\AttributeTok{sma=}\StringTok{"SmÃ¥planter"}\NormalTok{,}\AttributeTok{tot=}\StringTok{"Ant.DR"}\NormalTok{,}
+                               \AttributeTok{forekomst\_transekt=}\StringTok{"Dragehode"}\NormalTok{,}\AttributeTok{forekomst\_avstand=}\StringTok{"Forekomst dragehode (m)"}\NormalTok{,}
+                               \AttributeTok{quantiles=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.025}\NormalTok{,}\FloatTok{0.975}\NormalTok{))\{}
+\NormalTok{  year }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsdata[lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{==}\NormalTok{utvalgt.lokalitet,}\StringTok{"�r"}\NormalTok{]}
+\NormalTok{  design }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsdata[lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{==}\NormalTok{utvalgt.lokalitet,}\StringTok{"Design"}\NormalTok{]}
+\NormalTok{  lokalitetsbredde }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsdata[lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{==}\NormalTok{utvalgt.lokalitet,}\StringTok{"Lokalitetsbredde"}\NormalTok{]}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(utvalgt.lokalitet, year, design,}\StringTok{"bredde:"}\NormalTok{,lokalitetsbredde))}
+\NormalTok{  nboot }\OtherTok{\textless{}{-}} \DecValTok{2000}
+\NormalTok{  nq }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(quantiles)}
+\NormalTok{  nyear }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(year)}
+\NormalTok{  nFert }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nyear)}
+\NormalTok{  nVeg }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nyear)}
+\NormalTok{  nSma }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nyear)}
+\NormalTok{  nTot }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nyear)}
+\NormalTok{  Fert.CI }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\ConstantTok{NA}\NormalTok{,nyear,nq)}
+\NormalTok{  Veg.CI }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\ConstantTok{NA}\NormalTok{,nyear,nq)}
+\NormalTok{  Sma.CI }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\ConstantTok{NA}\NormalTok{,nyear,nq)}
+\NormalTok{  Tot.CI }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\ConstantTok{NA}\NormalTok{,nyear,nq)}
+
+\NormalTok{  forekomstareal.liste }\OtherTok{\textless{}{-}} \FunctionTok{beregn.forekomstareal}\NormalTok{(transektdata,utvalgt.lokalitet,year,design,lokalitetsbredde,rutebredde,forekomst\_transekt,forekomst\_avstand)}
+  \CommentTok{\#print(forekomstareal.liste)}
+  
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(year))}
+\NormalTok{  \{}
+\NormalTok{    forekomstareal }\OtherTok{\textless{}{-}}\NormalTok{ forekomstareal.liste[[i]]}
+    \FunctionTok{saveRDS}\NormalTok{(forekomstareal, }\FunctionTok{paste0}\NormalTok{(}\StringTok{"data/derived\_data/"}\NormalTok{, utvalgt.lokalitet,}\StringTok{"\_forekomstareal"}\NormalTok{,}\StringTok{"\_"}\NormalTok{,i,}\StringTok{".RDS"}\NormalTok{))}
+    \FunctionTok{print}\NormalTok{(year[i])}
+\NormalTok{    ruter }\OtherTok{\textless{}{-}}\NormalTok{ rutedata[rutedata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{==}\NormalTok{utvalgt.lokalitet }\SpecialCharTok{\&}\NormalTok{ rutedata}\SpecialCharTok{$}\NormalTok{�r}\SpecialCharTok{==}\NormalTok{year[i] }\SpecialCharTok{\&}\NormalTok{ rutedata[,tot]}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{,]}
+    \FunctionTok{saveRDS}\NormalTok{(ruter, }\FunctionTok{paste0}\NormalTok{(}\StringTok{"data/derived\_data/"}\NormalTok{, utvalgt.lokalitet,}\StringTok{"\_ruter"}\NormalTok{,}\StringTok{"\_"}\NormalTok{,i ,}\StringTok{".RDS"}\NormalTok{))}
+
+    \FunctionTok{print}\NormalTok{(}\StringTok{"Fertile"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(fert)) x }\OtherTok{\textless{}{-}} \FunctionTok{boot.pop}\NormalTok{(ruter[,fert],forekomstareal,nboot)}
+    \ControlFlowTok{else}\NormalTok{ x }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+    \CommentTok{\#print(summary(x))}
+\NormalTok{    nFert[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x); Fert.CI[i,] }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(x,quantiles,}\AttributeTok{na.rm=}\NormalTok{T)}
+
+    \FunctionTok{print}\NormalTok{(}\StringTok{"Vegetative"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(veg)) x }\OtherTok{\textless{}{-}} \FunctionTok{boot.pop}\NormalTok{(ruter[,veg],forekomstareal,nboot)}
+    \ControlFlowTok{else}\NormalTok{ x }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+    \CommentTok{\#print(summary(x))}
+\NormalTok{    nVeg[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x); Veg.CI[i,] }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(x,quantiles,}\AttributeTok{na.rm=}\NormalTok{T)}
+    
+    \FunctionTok{print}\NormalTok{(}\StringTok{"Småplanter"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(sma)) x }\OtherTok{\textless{}{-}} \FunctionTok{boot.pop}\NormalTok{(ruter[,sma],forekomstareal,nboot)}
+    \ControlFlowTok{else}\NormalTok{ x }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+    \CommentTok{\#print(summary(x))}
+\NormalTok{    nSma[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x); Sma.CI[i,] }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(x,quantiles,}\AttributeTok{na.rm=}\NormalTok{T)}
+
+    \FunctionTok{print}\NormalTok{(}\StringTok{"Totalt"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(tot)) x }\OtherTok{\textless{}{-}} \FunctionTok{boot.pop}\NormalTok{(ruter[,tot],forekomstareal,nboot)}
+    \ControlFlowTok{else}\NormalTok{ x }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+    \FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(x))}
+\NormalTok{    nTot[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x); Tot.CI[i,] }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(x,quantiles,}\AttributeTok{na.rm=}\NormalTok{T)}
+\NormalTok{  \}}
+  
+\NormalTok{  popstr }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{lokalitet=}\NormalTok{utvalgt.lokalitet,}\AttributeTok{year=}\NormalTok{year,}\AttributeTok{nFert=}\NormalTok{nFert,}\AttributeTok{nVeg=}\NormalTok{nVeg,}\AttributeTok{nSma=}\NormalTok{nSma,}\AttributeTok{nTot=}\NormalTok{nTot,}\AttributeTok{Fert.CI=}\NormalTok{Fert.CI,}\AttributeTok{Veg.CI=}\NormalTok{Veg.CI,}\AttributeTok{Sma.CI=}\NormalTok{Sma.CI,}\AttributeTok{Tot.CI=}\NormalTok{Tot.CI)}
+  \FunctionTok{return}\NormalTok{(popstr)}
+\NormalTok{\}}
+
+
+
+\CommentTok{\#\textquotesingle{} Base plot population structure}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @param popstr population structure data }
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @return Baseplots of population structure per location}
+\CommentTok{\#\textquotesingle{} @export}
+
+\NormalTok{plot.popstruktur }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(popstr)\{}
+\NormalTok{  thisyear}\OtherTok{=}\NormalTok{lubridate}\SpecialCharTok{::}\FunctionTok{year}\NormalTok{(}\FunctionTok{Sys.time}\NormalTok{())}
+\NormalTok{  tidsrom}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\FloatTok{2016.5}\NormalTok{, thisyear)}
+  \FunctionTok{plot}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,popstr}\SpecialCharTok{$}\NormalTok{nTot,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{max}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{Tot.CI,}\AttributeTok{na.rm=}\NormalTok{T)),}\AttributeTok{type=}\StringTok{"o"}\NormalTok{,}\AttributeTok{main=}\NormalTok{popstr}\SpecialCharTok{$}\NormalTok{lokalitet,}\AttributeTok{xlab=}\StringTok{"Ãr"}\NormalTok{,}\AttributeTok{ylab=}\StringTok{"Antall individer"}\NormalTok{,}\AttributeTok{xlim=}\NormalTok{tidsrom)}
+  \FunctionTok{polygon}\NormalTok{(}\FunctionTok{c}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,}\FunctionTok{rev}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year)),}\FunctionTok{c}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{Tot.CI[,}\DecValTok{1}\NormalTok{],}\FunctionTok{rev}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{Tot.CI[,}\DecValTok{2}\NormalTok{])),}\AttributeTok{col=}\FunctionTok{rgb}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\AttributeTok{alpha=}\FloatTok{0.2}\NormalTok{),}\AttributeTok{border=}\ConstantTok{NA}\NormalTok{)}
+  \FunctionTok{lines}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,popstr}\SpecialCharTok{$}\NormalTok{nFert,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{type=}\StringTok{"o"}\NormalTok{); }\FunctionTok{polygon}\NormalTok{(}\FunctionTok{c}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,}\FunctionTok{rev}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year)),}\FunctionTok{c}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{Fert.CI[,}\DecValTok{1}\NormalTok{],}\FunctionTok{rev}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{Fert.CI[,}\DecValTok{2}\NormalTok{])),}\AttributeTok{col=}\FunctionTok{rgb}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\AttributeTok{alpha=}\FloatTok{0.2}\NormalTok{),}\AttributeTok{border=}\ConstantTok{NA}\NormalTok{)}
+  \FunctionTok{lines}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,popstr}\SpecialCharTok{$}\NormalTok{nVeg,}\AttributeTok{col=}\StringTok{"green"}\NormalTok{,}\AttributeTok{type=}\StringTok{"o"}\NormalTok{); }\FunctionTok{polygon}\NormalTok{(}\FunctionTok{c}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,}\FunctionTok{rev}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year)),}\FunctionTok{c}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{Veg.CI[,}\DecValTok{1}\NormalTok{],}\FunctionTok{rev}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{Veg.CI[,}\DecValTok{2}\NormalTok{])),}\AttributeTok{col=}\FunctionTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\AttributeTok{alpha=}\FloatTok{0.2}\NormalTok{),}\AttributeTok{border=}\ConstantTok{NA}\NormalTok{)}
+  \FunctionTok{lines}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,popstr}\SpecialCharTok{$}\NormalTok{nSma,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,,}\AttributeTok{type=}\StringTok{"o"}\NormalTok{); }\FunctionTok{polygon}\NormalTok{(}\FunctionTok{c}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,}\FunctionTok{rev}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year)),}\FunctionTok{c}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{Sma.CI[,}\DecValTok{1}\NormalTok{],}\FunctionTok{rev}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{Sma.CI[,}\DecValTok{2}\NormalTok{])),}\AttributeTok{col=}\FunctionTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\AttributeTok{alpha=}\FloatTok{0.2}\NormalTok{),}\AttributeTok{border=}\ConstantTok{NA}\NormalTok{)}
+  \CommentTok{\#lines(popstr$year,popstr$nSma+popstr$nVeg+popstr$nFert,lty=2,type="o")}
+  \FunctionTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\StringTok{"Totalt"}\NormalTok{,}\StringTok{"Fertile"}\NormalTok{,}\StringTok{"Vegetative"}\NormalTok{,}\StringTok{"Småplanter"}\NormalTok{),}\AttributeTok{lty=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{pch=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"blue"}\NormalTok{),}\AttributeTok{bty=}\StringTok{"n"}\NormalTok{)}
+\NormalTok{\}}
+
+
+\CommentTok{\#\textquotesingle{} Base plot group trends}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @param lokalitetsdata locality data}
+\CommentTok{\#\textquotesingle{} @param gruppevariabel grouping variable }
+\CommentTok{\#\textquotesingle{} @param lokalitetsestimater local estimates data}
+\CommentTok{\#\textquotesingle{} @param reverser Reverse the axis? default is FALSE}
+\CommentTok{\#\textquotesingle{} @param lokalitetsnavn locality name}
+\CommentTok{\#\textquotesingle{} @param lokfarge locality colour}
+\CommentTok{\#\textquotesingle{} @param regsymbol Regional symbol}
+\CommentTok{\#\textquotesingle{} @param natlinje linetype for naturtype}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @return baseplots of group trends}
+\CommentTok{\#\textquotesingle{} @export}
+\CommentTok{\#\textquotesingle{}}
+\NormalTok{plot.gruppetrender }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(lokalitetsdata,gruppevariabel,lokalitetsestimater,}
+                               \AttributeTok{reverser=}\ConstantTok{FALSE}\NormalTok{,lokalitetsnavn,lokfarge,regsymbol,natlinje)\{}
+\NormalTok{  thisyear}\OtherTok{=}\NormalTok{lubridate}\SpecialCharTok{::}\FunctionTok{year}\NormalTok{(}\FunctionTok{Sys.time}\NormalTok{())}
+\NormalTok{  tidsrom}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\FloatTok{2016.5}\NormalTok{, thisyear)}
+  
+\NormalTok{  gruppe }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(lokalitetsdata[,gruppevariabel])}
+  \ControlFlowTok{if}\NormalTok{(reverser) gruppe }\OtherTok{\textless{}{-}} \FunctionTok{rev}\NormalTok{(gruppe)}
+\NormalTok{  ngrp }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(gruppe)}
+  \FunctionTok{par}\NormalTok{(}\AttributeTok{mfcol=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,ngrp),}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{,}\FloatTok{0.2}\NormalTok{))}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{ngrp)}
+\NormalTok{  \{}
+\NormalTok{    grp }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(gruppe[i])}
+    \FunctionTok{print}\NormalTok{(grp)}
+\NormalTok{    lok }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{unique}\NormalTok{(lokalitetsdata[lokalitetsdata[,gruppevariabel]}\SpecialCharTok{==}\NormalTok{grp,}\StringTok{"Lokalitet"}\NormalTok{]))}
+\NormalTok{    farge }\OtherTok{\textless{}{-}}\NormalTok{ lokfarge[lok]}
+    \CommentTok{\#print(lok)}
+    \CommentTok{\#print(farge}
+    
+\NormalTok{    variabler }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"nTot"}\NormalTok{,}\StringTok{"nFert"}\NormalTok{,}\StringTok{"nVeg"}\NormalTok{,}\StringTok{"nSma"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{(i}\SpecialCharTok{==}\DecValTok{1}\NormalTok{) ylab }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Antall totalt"}\NormalTok{,}\StringTok{"Antall fertile"}\NormalTok{,}\StringTok{"Antall vegetative"}\NormalTok{,}\StringTok{"Antall smÃ¥planter"}\NormalTok{)}
+    \ControlFlowTok{else}\NormalTok{ ylab }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{,}\FunctionTok{length}\NormalTok{(variabler))}
+\NormalTok{    xlab }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{,}\FunctionTok{length}\NormalTok{(variabler)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{),}\StringTok{"Ãr"}\NormalTok{)}
+\NormalTok{    main }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(grp,}\FunctionTok{rep}\NormalTok{(}\StringTok{""}\NormalTok{,}\FunctionTok{length}\NormalTok{(variabler)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{))}
+    \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(variabler))}
+\NormalTok{    \{}
+\NormalTok{      noplot }\OtherTok{\textless{}{-}} \ConstantTok{TRUE}
+      \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(lok))}
+\NormalTok{      \{}
+        \CommentTok{\#print(lok[j])}
+\NormalTok{        reg }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{unique}\NormalTok{(lokalitetsdata[lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{==}\NormalTok{lok,}\StringTok{"Region"}\NormalTok{]))}
+\NormalTok{        symbol }\OtherTok{\textless{}{-}}\NormalTok{ regsymbol[reg]}
+\NormalTok{        nat }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{unique}\NormalTok{(lokalitetsdata[lokalitetsdata}\SpecialCharTok{$}\NormalTok{Lokalitet}\SpecialCharTok{==}\NormalTok{lok,}\StringTok{"Hovednaturtype"}\NormalTok{]))}
+\NormalTok{        linje }\OtherTok{\textless{}{-}}\NormalTok{ natlinje[nat]}
+        \CommentTok{\#print(linje)}
+        
+\NormalTok{        popstr }\OtherTok{\textless{}{-}}\NormalTok{ lokalitetsestimater[lok[j]][[}\DecValTok{1}\NormalTok{]]}
+        \ControlFlowTok{if}\NormalTok{(}\FunctionTok{length}\NormalTok{(popstr)}\SpecialCharTok{==}\DecValTok{1}\NormalTok{) \{}\FunctionTok{print}\NormalTok{(}\StringTok{"Ingen estimater"}\NormalTok{); }\ControlFlowTok{next}\NormalTok{\}}
+        \ControlFlowTok{if}\NormalTok{(noplot)}
+\NormalTok{        \{}
+          \FunctionTok{plot}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,popstr[variabler[i]][[}\DecValTok{1}\NormalTok{]],}\AttributeTok{xlim=}\NormalTok{tidsrom,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{70000}\NormalTok{),}\AttributeTok{type=}\StringTok{"o"}\NormalTok{,}\AttributeTok{col=}\NormalTok{farge[j],     }\CommentTok{\#pch=symbol,lty=linje,}
+               \AttributeTok{main=}\NormalTok{main[i],}\AttributeTok{xlab=}\NormalTok{xlab[i],}\AttributeTok{ylab=}\NormalTok{ylab[i],}\AttributeTok{log=}\StringTok{"y"}\NormalTok{)}
+\NormalTok{          noplot }\OtherTok{\textless{}{-}} \ConstantTok{FALSE}
+\NormalTok{        \}}
+        \ControlFlowTok{else} \FunctionTok{lines}\NormalTok{(popstr}\SpecialCharTok{$}\NormalTok{year,popstr[variabler[i]][[}\DecValTok{1}\NormalTok{]],}\AttributeTok{type=}\StringTok{"o"}\NormalTok{,}\AttributeTok{col=}\NormalTok{farge[j]) }\CommentTok{\#,pch=symbol,lty=linje)}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\CommentTok{\#}
+
+\CommentTok{\#\textquotesingle{} Calculate growth rate}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @param rutedata quadrate data}
+\CommentTok{\#\textquotesingle{} @param popvar population variable (Total Dragehode )}
+\CommentTok{\#\textquotesingle{} @param idvar Id of the quadrate (RuteID)}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @return growthrate estimates}
+\CommentTok{\#\textquotesingle{} @export}
+
+\NormalTok{beregn.vekstrate }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(rutedata,popvar,idvar)\{}
+\NormalTok{  vekstrate }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{,}\FunctionTok{nrow}\NormalTok{(rutedata))}
+\NormalTok{  year }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{unique}\NormalTok{(rutedata}\SpecialCharTok{$}\NormalTok{�r)))}
+\NormalTok{  nyear }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(year)}
+  \ControlFlowTok{if}\NormalTok{(nyear}\SpecialCharTok{\textless{}}\DecValTok{2}\NormalTok{) }\FunctionTok{return}\NormalTok{(}\ConstantTok{NA}\NormalTok{)}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(nyear}\DecValTok{{-}1}\NormalTok{))}
+\NormalTok{  \{}
+\NormalTok{    t1 }\OtherTok{\textless{}{-}}\NormalTok{ rutedata}\SpecialCharTok{$}\NormalTok{�r}\SpecialCharTok{==}\NormalTok{year[i]}
+\NormalTok{    t2 }\OtherTok{\textless{}{-}}\NormalTok{ rutedata}\SpecialCharTok{$}\NormalTok{�r}\SpecialCharTok{==}\NormalTok{year[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}
+\NormalTok{    idmatch }\OtherTok{\textless{}{-}} \FunctionTok{match}\NormalTok{(rutedata[t1,idvar],rutedata[t2,idvar])}
+\NormalTok{    vekstrate[t1] }\OtherTok{\textless{}{-}}\NormalTok{ rutedata[t2,popvar][idmatch] }\SpecialCharTok{/}\NormalTok{ rutedata[t1,popvar] }
+\NormalTok{  \}}
+\NormalTok{  rutedata}\SpecialCharTok{$}\NormalTok{vekstrate }\OtherTok{\textless{}{-}}\NormalTok{ vekstrate}
+  \FunctionTok{return}\NormalTok{(rutedata)}
+\NormalTok{\}}
+
+
+\CommentTok{\#\textquotesingle{} GGplot version of plot.popstruktur}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @param popstr population structure}
+\CommentTok{\#\textquotesingle{}}
+\CommentTok{\#\textquotesingle{} @return plots of population structure}
+\CommentTok{\#\textquotesingle{} @export}
+\CommentTok{\#\textquotesingle{}}
+
+\NormalTok{ggplot.popstruktur }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(popstr)\{}
+  \FunctionTok{require}\NormalTok{(tidyverse)}
+\NormalTok{  title}\OtherTok{=}\NormalTok{popstr}\SpecialCharTok{$}\NormalTok{lokalitet}
+\NormalTok{  popstr}\OtherTok{=}\FunctionTok{as\_tibble}\NormalTok{(popstr)}
+  \FunctionTok{names}\NormalTok{(popstr)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{( }\StringTok{"lokalitet"}\NormalTok{ ,}\StringTok{"year"}\NormalTok{,      }\StringTok{"Fertile"}\NormalTok{,     }\StringTok{"Vegetative"}\NormalTok{,      }\StringTok{"Småplanter"}\NormalTok{,      }\StringTok{"Totalt"}\NormalTok{,     }
+                    \StringTok{"Fert.CI"}\NormalTok{,   }\StringTok{"Veg.CI"}\NormalTok{,    }\StringTok{"Sma.CI"}\NormalTok{,    }\StringTok{"Tot.CI"}\NormalTok{ )}
+  
+  
+\NormalTok{  popstrCI}\OtherTok{=}\NormalTok{popstr }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Fert.CI\_upper"}\OtherTok{=}\NormalTok{ Fert.CI[,}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Fert.CI\_lower"}\OtherTok{=}\NormalTok{ Fert.CI[,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Tot.CI\_upper"}\OtherTok{=}\NormalTok{ Tot.CI[,}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Tot.CI\_lower"}\OtherTok{=}\NormalTok{ Tot.CI[,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Veg.CI\_upper"}\OtherTok{=}\NormalTok{ Veg.CI[,}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Veg.CI\_lower"}\OtherTok{=}\NormalTok{ Veg.CI[,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Sma.CI\_upper"}\OtherTok{=}\NormalTok{ Sma.CI[,}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Sma.CI\_lower"}\OtherTok{=}\NormalTok{ Sma.CI[,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\NormalTok{lokalitet) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{!}\NormalTok{year, }\AttributeTok{names\_to =} \StringTok{"key"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{filter}\NormalTok{(key}\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Fert.CI"}\NormalTok{, }\StringTok{"Veg.CI"}\NormalTok{,}\StringTok{"Sma.CI"}\NormalTok{, }\StringTok{"Tot.CI"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{var=}\FunctionTok{gsub}\NormalTok{(}\StringTok{".CI"}\NormalTok{,}\StringTok{""}\NormalTok{, key))}
+  
+\NormalTok{  popstrCI}\OtherTok{=}\NormalTok{popstrCI}\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{var=}\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Fertile"}\NormalTok{, }\StringTok{"Vegetative"}\NormalTok{, }\StringTok{"Småplanter"}\NormalTok{, }\StringTok{"Totalt"}\NormalTok{),(}\FunctionTok{dim}\NormalTok{(popstrCI)[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\DecValTok{4}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{upper=}\NormalTok{value[,}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{lower=}\NormalTok{value[,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\NormalTok{value)}
+  
+  
+  
+\NormalTok{  popstr\_plot}\OtherTok{=}\NormalTok{popstr }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Fert.CI\_upper"}\OtherTok{=}\NormalTok{ Fert.CI[,}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Fert.CI\_lower"}\OtherTok{=}\NormalTok{ Fert.CI[,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Tot.CI\_upper"}\OtherTok{=}\NormalTok{ Tot.CI[,}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Tot.CI\_lower"}\OtherTok{=}\NormalTok{ Tot.CI[,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Veg.CI\_upper"}\OtherTok{=}\NormalTok{ Veg.CI[,}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Veg.CI\_lower"}\OtherTok{=}\NormalTok{ Veg.CI[,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Sma.CI\_upper"}\OtherTok{=}\NormalTok{ Sma.CI[,}\DecValTok{2}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{"Sma.CI\_lower"}\OtherTok{=}\NormalTok{ Sma.CI[,}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\NormalTok{lokalitet) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{!}\NormalTok{year, }\AttributeTok{names\_to =} \StringTok{"key"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \CommentTok{\#filter(!key\%in\% c("Fert.CI", "Veg.CI","Sma.CI", "Tot.CI")) \%\textgreater{}\% }
+    \FunctionTok{filter}\NormalTok{(key}\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Fertile"}\NormalTok{, }\StringTok{"Småplanter"}\NormalTok{, }\StringTok{"Totalt"}\NormalTok{, }\StringTok{"Vegetative"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{upper=}\NormalTok{popstrCI}\SpecialCharTok{$}\NormalTok{upper) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{lower=}\NormalTok{popstrCI}\SpecialCharTok{$}\NormalTok{lower)}
+  
+\NormalTok{  p}\OtherTok{=}\NormalTok{popstr\_plot}\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(year,value[,}\DecValTok{1}\NormalTok{], }\AttributeTok{colour=}\NormalTok{key))}\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size=}\DecValTok{2}\NormalTok{)}\SpecialCharTok{+}
+    \FunctionTok{geom\_ribbon}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{lower, }\AttributeTok{ymax=}\NormalTok{upper, }\AttributeTok{fill=}\NormalTok{popstr\_plot}\SpecialCharTok{$}\NormalTok{key), }\AttributeTok{alpha=}\FloatTok{0.2}\NormalTok{)}\SpecialCharTok{+}
+    \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkred"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkgrey"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{guide=}\StringTok{"none"}\NormalTok{)}\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{( }\AttributeTok{size=}\FloatTok{1.2}\NormalTok{)}\SpecialCharTok{+}
+    \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkred"}\NormalTok{, }\StringTok{"darkblue"}\NormalTok{, }\StringTok{"darkgrey"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{))}\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Ãr"}\NormalTok{, }\AttributeTok{y=} \StringTok{"Antall individer"}\NormalTok{)}\SpecialCharTok{+}
+    \FunctionTok{ggtitle}\NormalTok{(title)}\SpecialCharTok{+}
+    \FunctionTok{theme\_classic}\NormalTok{()}
+  
+  \FunctionTok{ggsave}\NormalTok{(}
+    \FunctionTok{paste0}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(),}\StringTok{"/Figurer/ggplots/"}\NormalTok{ ,title, }\StringTok{".png"}\NormalTok{))              }
+  
+\NormalTok{\}              }
+\end{Highlighting}
+\end{Shaded}
+
+
+
+
+\end{document}
