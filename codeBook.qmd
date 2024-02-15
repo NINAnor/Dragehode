@@ -6,8 +6,7 @@ fontenc: iso-8859-1
 
 # Code to recreate the analysis {#sec-code}
 
-To look at the functions used go to @sec-funksjoner
-
+For å se funksjonene, gå til [@sec-funksjoner]
 
 ```{r}
 #| echo: true

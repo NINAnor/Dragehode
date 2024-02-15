@@ -6,7 +6,7 @@ fontenc: iso-8859-1
 
 # Funksjoner {#sec-funksjoner}
 
-To see the code which uses these functions go to @sec-code
+For å se koden som bruker disse funksjonene, gå til [@sec-code]
 
 ```{r}
 #| echo: true
