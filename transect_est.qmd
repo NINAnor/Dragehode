@@ -3,7 +3,7 @@ title: "Transektbaserte estimater av populasjonsstÃ¸rrelse"
 editor: visual
 ---
 
-Vi brukte data pÃ¥ lengden pÃ¥ transektene, antallet forekomstruter med individer registrert langs transektet og beregnet tetthet som antall ruter med forekomst delt pÃ¥ lengden av transektet (=gjennomsnittlig tetthet langs transektet). For hvert simulerte datasett beregnet vi gjennomsnittlig tetthet langs transektene og ekstrapolerte denne tettheten for Ã¥ estimere total populasjon. Gjennom Ã¥ bootstrappe datasettet (1000 ganger) genererte vi en fordeling av populasjonsestimater, som ga innsikt i hvor stort spenn av potensielle verdier for populasjons-stÃ¸rrelser det var for hver lokalitet, og usikkerheten ved estimatene. 
+Vi brukte data pÃ¥ lengden pÃ¥ transektene, antallet forekomstruter med individer registrert langs transektet og beregnet tetthet som antall ruter med forekomst delt pÃ¥ lengden av transektet (=gjennomsnittlig tetthet langs transektet). For hvert simulerte datasett beregnet vi gjennomsnittlig tetthet langs transektene og ekstrapolerte denne tettheten for Ã¥ estimere total populasjon. Gjennom Ã¥ bootstrappe datasettet (1000 ganger) genererte vi en fordeling av populasjonsestimater, som ga innsikt i hvor stort spenn av potensielle verdier for populasjons-stÃ¸rrelser det var for hver lokalitet, og usikkerheten ved estimatene.
 
 ```{r}
 #| echo: false
@@ -95,70 +95,71 @@ for (site in unique(lokalitetsdata$Lokalitet)) {
   ggsave(paste0("Figurer/trans_Est/", site, "_plot.pdf"), plot = p, device = "pdf", width = 10, height = 6)
 }
 
+# fix spaces in filenames
+#filesstrings::remove_filename_spaces(dir = "Figurer/trans_Est", pattern = ".png", replacement = "_")
+
+#filesstrings::rename_with_nums(dir = "Figurer/trans_Est", pattern = ".png")
+
 ```
 
 ## Hadeland
 
-![](Figurer/trans_Est/Aslaksrud_plot.png)
+![](Figurer/trans_Est/01.png)
 
-![](Figurer/trans_Est/Falang_plot.png)
+![](Figurer/trans_Est/09.png)
 
-![](Figurer/trans_Est/Gjefsen_plot.png)
+![](Figurer/trans_Est/10.png)
 
-![](Figurer/trans_Est/Gran sykehjem_plot.png)
+![](Figurer/trans_Est/11.png)
 
-![](Figurer/trans_Est/Grindaker_plot.png)
+![](Figurer/trans_Est/12.png)
 
-![](Figurer/trans_Est/Lyngstad Vestre_plot.png)
+![](Figurer/trans_Est/23.png)
 
-![](Figurer/trans_Est/Nedre Røykenvik_plot.png)
+![](Figurer/trans_Est/25.png)
 
-![](Figurer/trans_Est/Øvre Røykenvik_plot.png)
-
-#![](Figurer/trans_Est/Nedre Røykenvik_plot.png)
-
-#![](Figurer/trans_Est/Øvre Røykenvik_plot.png)
+![](Figurer/trans_Est/42.png)
 
 ## Oslo
 
-![](Figurer/trans_Est/Ekebergskråningen_plot.png)
+![](Figurer/trans_Est/07.png)
 
-![](Figurer/trans_Est/Heggholmen_plot.png)
+![](Figurer/trans_Est/14.png)
 
-![](Figurer/trans_Est/Horgen_plot.png)
+![](Figurer/trans_Est/15.png)
 
-![](Figurer/trans_Est/Hovedøya V_plot.png)
+![](Figurer/trans_Est/17.png)
 
-![](Figurer/trans_Est/Hovedøya_plot.png)
+![](Figurer/trans_Est/16.png)
 
-![](Figurer/trans_Est/Kalvøya_plot.png)
+![](Figurer/trans_Est/20.png)
 
-![](Figurer/trans_Est/Møllerenga_plot.png)
+![](Figurer/trans_Est/24.png)
 
-![](Figurer/trans_Est/Spireodden_plot.png)
+![](Figurer/trans_Est/30.png)
 
-![](Figurer/trans_Est/Storøykilen_plot.png)
+![](Figurer/trans_Est/34.png)
 
-![](Figurer/trans_Est/Svartorseter_plot.png)
+![](Figurer/trans_Est/35.png)
 
-![](Figurer/trans_Est/Telenor_plot.png)
+![](Figurer/trans_Est/38.png)
 
-![](Figurer/trans_Est/Vendelenga_plot.png)
+![](Figurer/trans_Est/40.png)
 
-#![](Figurer/trans_Est/Viernbukta_plot.png)
+![](Figurer/trans_Est/41.png)
 
 ## Ringerike
 
-![](Figurer/trans_Est/Auren_plot.png)
+![](Figurer/trans_Est/02.png)
 
-![](Figurer/trans_Est/Buss-stopp_plot.png)
+![](Figurer/trans_Est/04.png)
 
-![](Figurer/trans_Est/Haugsbygd, vestvendt vegskråning_plot.png)
+![](Figurer/trans_Est/13.png)
 
-![](Figurer/trans_Est/Hurumåsen_plot.png)
+![](Figurer/trans_Est/18.png)
 
-![](Figurer/trans_Est/Nordre Ultvet_plot.png)
+![](Figurer/trans_Est/26.png)
 
-![](Figurer/trans_Est/Ultvet Sø_plot.png)
+![](Figurer/trans_Est/39.png)
 
-![](Figurer/trans_Est/Åsaporten Nø_plot.png)
+![](Figurer/trans_Est/43.png)
