@@ -19,6 +19,7 @@ For å se koden som bruker disse funksjonene, gå til [@sec-code]
 #'
 #' @return coverage 
 #' @export
+#' @author Olav Skarpaas
 #'
 beregn.dekning <- function(rutedata,artsdata,artsgruppe){
   dekning <- rep(0,nrow(rutedata))
@@ -40,6 +41,7 @@ beregn.dekning <- function(rutedata,artsdata,artsgruppe){
 #'
 #' @return area weighting of survey to calculate estimates
 #' @keywords internal
+#' @author Olav Skarpaas
 #'
 
 beregn.arealvekt <- function(x,design,lokalitetsbredde=NA,rutebredde=1){
@@ -66,6 +68,7 @@ beregn.arealvekt <- function(x,design,lokalitetsbredde=NA,rutebredde=1){
 #'
 #' @return bootstraped estimates of population per age stage
 #' @keywords internal
+#' @author Olav Skarpaas
 #'
 boot.pop <- function(tetthet,forekomstareal,nboot=2000){
   tetthet <- tetthet[!is.na(tetthet)]
@@ -87,6 +90,7 @@ boot.pop <- function(tetthet,forekomstareal,nboot=2000){
 #' @param forekomst_avstand "Forekomst dragehode (m)" column in data
 #'
 #' @keywords internal
+#' @author Olav Skarpaas
 beregn.forekomstareal <- function(transektdata,utvalgt.lokalitet,year,design,lokalitetsbredde,rutebredde=1,
                                   forekomst_transekt="Dragehode",forekomst_avstand="Forekomst dragehode (m)"){
   x <- list()
@@ -145,6 +149,7 @@ beregn.forekomstareal <- function(transektdata,utvalgt.lokalitet,year,design,lok
 #'
 #' @return population structure list per location
 #' @export
+#' @author Olav Skarpaas
 #'
 
 beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rutedata,rutebredde=1,
@@ -214,7 +219,9 @@ beregn.popstruktur <- function(utvalgt.lokalitet,lokalitetsdata,transektdata,rut
 #' @param popstr population structure data 
 #'
 #' @return Baseplots of population structure per location
+#' @author Olav Skarpaas
 #' @export
+#' 
 
 plot.popstruktur <- function(popstr){
   thisyear=lubridate::year(Sys.time())
@@ -241,6 +248,7 @@ plot.popstruktur <- function(popstr){
 #' @param natlinje linetype for naturtype
 #'
 #' @return baseplots of group trends
+#' @author Olav Skarpaas
 #' @export
 #'
 plot.gruppetrender <- function(lokalitetsdata,gruppevariabel,lokalitetsestimater,
@@ -301,6 +309,7 @@ plot.gruppetrender <- function(lokalitetsdata,gruppevariabel,lokalitetsestimater
 #' @param idvar Id of the quadrate (RuteID)
 #'
 #' @return growthrate estimates
+#' @author Olav Skarpaas
 #' @export
 
 beregn.vekstrate <- function(rutedata,popvar,idvar){
@@ -325,6 +334,7 @@ beregn.vekstrate <- function(rutedata,popvar,idvar){
 #' @param popstr population structure
 #'
 #' @return plots of population structure
+#' @author Matthew Grainger
 #' @export
 #'
 

@@ -14,6 +14,7 @@ For å se funksjonene, gå til [@sec-funksjoner]
 #| warning: false
 #| eval: false
 
+#' @author Olav Skarpaas & Matthew Grainger 
 
 # Population estimation script ----
 ## Load libraries ----
