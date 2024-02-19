@@ -4,7 +4,7 @@ lang: no
 fontenc: iso-8859-1
 ---
 
-# Kode for � gjenskape analysen {#sec-code}
+# Kode for å gjenskape analysen {#sec-code}
 
 For å se funksjonene, gå til [@sec-funksjoner]
 
