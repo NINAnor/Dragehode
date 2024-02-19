@@ -69,7 +69,7 @@ for (i in seq_along(lokalitetsestimater)){
       model1<-stan_glm(nTot~year, data=modeldata)
       saveRDS(model1, file=paste0("data/derived_data/direction_plots/models/",lokalitetsnavn_, ".RDS"))
       pd=bayestestR::p_direction(model1)
-      p=plot(pd)
+      p=plot(pd)+labs(x="Endring i andel forkomstruter over tid", y="Antall posteriorverdier")
       
       if(sum(p$data$fill=="Positive")>=(dim(p$data)[1]/2)){
         p+ggtitle(paste0(lokalitetsnavn_),subtitle=paste0("Probability of positive trend= ",pd$pd[2]*100, "%"))
@@ -124,7 +124,7 @@ for (i in seq_along(unique(rds_combo$Region))){
       model1<-stan_glm(nTot~year, data=modeldata)
       saveRDS(model1, file=paste0("data/derived_data/direction_plots/models/",Regionsnavn_, ".RDS"))
       pd=bayestestR::p_direction(model1)
-      p=plot(pd)
+      p=plot(pd)+labs(x="Endring i andel forkomstruter over tid", y="Antall posteriorverdier")
       if(sum(p$data$fill=="Positive")>=(dim(p$data)[1]/2)){
         p+ggtitle(paste0(Regionsnavn_),subtitle=paste0("Probability of positive trend= ",pd$pd[2]*100, "%"))
       }else{
